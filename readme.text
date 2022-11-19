@@ -1,6 +1,10 @@
 pip install pyqt5
 pip install pyqt5designer
+pip install opencv-python
+
 pyuic -x untitled.ui -o untitled.py
+
+
 TODOheight 설치
 
 
@@ -14,6 +18,20 @@ git commit -m "커밋할 내용"
 git push origin main
 
 git pull origin master = git pull [원격 저장소의 이름] [원격 저장소에서 받아오고자 하는 브랜치의 이름]
+
+
+
+
+#cv2.waitKey(0)
+#aitKey를 보면 "키를 기다린다" 라는 의미로 해석할 수 있습니다. 우리가 키를 누르게 되면 이벤트가 발생하는 것인데요.
+# 보통은 출력한 윈도우 창을 닫기 위해 사용하는 함수입니다.
+#숫자 0은요?
+#숫자 0은 시간을 의미합니다. OpenCV에서는 시간은 밀리세컨드 단위로 (5000)을 입력하면 5초동안 창이 켜져있음을 의미합니다.
+# 0은 무한을 의미합니다. 
+# 사용자가 키를 누르지않는 이상 윈도우 창은 항상 켜져있습니다!
+#cv2.destroyAllWindows()
+#이 무시무시한 이름은 윈도우 창이 여러개 출력되어있을 경우 waitKey로부터 키를 입력받았을 경우 
+#동시에 모든 창을 종료하라는 의미입니다.
 
 
 class MainWindow(QMainWindow):
