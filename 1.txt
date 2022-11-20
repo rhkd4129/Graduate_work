@@ -1,0 +1,17 @@
+https://github.com/rhkd4129/Graduate_work_1-GUI.git
+# git clone https://github.com/rhkd4129/Graduate_work_1-GUI.git .
+
+
+git init
+
+git remote add origin https://github.com/rhkd4129/Graduate_work_1-GUI.git
+git remote -v
+
+git pull origin master
+
+
+git push -u origin master
+-u옵션은 다음부터 pull.push할 시 origin master을 따로 지정하지 않아도 알아서 origin/master로 
+
+
+git branch -r 원격 브랜치 확인
