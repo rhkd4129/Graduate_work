@@ -7,20 +7,17 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 main = Tk()
 
 global search_image_entry
-global search_image_entry
+# global search_image_entry
 
 global search_image_num
 global number_num
 
-image1 = cv2.imread('images/1.png')    
-image2 = cv2.imread('images/2.jpg')    
-image3 = cv2.imread('images/3.jpg')    
-image4 = cv2.imread('images/4.jpg')    
-image5 = cv2.imread('images/5.jpg')    
-image6 = cv2.imread('images/6.jpg')    
-image7 = cv2.imread('images/7.jpg')    
-image8 = cv2.imread('images/8.jpg')    
-images = [image1,image2,image3,image4,image5,image6,image7,image8]
+image1 = cv2.imread('cat/1.jpg')    
+image2 = cv2.imread('cat/2.png')    
+image3 = cv2.imread('cat/3.jpg')    
+image4 = cv2.imread('cat/4.jpg')    
+  
+images = [image1,image2,image3,image4]
 cvt_images =[]
 for image in images:
     image = cv2.cvtColor(image,cv2.COLOR_RGB2BGR)
@@ -82,10 +79,10 @@ def GOClick():
     Clear()
   
  
-    Fig = plt.Figure(figsize=(15,7),dpi=100)
+    Fig = plt.Figure(figsize=(13,5),dpi=100)
 
     for x in range(len(cvt_images)):
-        ax = Fig.add_subplot(1,6,x+1)
+        ax = Fig.add_subplot(1,5,x+1)
         ax.set_xticks([])
         ax.set_yticks([])
         one = FigureCanvasTkAgg(Fig,main)
