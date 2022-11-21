@@ -34,18 +34,8 @@ from PyQt5.QtWidgets import (
         # FIXME: 
 
 #from seconed_page import MplCanvas,AnotherWindow
-'''
-class AnotherWindow(QWidget):
-    def __init__(self):
-        super().__init__()
 
-        self.resize(500, 350)
 
-        layout = QVBoxLayout()
-        self.label = QLabel("Another Window % d" % randint(0, 100))
-        layout.addWidget(self.label)
-        self.setLayout(layout)
-'''
 
 
 image1 = cv2.imread('images/1.png')    
@@ -61,31 +51,32 @@ for image in images:
     
 
 
+# class MplCanvas(FigureCanvasQTAgg):
+
+#     def __init__(self, parent=None, width=5, height=4, dpi=100):
+#         fig = Figure(figsize=(width, height), dpi=dpi)
+#         #fig ,ax= plt.subplots(1,2,figsize=(10,5))
+#         super(MplCanvas, self).__init__(fig)
+            
+
 class MplCanvas(FigureCanvasQTAgg):
 
     def __init__(self, parent=None, width=5, height=4, dpi=100):
         fig = Figure(figsize=(width, height), dpi=dpi)
-        #fig ,ax= plt.subplots(1,2,figsize=(10,5))
+        self.axes = fig.add_subplot(111)
         super(MplCanvas, self).__init__(fig)
-            
+
+
 class AnotherWindow(QWidget):
     def __init__(self):
-        super().__init__()
+        super(AnotherWindow,self).__init__()
+        
 
         sc = MplCanvas(self, width=5, height=4, dpi=100)
-        #sc.axes.plot([0,1,2,3,4], [10,1,20,3,40])
-        
-        sc,ax= plt.subplots(1,4)
-
-        for i in range(4):
-            ax[i].imshow(cvt_images[i])
-            ax[i].set_xticks([])
-            ax[i].set_yticks([])
-        plt.show()
-        #self.resize(700, 700)
-        
+        sc.axes.plot([0,1,2,3,4], [10,1,20,3,40])
         toolbar = NavigationToolbar(sc, self)
 
+        
         layout = QtWidgets.QVBoxLayout()
         layout.addWidget(toolbar)
         layout.addWidget(sc)
@@ -93,17 +84,16 @@ class AnotherWindow(QWidget):
         # Create a placeholder widget to hold our toolbar and canvas.
         widget = QtWidgets.QWidget()
         widget.setLayout(layout)
-        self.setCentralWidget(widget)
+        # self.setCentralWidget(widget)
 
-        self.show()
-
+        # self.show()
 
 
 class Ui_MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.window1 = AnotherWindow()
-
+        
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(372, 350)
         self.centralwidget = QWidget(MainWindow)
@@ -218,3 +208,32 @@ if __name__ == "__main__":
     #ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
+
+# class AnotherWindow(QWidget):
+#     def __init__(self):
+#         super().__init__()
+#         self.setWindowTitle('My First Application')
+#         sc = MplCanvas(self, width=5, height=4, dpi=100)
+#         #sc.axes.plot([0,1,2,3,4], [10,1,20,3,40])
+        
+#         sc,ax= plt.subplots(1,4)
+
+#         for i in range(4):
+#             ax[i].imshow(cvt_images[i])
+#             ax[i].set_xticks([])
+#             ax[i].set_yticks([])
+#         plt.show()
+#         #self.resize(700, 700)
+        
+#         toolbar = NavigationToolbar(sc, self)
+
+#         layout = QtWidgets.QVBoxLayout()
+#         layout.addWidget(toolbar)
+#         layout.addWidget(sc)
+
+#         # Create a placeholder widget to hold our toolbar and canvas.
+#         widget = QtWidgets.QWidget()
+#         widget.setLayout(layout)
+#         self.setCentralWidget(widget)
+
+#         self.show()
