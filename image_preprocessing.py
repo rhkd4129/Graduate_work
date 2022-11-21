@@ -28,4 +28,4 @@ def filter_and_remove(dir_name:str,query:str,filter_size:int)->None:
 
 
 files_names =  [name for name in os.listdir('C:\Python_1821028\cat')]
-print(files_names)
+
