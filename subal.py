@@ -55,7 +55,7 @@ class AnotherWindow(QWidget):
         # self.setLayout(self.sc)
 
 
-class MainWindow(QMainWindow):
+class MainWindow(QWidget):
     def __init__(self):
         super().__init__()
         self.window1 = AnotherWindow()
