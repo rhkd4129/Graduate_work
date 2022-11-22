@@ -1,0 +1,17 @@
+pip install opencv-python
+pip install matplotlib
+pip install googletrans==4.0.0-rc1 #->> 해당 버전이 아니면 오류 발생 (꼭 버전을 붙혀서 )
+
+#TODOheight 설치
+
+
+#####################   git    ##################### 
+# git init
+# git remote add origin https://github.com/rhkd4129/Graduate_work_1-GUI.git
+# git remote -v
+# git pull origin master(branch)
+# 원격 저장소의 파일을 불러와 로컬과 똑같이
+
+# git pull origin master = git pull [원격 저장소의 이름] [원격 저장소에서 받아오고자 하는 브랜치의 이름]
+
+

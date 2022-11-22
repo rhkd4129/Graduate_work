@@ -3,28 +3,24 @@ from tkinter import *
 import cv2
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-# 6시 10분
+
+from image_preprocessing import cvt_image_save
+
+
+
 main = Tk()
 
 global search_image_entry
-# global search_image_entry
+global number_entry
 
 global search_image_num
 global number_num
 
-image1 = cv2.imread('cat/1.jpg')    
-image2 = cv2.imread('cat/2.png')    
-image3 = cv2.imread('cat/3.jpg')    
-image4 = cv2.imread('cat/4.jpg')    
-  
-images = [image1,image2,image3,image4]
-cvt_images =[]
-for image in images:
-    image = cv2.cvtColor(image,cv2.COLOR_RGB2BGR)
-    cvt_images.append(image)
-    
-    
 
+  
+cvt_images = cvt_image_save('cat_img_download')
+
+image_num = len(cvt_images)
 
 
 def Clear():
@@ -73,21 +69,27 @@ def mainWindow():
 
 def GOClick():
     global search_image_entry
-    global number_num
+    global number_num_entry
 
     search_image_num = str(search_image_entry.get())
+    number_entry_num = int(number_entry.get())
     Clear()
   
- 
+    lbl1 = Label(main)
+    lbl1.config(text =number_entry_num )
+    lbl1.place(x = 1500, y= 150)
+
     Fig = plt.Figure(figsize=(13,5),dpi=100)
 
-    for x in range(len(cvt_images)):
-        ax = Fig.add_subplot(1,5,x+1)
+    for x in range(image_num):
+        ax = Fig.add_subplot(1,image_num,x+1)
         ax.set_xticks([])
         ax.set_yticks([])
         one = FigureCanvasTkAgg(Fig,main)
         one.get_tk_widget().place(x=100,y=100)
         ax.imshow(cvt_images[x])
+
+    
     
 
     main.geometry("1800x700")

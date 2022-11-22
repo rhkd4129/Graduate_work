@@ -1,7 +1,5 @@
 import cv2
 import matplotlib.pyplot as plt
-
-
 import os
 
 
@@ -23,9 +21,16 @@ def filter_and_remove(dir_name:str,query:str,filter_size:int)->None:
 
 
 
+def cvt_image_save(path:str)->list:# cat_img_download'
+  files_names =  [name for name in os.listdir(path)]
 
-# for index,file_name in enumerate(os.listdir(dir_name)):
+  cvt_images=[]
+  for i , file_name in enumerate(files_names):
+    image = cv2.imread('cat_img_download/'+file_name)    
+    cvt_image = cv2.cvtColor(image,cv2.COLOR_RGB2BGR)
+    cvt_images.append(cvt_image)
 
-
-files_names =  [name for name in os.listdir('C:\Python_1821028\cat')]
-
+  return cvt_images
+images  = cvt_image_save('cat_img_download')
+plt.imshow(images[2])
+plt.show()

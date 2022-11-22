@@ -1,21 +1,4 @@
 
-pip install opencv-python
-pip install matplotlib
-
-TODOheight 설치
-
-
-git remote add origin ''address''
-연결
-git pull origin main
-원격 저장소의 파일을 불러와 로컬과 똑같이 
-
-git add --all
-git commit -m "커밋할 내용"
-git push origin main
-
-git pull origin master = git pull [원격 저장소의 이름] [원격 저장소에서 받아오고자 하는 브랜치의 이름]
-
 
 
 
