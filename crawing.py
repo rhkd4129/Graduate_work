@@ -28,8 +28,8 @@ def translate(keyword):
         print(keyword + " => " + result.text)
         keyword = result.text
         return keyword
-    else:
-        return keyword
+    # else:
+    #     return keyword
     
 
 # 키워드 입력
@@ -126,7 +126,8 @@ def crawing(keyword,image_count):
                 print(e)
                 break
         else: break
-        driver.close()
+    driver.close()
+    return keyword
 
 # keyword = input("Keyword : ")
 # crawing(keyword)

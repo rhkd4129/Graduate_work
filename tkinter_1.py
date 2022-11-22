@@ -89,10 +89,14 @@ def GOClick():
     lbl1.config(text =number_entry_num )
     lbl1.place(x = 1500, y= 150)
 
+    lbl2 = Label(main)
+    lbl2.config(text =search_image_name )
+    lbl2.place(x = 1500, y= 300)
+
   
 
     keyword = search_image_name
-    # crawing(keyword,number_entry_num)
+    keyword = crawing(keyword,number_entry_num)
 
     cvt_images =cvt_image_save(keyword+'_img_download')
     image_length = len(cvt_images)

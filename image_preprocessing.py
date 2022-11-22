@@ -21,16 +21,20 @@ def filter_and_remove(dir_name:str,query:str,filter_size:int)->None:
 
 
 
-def cvt_image_save(path:str)->list:# cat_img_download'
-  files_names =  [name for name in os.listdir(path)]
-
+# images  = cvt_image_save('cat_img_download')
+# plt.imshow(images[2])
+# plt.show()
+def cvt_image_save(dir_path:str)->list:# cat_img_download'
+  files_names =  [name for name in os.listdir(dir_path)]
+  
+  print(files_names)
   cvt_images=[]
   for i , file_name in enumerate(files_names):
-    image = cv2.imread('cat_img_download/'+file_name)    
+    # print(os.path.join(dir_path,file_name))
+    path = os.path.join(dir_path,file_name)
+    image = cv2.imread(path)
+
     cvt_image = cv2.cvtColor(image,cv2.COLOR_RGB2BGR)
     cvt_images.append(cvt_image)
 
   return cvt_images
-# images  = cvt_image_save('cat_img_download')
-# plt.imshow(images[2])
-# plt.show()
