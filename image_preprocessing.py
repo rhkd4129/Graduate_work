@@ -31,6 +31,6 @@ def cvt_image_save(path:str)->list:# cat_img_download'
     cvt_images.append(cvt_image)
 
   return cvt_images
-images  = cvt_image_save('cat_img_download')
-plt.imshow(images[2])
-plt.show()
+# images  = cvt_image_save('cat_img_download')
+# plt.imshow(images[2])
+# plt.show()

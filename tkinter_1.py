@@ -3,9 +3,23 @@ from tkinter import *
 import cv2
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-
 from image_preprocessing import cvt_image_save
 
+
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+from selenium.common.exceptions import NoSuchElementException,ElementClickInterceptedException,ElementNotInteractableException
+from urllib.error import HTTPError,URLError
+import time
+import urllib.request
+import os
+import socket
+import googletrans
+
+from crawing import translate,crawing,createFolder
+
+from image_preprocessing import cvt_image_save
 
 
 main = Tk()
@@ -17,10 +31,6 @@ global search_image_num
 global number_num
 
 
-  
-cvt_images = cvt_image_save('cat_img_download')
-
-image_num = len(cvt_images)
 
 
 def Clear():
@@ -71,18 +81,26 @@ def GOClick():
     global search_image_entry
     global number_num_entry
 
-    search_image_num = str(search_image_entry.get())
+    search_image_name = str(search_image_entry.get())
     number_entry_num = int(number_entry.get())
     Clear()
-  
+
     lbl1 = Label(main)
     lbl1.config(text =number_entry_num )
     lbl1.place(x = 1500, y= 150)
 
+  
+
+    keyword = search_image_name
+    # crawing(keyword,number_entry_num)
+
+    cvt_images =cvt_image_save(keyword+'_img_download')
+    image_length = len(cvt_images)
+
     Fig = plt.Figure(figsize=(13,5),dpi=100)
 
-    for x in range(image_num):
-        ax = Fig.add_subplot(1,image_num,x+1)
+    for x in range(image_length):
+        ax = Fig.add_subplot(1,image_length,x+1)
         ax.set_xticks([])
         ax.set_yticks([])
         one = FigureCanvasTkAgg(Fig,main)
