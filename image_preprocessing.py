@@ -19,12 +19,9 @@ def filter_and_remove(dir_name:str,query:str,filter_size:int)->None:
       os.remove(file_path)       ## 이미지제거
       filtered_count +=1
 
+##################################################################
 
-
-# images  = cvt_image_save('cat_img_download')
-# plt.imshow(images[2])
-# plt.show()
-def cvt_image_save(dir_path:str)->list:# cat_img_download'
+def cvt_image_save(dir_path:str)->list:#ex) cat_img_download'
   files_names =  [name for name in os.listdir(dir_path)]
   
   print(files_names)
@@ -36,5 +33,4 @@ def cvt_image_save(dir_path:str)->list:# cat_img_download'
 
     cvt_image = cv2.cvtColor(image,cv2.COLOR_RGB2BGR)
     cvt_images.append(cvt_image)
-
   return cvt_images

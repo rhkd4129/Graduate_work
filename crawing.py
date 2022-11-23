@@ -12,7 +12,7 @@ import googletrans
 
 
 
-# 폴더 만드는 함수
+############ 폴더 만드는 함수########################
 def createFolder(directory):
     try:
         if not os.path.exists(directory):
@@ -21,20 +21,21 @@ def createFolder(directory):
         print ('ERROR: Creating directory. ' +  directory)
 
 
-def translate(keyword):
+############## 한글 입력받으면 번역하는 함수############
+def translate(keyword:str)->str:
     if not 'a' <= keyword[0] <= 'z' or 'A' <= keyword[0] <='Z':
         translator = googletrans.Translator()
         result = translator.translate(keyword, dest='en')
         print(keyword + " => " + result.text)
         keyword = result.text
         return keyword
-    # else:
-    #     return keyword
+    else:
+        return keyword
     
 
-# 키워드 입력
 
-def crawing(keyword,image_count):
+
+def crawing(keyword:str,image_count:int)->str:
 
     # 크롬 웹드라이버 연결
     chrome_options = webdriver.ChromeOptions()
@@ -44,11 +45,11 @@ def crawing(keyword,image_count):
     driver = webdriver.Chrome('chromedriver', chrome_options=chrome_options)
     driver.get("https://www.google.co.kr/imghp?hl=ko&tab=ri&ogbl")
 
-    # 폴더 생성
+    
     keyword = translate(keyword)
-    # 키워드가 영어가 아니면 영어로 번역 처리
+    
     createFolder('./' + keyword + '_img_download')
-    # 이미지 개수 입력
+    
     # image_count = int(input("Image count : "))
 
     
@@ -67,7 +68,7 @@ def crawing(keyword,image_count):
 
         time.sleep(SCROLL_PAUSE_TIME)
 
-        # Calculate new scroll height and compare with last scroll height   
+        
         new_height = driver.execute_script("return document.body.scrollHeight")
         if new_height == last_height:
             try:
@@ -83,7 +84,7 @@ def crawing(keyword,image_count):
     image_limit = 10
     print("찾은 " + keyword + " 이미지 개수 : ", len(images))
     
-    # 입력한 이미지 수만큼 출력되도록 403 forbidden에러는 넘어가는 방식
+    # 입력한 이미지 수만큼 출력되도록 에러는 넘어가는 방식
     for i in range(len(images)):
         if(count - 1 != image_count):
             try:
@@ -100,7 +101,7 @@ def crawing(keyword,image_count):
                     urllib.request.urlretrieve(imgUrl, "./" + keyword + "_img_download/" + keyword + str(count) + ".jpg")
                     print("JPG Image saved : {}_{}.jpg".format(keyword, count))
                 count = count + 1
-            # 예외 처리
+##################### 예외 처리#######################################
             except HTTPError as e:
                 print(e)
                 pass
