@@ -75,13 +75,13 @@ def GOClick():
     number_entry_num = int(number_entry.get())
     Clear()
 
-    lbl1 = Label(main)
-    lbl1.config(text =number_entry_num )
-    lbl1.place(x = 1500, y= 150)
+    # lbl1 = Label(main)
+    # lbl1.config(text =number_entry_num )
+    # lbl1.place(x = 1500, y= 150)
 
-    lbl2 = Label(main)
-    lbl2.config(text =search_image_name )
-    lbl2.place(x = 1500, y= 300)
+    # lbl2 = Label(main)
+    # lbl2.config(text =search_image_name )
+    # lbl2.place(x = 1500, y= 300)
 
     keyword = search_image_name
     keyword = crawing(keyword,number_entry_num)
@@ -99,7 +99,7 @@ def GOClick():
         one.get_tk_widget().place(x=100,y=100)
         ax.imshow(cvt_images[x])
 
-    main.geometry("1800x700")
+    main.geometry("1700x700")
     main.option_add("*Font","맑은고딕 15")
     
 ###########################################################################
