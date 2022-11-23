@@ -18,27 +18,22 @@ import socket
 import googletrans
 
 from crawing import translate,crawing,createFolder
-
 from image_preprocessing import cvt_image_save
 
-
+###########################################################################
 main = Tk()
-
+###########################################################################
 global search_image_entry
 global number_entry
 
 global search_image_num
 global number_num
 
-
-
-
+###########################################################################
 def Clear():
     for w in main.place_slaves():
         w.destroy()
-
-
-
+###########################################################################
 def mainWindow():
     global  search_image_entry
     global  number_entry
@@ -48,19 +43,16 @@ def mainWindow():
     main.title("window")
 
 
-################ <---- 첫쨰줄 ---->  ################################
+################ <---- 첫쨰줄 ---->  #################
 
     search_image_lbl = Label(main)
     search_image_lbl.config(text = "search_image")
     search_image_lbl.place(x = 400, y= 80)
 
-
     search_image_entry = Entry(main)
     search_image_entry.place(x = 40, y= 80)
 
-
-
-################ <---- 두번째 줄 ---->  ################################
+################ <---- 두번째 줄 ---->  ###############
     number_lbl = Label(main)
     number_lbl.config(text = "number")
     number_lbl.place(x = 400, y= 150)
@@ -68,15 +60,14 @@ def mainWindow():
     number_entry = Entry(main)
     number_entry.place(x = 40, y= 150)
     
-################ <---- 세번째 줄 ---->  ################################    
-
-
+################ <---- 세번째 줄 ---->  ###############
     GObtn = Button(main)
     GObtn.config(text="GO")
     GObtn.place(x = 400, y=250)
     GObtn.config(command = GOClick)
 
 
+###########################################################################
 def GOClick():
     global search_image_entry
     global number_num_entry
@@ -92,8 +83,6 @@ def GOClick():
     lbl2 = Label(main)
     lbl2.config(text =search_image_name )
     lbl2.place(x = 1500, y= 300)
-
-  
 
     keyword = search_image_name
     keyword = crawing(keyword,number_entry_num)
@@ -111,13 +100,10 @@ def GOClick():
         one.get_tk_widget().place(x=100,y=100)
         ax.imshow(cvt_images[x])
 
-    
-    
-
     main.geometry("1800x700")
     main.option_add("*Font","맑은고딕 15")
     
-
+###########################################################################
 
 
 
