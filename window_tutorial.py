@@ -136,7 +136,6 @@ def ResultBtn():
     ResultBtn.config(text = "결과")
     ResultBtn.place(x = 50, y = 450)
     ResultBtn.config(command = ResultClick)
-
 def nrsort(nrlist):
     nrlist = nrlist
     nlist = []
