@@ -32,7 +32,7 @@ global number_num
 def Clear():
     for w in main.place_slaves():
         w.destroy()
-###########################################################################
+#######################################################################
 def mainWindow():
     global  search_image_entry
     global  number_entry
