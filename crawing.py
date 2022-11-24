@@ -17,24 +17,29 @@ def createFolder(directory):
     try:
         if not os.path.exists(directory):
             os.makedirs(directory)
+            #해당 폴더 없으면 생성 
     except OSError:
         print ('ERROR: Creating directory. ' +  directory)
+            # 예외 처리 
 
 
 ############## 한글 입력받으면 번역하는 함수############
 def translate(keyword:str)->str:
+    # 입력받은 keyword가 한국어면 
     if not 'a' <= keyword[0] <= 'z' or 'A' <= keyword[0] <='Z':
+        # 번역 api로 번역 
         translator = googletrans.Translator()
         result = translator.translate(keyword, dest='en')
         print(keyword + " => " + result.text)
         keyword = result.text
         return keyword
+    # 입력받은 키워드가 영어라면 그냥 바로 영어반환
     else:
         return keyword
     
 
 
-
+###### 실질적으로 크롤링하는 함수 크롤링할 이미지키워드와 개수 입력
 def crawing(keyword:str,image_count:int)->str:
 
     # 크롬 웹드라이버 연결
@@ -45,12 +50,13 @@ def crawing(keyword:str,image_count:int)->str:
     driver = webdriver.Chrome('chromedriver', chrome_options=chrome_options)
     driver.get("https://www.google.co.kr/imghp?hl=ko&tab=ri&ogbl")
 
-    
+    # 번역기 
     keyword = translate(keyword)
     
+    # 폴더 생성 
     createFolder('./' + keyword + '_img_download')
     
-    # image_count = int(input("Image count : "))
+    
 
     
     # 검색창 찾기
@@ -58,7 +64,7 @@ def crawing(keyword:str,image_count:int)->str:
     elem.send_keys(keyword) # 검색창에 키워드 입력
     elem.send_keys(Keys.RETURN) # enter
 
-    
+    # 딜레이 타임
     SCROLL_PAUSE_TIME = 1
     last_height = driver.execute_script("return document.body.scrollHeight")
 
@@ -81,7 +87,7 @@ def crawing(keyword:str,image_count:int)->str:
 
     images = driver.find_elements(By.CSS_SELECTOR, ".rg_i.Q4LuWd")
     count = 1
-    image_limit = 10
+    
     print("찾은 " + keyword + " 이미지 개수 : ", len(images))
     
     # 입력한 이미지 수만큼 출력되도록 에러는 넘어가는 방식
@@ -129,8 +135,4 @@ def crawing(keyword:str,image_count:int)->str:
         else: break
     driver.close()
     return keyword
-
-# keyword = input("Keyword : ")
-# crawing(keyword)
-
 
