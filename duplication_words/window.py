@@ -4,12 +4,16 @@ from tkinter import *
 
 global search_image_entry    
 global number_entry          
-duplication_words={
+
+# 동음의어 사전 
+duplication_words_dict={
     '사과':['apple','apologize'],
     '배':['ship','pear','stomach']
 }
 
 main = Tk()
+
+
 def mainWindow():
     global  search_image_entry
     global  number_entry
@@ -49,37 +53,80 @@ def Clear():
     for w in main.place_slaves():
         w.destroy()
 
-def GOClick():
-    global search_image_entry
-    global number_entry     
-    search_image_name = str(search_image_entry.get())
-    Clear()
-
-    if search_image_name in duplication_words.keys():
-        duplication_words_lbl = Label(main)
-        duplication_words_lbl.config(text = search_image_name+'가 중의적 표현입니다')
-        duplication_words_lbl.place(x = 300, y= 100)
-
+def duplication_word_valid(keyword):
+    # 사전에서 입력한 키워드가 있는지 검사 
+    if keyword in duplication_words_dict.keys():
+        duplication_word_lbl = Label(main)
+        duplication_word_lbl.config(text = keyword+'가 중의적 표현입니다')
+        duplication_word_lbl.place(x = 200, y= 50)
+        # 입력한 단어가 중의적 표현이라고 알려주기 
+        # keyword 사과 
         buttons = []
         
 
-        words_number = len(duplication_words[search_image_name])
-        x =20
 
-        for i in range(words_number):
-            search_image_name_btn = Button(main)
-            search_image_name_btn.config(text=duplication_words[search_image_name][i])
-            search_image_name_btn.place(x = x+150, y=250)
-            search_image_name_btn.config()
-            print(f'{ duplication_words[search_image_name][i]}   ',end = '')
-        print('\n어떤 단어인가요?')
+        duplication_words_number = len(duplication_words_dict[keyword])
+        duplication_words = duplication_words_dict[keyword]
+        
+        if duplication_words_number ==2 :x=130
+        else:x=30
+
+        for i,duplication_word_btn in enumerate(duplication_words):
+            duplication_word_btn = Button(main)
+            duplication_word_btn.config(text=duplication_words_dict[keyword][i])
+            duplication_word_btn.place(x = x+40, y=150)
+            duplication_word_btn.config()
+            x+=200
+        lbl_1 = Label(main)
+        lbl_1.config(text ='어떤 단어가 맞나요?')
+        lbl_1.place(x = 200, y= 250)
+
+
+
+def GOClick():
+    global search_image_entry
+    global number_entry     
+    keyword = str(search_image_entry.get())
+    Clear()
+
+
+    # 사전에서 입력한 키워드가 있는지 검사 
+    if keyword in duplication_words_dict.keys():
+        duplication_word_lbl = Label(main)
+        duplication_word_lbl.config(text = keyword+'가 중의적 표현입니다')
+        duplication_word_lbl.place(x = 200, y= 50)
+        # 입력한 단어가 중의적 표현이라고 알려주기 
+        # keyword 사과 
+     
+        
+
+
+        duplication_words_number = len(duplication_words_dict[keyword])
+        duplication_words = duplication_words_dict[keyword]
+        
+        if duplication_words_number ==2 :x=130
+        else:x=30
+
+        for i,duplication_word_btn in enumerate(duplication_words):
+            duplication_word_btn = Button(main)
+            duplication_word_btn.config(text=duplication_words_dict[keyword][i])
+            duplication_word_btn.place(x = x+40, y=150)
+            # duplication_word_btn.config(command=lambda  )
+            x+=200
+        lbl_1 = Label(main)
+        lbl_1.config(text ='어떤 단어가 맞나요?')
+        lbl_1.place(x = 200, y= 250)
+
+
+
+    # 없으면 바로 크롤링으로 넘어감
     else:
         duplication_words_lbl = Label(main)
         duplication_words_lbl.config(text = '없다 이놈아')
         duplication_words_lbl.place(x = 300, y= 100)
 
 
-    main.geometry("800x800")
+    main.geometry("700x300")
     main.option_add("*Font","맑은고딕 15")
 
 

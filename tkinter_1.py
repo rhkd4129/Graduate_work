@@ -18,6 +18,10 @@ import googletrans
 
 from crawing import translate,crawing,createFolder
 from image_preprocessing import cvt_image_save
+duplication_words_dict={
+    '사과':['apple','apologize'],
+    '배':['ship','pear','stomach']
+}
 
 ###########################################################################
 main = Tk()
@@ -91,47 +95,49 @@ def GOClick():
     ## 화면 전환전에 사용하는 함수 위에서 entry의 값을 먼저 읽어오고
     ## 선언해야 된다. 아니면 값이 안받아와짐 
 
-    # lbl1 = Label(main)
-    # lbl1.config(text =number_entry_num )
-    # lbl1.place(x = 1500, y= 150)
-    # lbl2 = Label(main)
-    # lbl2.config(text =search_image_name )
-    # lbl2.place(x = 1500, y= 300)
+    ################################################
 
-    keyword = search_image_name
-    # 번역이 완료된 keyword
-    keyword = crawing(keyword,number_entry_num)
-    # 크롤링 하기 
-    # keyword가 이후에도 쓰이기 떄문에 return으로 keyword 받아옴
+    if search_image_name in duplication_words_dict.keys():
+        duplication_word_lbl = Label(main)
+        duplication_word_lbl.config(text = search_image_name+'가 중의적 표현입니다')
+        duplication_word_lbl.place(x = 200, y= 50)
+        # 입력한 단어command=lambda 가 중의적 표현이라고 알려주기 
+        # keyword 사과 
 
-    cvt_images =cvt_image_save(keyword+'_img_download')
+        duplication_words_number = len(duplication_words_dict[search_image_name])
+        duplication_words = duplication_words_dict[search_image_name]
+        
+        if duplication_words_number ==2 :x=130
+        else:x=30
 
-    # 이미지 처리 후 저장 
-    image_length = len(cvt_images)
+        for i,duplication_word_btn in enumerate(duplication_words):
+            keyword = duplication_word_btn
+            print(type(keyword),keyword)
 
-    Fig = plt.Figure(figsize=(13,5),dpi=100)
-    # plt.figure()그림그릴 도화지 선언 같은 역활
+            duplication_word_btn = Button(main)
+            duplication_word_btn.config(text=duplication_words_dict[search_image_name][i])
+            duplication_word_btn.place(x = x+40, y=150)
 
-    for x in range(image_length):
-        ax = Fig.add_subplot(1,image_length,x+1)
-        # Fig(도화지)에 subplot을 추가하는데, 도화지에 여러개의 그림을 그릴려고 할때 사용
-        # add_subplot(x,y,z) => (1,3,1)은 1*3 행렬모양의 그래프 (3개)  맨마지막 1은 첫번째 그래프를 가리킴
-        # 원문 보시길.. 
+            # duplication_word_btn.config(commend = crawing(keyword,number_entry_num,inputType='ko'))
+            x+=200
+        lbl_1 = Label(main)
+        lbl_1.config(text ='어떤 단어가 맞나요?')
+        lbl_1.place(x = 200, y= 250)
+        main.geometry("700x400")
+        main.option_add("*Font","맑은고딕 15")
 
-        ax.set_xticks([])
-        ax.set_yticks([])
-        # x축과 y레이블은 없는게 깔끔해서 없앰 
-        one = FigureCanvasTkAgg(Fig,main)
-        # 뭐 tkinter랑 같이쓸려면 써야 한대서  씀
-        one.get_tk_widget().place(x=100,y=100)
-        # 이것도??
-        ax.imshow(cvt_images[x])
-        # 
+        # 없으면 바로 크롤링으로 넘어감
+    else:
+        keyword = search_image_name
+        # 번역이 완료된 keyword
+        keyword = crawing(keyword,number_entry_num)
+        # 크롤링 하기 
+        # keyword가 이후에도 쓰이기 떄문에 return으로 keyword 받아옴
+
+        
 
     main.geometry("1700x700")
     main.option_add("*Font","맑은고딕 15")
-
-
 # 이해안되면 물어보세욥
 ###########################################################################
 

@@ -8,7 +8,10 @@ import urllib.request
 import os
 import socket
 import googletrans
-
+import matplotlib.pyplot as plt
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from image_preprocessing import cvt_image_save
+from tkinter_1 import main
 
 
 
@@ -40,7 +43,7 @@ def translate(keyword:str)->str:
 
 
 ###### 실질적으로 크롤링하는 함수 크롤링할 이미지키워드와 개수 입력
-def crawing(keyword:str,image_count:int)->str:
+def crawing(keyword:str,image_count:int,inputType='en')->str:
 
     # 크롬 웹드라이버 연결
     chrome_options = webdriver.ChromeOptions()
@@ -51,7 +54,9 @@ def crawing(keyword:str,image_count:int)->str:
     driver.get("https://www.google.co.kr/imghp?hl=ko&tab=ri&ogbl")
 
     # 번역기 
-    keyword = translate(keyword)
+    if inputType=='en':
+        keyword = translate(keyword)
+    else: pass
     
     # 폴더 생성 
     createFolder('./' + keyword + '_img_download')
@@ -134,5 +139,36 @@ def crawing(keyword:str,image_count:int)->str:
                 break
         else: break
     driver.close()
-    return keyword
+
+    cvt_images =cvt_image_save(keyword+'_img_download')
+        # 이미지 처리 후 저장 
+    image_length = len(cvt_images)
+    grid(cvt_images,image_length,main)
+    
+    if inputType =='en':
+        return keyword
+    else:
+        return None
+
+
+def grid(cvt_images,image_length,main):
+    Fig = plt.Figure(figsize=(13,5),dpi=100)
+        # plt.figure()그림그릴 도화지 선언 같은 역활
+
+    for x in range(image_length):
+        ax = Fig.add_subplot(1,image_length,x+1)
+            # Fig(도화지)에 subplot을 추가하는데, 도화지에 여러개의 그림을 그릴려고 할때 사용
+            # add_subplot(x,y,z) => (1,3,1)은 1*3 행렬모양의 그래프 (3개)  맨마지막 1은 첫번째 그래프를 가리킴
+            # 원문 보시길.. 
+
+        ax.set_xticks([])
+        ax.set_yticks([])
+        # x축과 y레이블은 없는게 깔끔해서 없앰 
+        one = FigureCanvasTkAgg(Fig,main)
+        # 뭐 tkinter랑 같이쓸려면 써야 한대서  씀
+        one.get_tk_widget().place(x=100,y=100)
+        # 이것도??
+        ax.imshow(cvt_images[x])
+
+    
 
