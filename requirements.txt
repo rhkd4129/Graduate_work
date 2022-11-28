@@ -22,3 +22,7 @@ pip install selenium
 # git pull origin master = git pull [원격 저장소의 이름] [원격 저장소에서 받아오고자 하는 브랜치의 이름]
 
 
+
+
+
+ 
