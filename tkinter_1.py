@@ -116,19 +116,24 @@ def GOClick():
         
         if duplication_words_number ==2 :x=130
         else:x=30
-        
+        btn_dict ={}
         for i,duplication_word_btn in enumerate(duplication_words):
             keyword = duplication_word_btn
             print(type(keyword),keyword)
 
-            duplication_word_btn = Button(main)
-            duplication_word_btn.config(text=duplication_words_dict[search_image_name][i])
-            duplication_word_btn.place(x = x+40, y=150)
+            btn_dict[duplication_word_btn] = Button(main)
+            btn_dict[duplication_word_btn].config(text=duplication_words_dict[search_image_name][i],state='disabled')
+            btn_dict[duplication_word_btn].place(x = x+40, y=150)
             # keyword,cvt_images,cvt_images_length =  duplication_word_btn.config(commend = craw(keyword,number_entry_num,inputType='ko'))
             #return_value = duplication_word_btn.config(command=Click('aaa'))
-            a = duplication_word_btn.bind('<Button-1>',(lambda event,x: print(x)))
-            print(a)
+            # a = duplication_word_btn.bind('<Button-1>',(lambda event,x: print(x)))
             x+=200
+        # btn_dict[duplication_words[0]]
+
+        
+        print(btn_dict)
+        btn_dict[duplication_words[0]].config(command=Click('1'))
+        btn_dict[duplication_words[1]].config(command=Click1('2'))
         main.geometry("1700x700")
         main.option_add("*Font","맑은고딕 15")
 
@@ -146,7 +151,10 @@ def GOClick():
 ###########################################################################
 def Click(text):
     print(text)
-    return 10
+
+def Click1(text):
+    print(text)
+
 def dr():
     main.geometry("1700x700")
     main.option_add("*Font","맑은고딕 15")
