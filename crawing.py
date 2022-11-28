@@ -10,8 +10,11 @@ import socket
 import googletrans
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+
+
+
 from image_preprocessing import cvt_image_save
-from tkinter_1 import main
+# from tkinter_1 import main
 
 
 
@@ -27,7 +30,7 @@ def createFolder(directory):
 
 
 ############## 한글 입력받으면 번역하는 함수############
-def translate(keyword:str)->str:
+def trans(keyword:str)->str:
     # 입력받은 keyword가 한국어면 
     if not 'a' <= keyword[0] <= 'z' or 'A' <= keyword[0] <='Z':
         # 번역 api로 번역 
@@ -43,7 +46,7 @@ def translate(keyword:str)->str:
 
 
 ###### 실질적으로 크롤링하는 함수 크롤링할 이미지키워드와 개수 입력
-def crawing(keyword:str,image_count:int,inputType='en')->str:
+def craw(keyword:str,image_count:int,inputType='en')->str:
 
     # 크롬 웹드라이버 연결
     chrome_options = webdriver.ChromeOptions()
@@ -55,14 +58,11 @@ def crawing(keyword:str,image_count:int,inputType='en')->str:
 
     # 번역기 
     if inputType=='en':
-        keyword = translate(keyword)
+        keyword = trans(keyword)
     else: pass
     
     # 폴더 생성 
     createFolder('./' + keyword + '_img_download')
-    
-    
-
     
     # 검색창 찾기
     elem = driver.find_element(By.NAME, "q") # 검색창 태그 찾기
@@ -141,14 +141,18 @@ def crawing(keyword:str,image_count:int,inputType='en')->str:
     driver.close()
 
     cvt_images =cvt_image_save(keyword+'_img_download')
-        # 이미지 처리 후 저장 
     image_length = len(cvt_images)
-    grid(cvt_images,image_length,main)
+        # 이미지 처리 후 저장 
+
+
     
-    if inputType =='en':
-        return keyword
-    else:
-        return None
+    return keyword,cvt_images,image_length
+
+
+
+
+
+
 
 
 def grid(cvt_images,image_length,main):

@@ -3,8 +3,6 @@ from tkinter import *
 import cv2
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-from image_preprocessing import cvt_image_save
-
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
@@ -16,8 +14,10 @@ import os
 import socket
 import googletrans
 
-from crawing import translate,crawing,createFolder
 
+
+
+from crawing import craw,grid
 
 
 duplication_words_dict={
@@ -34,7 +34,7 @@ global number_entry          # entry(입력창) 개체
 
 
 ###########################################################################
-# 화면에 있는 (뭐 버튼이나 레이블)같은 요소들을 제거하는 함수인데 
+# 화면에 있는 (뭐 버튼이나 레이블)s같은 요소들을 제거하는 함수인데 
 # 화면전환전에 사용하는 함수 
 def Clear():
     for w in main.place_slaves():
@@ -100,6 +100,11 @@ def GOClick():
     ################################################
 
     if search_image_name in duplication_words_dict.keys():
+        lbl_1 = Label(main)
+        lbl_1.config(text ='어떤 단어가 맞나요?')
+        lbl_1.place(x = 200, y= 250)
+        main.geometry("700x400")
+        main.option_add("*Font","맑은고딕 15")
         duplication_word_lbl = Label(main)
         duplication_word_lbl.config(text = search_image_name+'가 중의적 표현입니다')
         duplication_word_lbl.place(x = 200, y= 50)
@@ -111,7 +116,7 @@ def GOClick():
         
         if duplication_words_number ==2 :x=130
         else:x=30
-
+        
         for i,duplication_word_btn in enumerate(duplication_words):
             keyword = duplication_word_btn
             print(type(keyword),keyword)
@@ -119,29 +124,32 @@ def GOClick():
             duplication_word_btn = Button(main)
             duplication_word_btn.config(text=duplication_words_dict[search_image_name][i])
             duplication_word_btn.place(x = x+40, y=150)
-
-            # duplication_word_btn.config(commend = crawing(keyword,number_entry_num,inputType='ko'))
+            # keyword,cvt_images,cvt_images_length =  duplication_word_btn.config(commend = craw(keyword,number_entry_num,inputType='ko'))
+            #return_value = duplication_word_btn.config(command=Click('aaa'))
+            a = duplication_word_btn.bind('<Button-1>',(lambda event,x: print(x)))
+            print(a)
             x+=200
-        lbl_1 = Label(main)
-        lbl_1.config(text ='어떤 단어가 맞나요?')
-        lbl_1.place(x = 200, y= 250)
-        main.geometry("700x400")
+        main.geometry("1700x700")
         main.option_add("*Font","맑은고딕 15")
 
         # 없으면 바로 크롤링으로 넘어감
     else:
         keyword = search_image_name
-        # 번역이 완료된 keyword
-        keyword = crawing(keyword,number_entry_num)
-        # 크롤링 하기 
-        # keyword가 이후에도 쓰이기 떄문에 return으로 keyword 받아옴
-
-        
-
-    main.geometry("1700x700")
-    main.option_add("*Font","맑은고딕 15")
+            # 번역이 완료된 keyword
+        keyword,cvt_images,cvt_images_length = craw(keyword,number_entry_num)
+        grid(cvt_images,cvt_images_length,main)
+            # 크롤링 하기 
+            # keyword가 이후에도 쓰이기 떄문에 return으로 keyword 받아옴
+        main.geometry("1700x700")
+        main.option_add("*Font","맑은고딕 15")
 # 이해안되면 물어보세욥
 ###########################################################################
+def Click(text):
+    print(text)
+    return 10
+def dr():
+    main.geometry("1700x700")
+    main.option_add("*Font","맑은고딕 15")
 
 mainWindow()
 main.mainloop()
