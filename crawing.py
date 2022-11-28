@@ -10,7 +10,7 @@ import socket
 import googletrans
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-
+import random
 
 
 from image_preprocessing import cvt_image_save
@@ -43,6 +43,12 @@ def trans(keyword:str)->str:
     else:
         return keyword
     
+def random_idx(search_image_number,images_length):
+    random_idx_list = []
+    for _ in range(search_image_number):
+        random_number = random.randint(0,images_length)
+        random_idx_list.append(random_number)
+    return random_idx_list
 
 
 ###### 실질적으로 크롤링하는 함수 크롤링할 이미지키워드와 개수 입력
