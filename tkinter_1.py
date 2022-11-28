@@ -17,7 +17,9 @@ import socket
 import googletrans
 
 from crawing import translate,crawing,createFolder
-from image_preprocessing import cvt_image_save
+
+
+
 duplication_words_dict={
     '사과':['apple','apologize'],
     '배':['ship','pear','stomach']
