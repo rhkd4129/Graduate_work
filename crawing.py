@@ -14,7 +14,7 @@ import random
 
 
 from image_preprocessing import cvt_image_save
-# from tkinter_1 import main
+# 직접 코딩한 함수 임포트 
 
 
 
@@ -42,8 +42,10 @@ def trans(keyword:str)->str:
     # 입력받은 키워드가 영어라면 그냥 바로 영어반환
     else:
         return keyword
-    
-def random_idx(search_image_number,images_length):
+
+
+# 이건 랜덤으로 인덱스 뽑는건데 아직 사용은 안하고 만들어만 본거 추후에 
+def random_idx(search_image_number,images_length) -> list:
     random_idx_list = []
     for _ in range(search_image_number):
         random_number = random.randint(0,images_length)
@@ -51,9 +53,9 @@ def random_idx(search_image_number,images_length):
     return random_idx_list
 
 
-###### 실질적으로 크롤링하는 함수 크롤링할 이미지키워드와 개수 입력
-def craw(keyword:str,image_count:int,inputType='en')->str:
-
+###### 실질적으로 크롤링하는 함수 크롤링할 이미지키워드와 개수 입력 inputType는 우선 신경안써도 됨
+def craw(keyword:str,image_count:int) -> tuple[str,float,int]:
+    keyword = trans(keyword)
     # 크롬 웹드라이버 연결
     chrome_options = webdriver.ChromeOptions()
     chrome_options.add_argument('--headless')
@@ -62,11 +64,6 @@ def craw(keyword:str,image_count:int,inputType='en')->str:
     driver = webdriver.Chrome('chromedriver', chrome_options=chrome_options)
     driver.get("https://www.google.co.kr/imghp?hl=ko&tab=ri&ogbl")
 
-    # 번역기 
-    if inputType=='en':
-        keyword = trans(keyword)
-    else: pass
-    
     # 폴더 생성 
     createFolder('./' + keyword + '_img_download')
     
@@ -148,19 +145,11 @@ def craw(keyword:str,image_count:int,inputType='en')->str:
 
     cvt_images =cvt_image_save(keyword+'_img_download')
     image_length = len(cvt_images)
-        # 이미지 처리 후 저장 
-
-
-    
+     # 이미지 처리 후 저장 
     return keyword,cvt_images,image_length
 
 
-
-
-
-
-
-
+# 크롤링해서 저장된 이미지를 그리는 함수 
 def grid(cvt_images,image_length,main):
     Fig = plt.Figure(figsize=(13,5),dpi=100)
         # plt.figure()그림그릴 도화지 선언 같은 역활

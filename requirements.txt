@@ -3,7 +3,8 @@ pip install matplotlib
 pip install googletrans==4.0.0-rc1 #->> 해당 버전이 아니면 오류 발생 (꼭 버전을 붙혀서 )
 pip install selenium
 # tkinter_1.py 를 실행해야됨
-# 2.py,   5.py,  window_tutorial.py  는 연습용파일이니까 그낭 신경안써도됨
+
+# duplication_words는 그냥 연습용? 실험용 폴더 
 
 
 

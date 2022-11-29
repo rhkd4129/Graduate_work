@@ -13,19 +13,22 @@ import urllib.request
 import os
 import socket
 import googletrans
+
+
 from crawing import craw,grid
+#직접 코딩한 함수  임포트
 
 duplication_words_dict={
     '사과':['apple','apologize'],
     '배':['ship','pear','stomach']
 }
 
+
+global search_image_entry
+global number_entry
 ###########################################################################
 main = Tk()
-###########################################################################
-global search_image_entry    # entry(입력창) 개체 여기에 get을 해서 entry에 입력한 값을 받아올 수 잇다.
-global number_entry          # entry(입력창) 개체 
-###########################################################################
+#########################
 # 화면에 있는 (뭐 버튼이나 레이블)s같은 요소들을 제거하는 함수인데 
 # 화면전환전에 사용하는 함수 
 def Clear():
@@ -55,7 +58,6 @@ def mainWindow():
     number_lbl = Label(main)
     number_lbl.config(text = "number")
     number_lbl.place(x = 400, y= 150)
-
     number_entry = Entry(main)
     number_entry.place(x = 40, y= 150)
 ################ <---- 세번째 줄 ---->  ###############
@@ -64,7 +66,7 @@ def mainWindow():
     GObtn.place(x = 400, y=250)
     GObtn.config(command = GOClick)
 ############################################################################
-def duplication_screen(search_image_name):
+def duplication_screen(search_image_name)->bool:
     main.geometry("700x400")
     lbl_1 = Label(main)
     lbl_1.config(text ='어떤 단어가 맞나요?')
@@ -76,7 +78,9 @@ def duplication_screen(search_image_name):
     duplication_words_length = len(duplication_words_dict[search_image_name])
     duplication_words = duplication_words_dict[search_image_name]
 
-    if duplication_words_length ==2 :x=130
+    # 동음의어가 두개라면 프레임에 맞게 x좌표 설정하고 3개라면 좀 더 x좌표를 좁게 설정
+    # 4개인 경우는 아직 못봐서 우선 2개 아님 3개만 
+    if duplication_words_length ==2 :x=130  
     else:x=30
     
     btn_dict ={}
@@ -87,15 +91,22 @@ def duplication_screen(search_image_name):
         btn_dict[duplication_word_btn] = Button(main)
         btn_dict[duplication_word_btn].config(text=duplication_words_dict[search_image_name][i])#,state='disabled'
         btn_dict[duplication_word_btn].place(x = x+40, y=150)
+
+        # FIXME: 
+        # 사과를 입력했다면 appple apologize 2개의 버튼이 생성은 되지만 각 버튼을 눌렀을때 해당 키워드가 크롤링되어야 한다,
+        # 그러기 위해서 각 버튼에 event를 걸어야 하는데 그게 문제 
+        
         # keyword,cvt_images,cvt_images_length =  duplication_word_btn.config(commend = craw(keyword,number_entry_num,inputType='ko'))
         #return_value = duplication_word_btn.config(command=Click('aaa'))
         # a = duplication_word_btn.bind('<Button-1>',(lambda event,x: print(x)))
-        x+=200
+
+        x+=200  ## 버튼이 일정 간격들 두고 생성
     main.option_add("*Font","맑은고딕 15")
     return True
 ###########################################################################
 ###########################################################################
-def GOClick():
+def GOClick(): 
+    #go 버튼을 눌렀을시 
     global search_image_entry
     global number_entry        
     # 첫 페이지(mainWindow) enrty의 값을 읽고  이 함수에 사용해야 하기 때문에 전역변수로 설정
@@ -105,22 +116,20 @@ def GOClick():
     Clear()
 
 
+    # 입력한 키워드가 동음의어인지 검사 
     if search_image_name in duplication_words_dict.keys():
         duplication_screen(search_image_name)
+
+    #아니면 바로 크롤링
     else:
-         keyword = search_image_name
+        #  keyword = search_image_name
          # 번역이 완료된 keyword    
-         keyword,cvt_images,cvt_images_length = craw(keyword,number_entry_num)
+         search_image_name,cvt_images,cvt_images_length = craw(search_image_name,number_entry_num)
          grid(cvt_images,cvt_images_length,main)
          main.geometry("1700x700")
          main.option_add("*Font","맑은고딕 15")
   
 ###########################################################################
-def Click(text):
-    print(text)
-
-def Click1(text):
-    print(text)
 
 mainWindow()
 main.mainloop()
