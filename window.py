@@ -49,17 +49,4 @@ def grid(cvt_images,image_length,main):
 
 
 
-main = Tk()
-cvt_images = cvt_image_save('hat_img_download')
-grid(cvt_images,len(cvt_images),main)
-def mainWindow():
-    main.geometry("1500x700")
-    # 창 크기 설정
-    main.option_add("*Font","맑은고딕 20")
-    # 폰트와 픽셀 크기 
-    main.title("window")
-    # 창 제목
-################ <---- 첫쨰줄 ---->  #################
-
-mainWindow()
-main.mainloop()
+cvt_images = cvt_image_save('graduate_work\hat_img_download')

@@ -1,6 +1,6 @@
-a = [5,6,7,8,9]
+import random
+
+b =random.randint(1,100)
+print(b)
 
 
-
-for i,x in enumerate(a):
-    print(i,x)
