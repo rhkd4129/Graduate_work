@@ -95,7 +95,7 @@ def craw(keyword:str,image_count:int) -> tuple[str,float,int]:
 
     images = driver.find_elements(By.CSS_SELECTOR, ".rg_i.Q4LuWd")
     count = 1
-    
+
     print("찾은 " + keyword + " 이미지 개수 : ", len(images))
     
     # 입력한 이미지 수만큼 출력되도록 에러는 넘어가는 방식

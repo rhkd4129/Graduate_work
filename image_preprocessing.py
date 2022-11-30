@@ -2,7 +2,7 @@ import cv2
 import matplotlib.pyplot as plt
 import os
 
-###################################################################
+
 # image가 저장되어 있는 곳의 경로를 인자로 받으면 
 # 해당 경로의 이미지를 읽어서 RGB2BGR로 이미지 처리 후 이미지 저장후 반환
 # dir_path --> ex) 'cat_img_download'
