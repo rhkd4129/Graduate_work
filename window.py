@@ -48,5 +48,12 @@ def grid(cvt_images,image_length,main):
         ax.imshow(cvt_images[x])
 
 
+# 이건 랜덤으로 인덱스 뽑는건데 아직 사용은 안하고 만들어만 본거 추후에 
+def random_idx(search_image_number,images_length) -> list:
+    random_idx_list = []
+    for _ in range(search_image_number):
+        random_number = random.randint(0,images_length)
+        random_idx_list.append(random_number)
+    return random_idx_list
 
 cvt_images = cvt_image_save('graduate_work\hat_img_download')

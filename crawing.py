@@ -44,18 +44,11 @@ def trans(keyword:str)->str:
         return keyword
 
 
-# 이건 랜덤으로 인덱스 뽑는건데 아직 사용은 안하고 만들어만 본거 추후에 
-def random_idx(search_image_number,images_length) -> list:
-    random_idx_list = []
-    for _ in range(search_image_number):
-        random_number = random.randint(0,images_length)
-        random_idx_list.append(random_number)
-    return random_idx_list
 
 
-###### 실질적으로 크롤링하는 함수 크롤링할 이미지키워드와 개수 입력 inputType는 우선 신경안써도 됨
+
+###### 실질적으로 크롤링하는 함수 크롤링할 이미지키워드와 개수 입력
 def craw(keyword:str,image_count:int) -> tuple[str,float,int]:
-    keyword = trans(keyword)
     # 크롬 웹드라이버 연결
     chrome_options = webdriver.ChromeOptions()
     chrome_options.add_argument('--headless')
@@ -115,7 +108,7 @@ def craw(keyword:str,image_count:int) -> tuple[str,float,int]:
                     urllib.request.urlretrieve(imgUrl, "./" + keyword + "_img_download/" + keyword + str(count) + ".jpg")
                     print("JPG Image saved : {}_{}.jpg".format(keyword, count))
                 count = count + 1
-##################### 예외 처리#######################################
+##################### 예외 처리#################################################
             except HTTPError as e:
                 print(e)
                 pass
@@ -146,6 +139,7 @@ def craw(keyword:str,image_count:int) -> tuple[str,float,int]:
     cvt_images =cvt_image_save(keyword+'_img_download')
     image_length = len(cvt_images)
      # 이미지 처리 후 저장 
+
     return keyword,cvt_images,image_length
 
 
@@ -159,7 +153,6 @@ def grid(cvt_images,image_length,main):
             # Fig(도화지)에 subplot을 추가하는데, 도화지에 여러개의 그림을 그릴려고 할때 사용
             # add_subplot(x,y,z) => (1,3,1)은 1*3 행렬모양의 그래프 (3개)  맨마지막 1은 첫번째 그래프를 가리킴
             # 원문 보시길.. 
-
         ax.set_xticks([])
         ax.set_yticks([])
         # x축과 y레이블은 없는게 깔끔해서 없앰 
