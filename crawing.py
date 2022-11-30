@@ -49,12 +49,14 @@ def trans(keyword:str)->str:
 def craw(keyword:str,image_count:int) -> tuple[str,float,int]:
     # 크롬 웹드라이버 연결
     chrome_options = webdriver.ChromeOptions()
-    # chrome_options.add_argument('--headless')
-    # chrome_options.add_argument('--no-sandbox')
-    # chrome_options.add_argument('--disable-dev-shm-usage')
+    chrome_options.add_argument('--headless')
+    chrome_options.add_argument('--no-sandbox')
+    chrome_options.add_argument('--disable-dev-shm-usage')
+    # chrome_options.add_argument("--allow-running-insecure-content")
     driver = webdriver.Chrome('chromedriver', chrome_options=chrome_options)
     driver.get("https://www.google.co.kr/imghp?hl=ko&tab=ri&ogbl")
 
+    keyword = trans(keyword)
     # 폴더 생성 
     createFolder('./' + keyword + '_img_download')
     
@@ -97,8 +99,9 @@ def craw(keyword:str,image_count:int) -> tuple[str,float,int]:
                 print("Image Click!")
                 time.sleep(2)
                 imgUrl = driver.find_element(By.XPATH,'//*[@id="Sva75c"]/div/div/div/div[3]/div[2]/c-wiz/div[2]/div[1]/div[1]/div[2]/div/a/img').get_attribute('src')
-                
-                # png, jpg 구분하여 저장
+                                                     
+                # png, jpg 구분하여 저장               
+
                 if imgUrl.split('.')[-1] == 'png':
                     urllib.request.urlretrieve(imgUrl, "./" + keyword + "_img_download/" + keyword + str(count) + ".png")
                     print("PNG Image saved : {}_{}.png".format(keyword, count))
