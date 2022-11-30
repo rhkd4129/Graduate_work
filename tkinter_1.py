@@ -14,12 +14,9 @@ import os
 import socket
 import googletrans
 
-
-from  dupication_words_DB import duplication_words_dict
+from duplication_words_DB import duplication_words_dict
 from crawing import craw,grid
 #직접 코딩한 함수  임포트
-
-
 
 
 global search_image_entry

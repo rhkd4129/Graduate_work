@@ -10,8 +10,6 @@ import socket
 import googletrans
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-import random
-
 
 from image_preprocessing import cvt_image_save
 # 직접 코딩한 함수 임포트 
