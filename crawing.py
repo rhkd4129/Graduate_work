@@ -99,7 +99,8 @@ def craw(keyword:str,image_count:int) -> tuple[str,float,int]:
                 images[i].click()
                 print("Image Click!")
                 time.sleep(2)
-                imgUrl = driver.find_element(By.XPATH,'//*[@id="Sva75c"]/div/div/div/div[3]/div[2]/c-wiz/div[2]/div[1]/div[1]/div[2]/div/a/img').get_attribute('src')
+                # imgUrl = driver.find_element(By.XPATH,'//*[@id="Sva75c"]/div/div/div/div[3]/div[2]/c-wiz/div[2]/div[1]/div[1]/div[2]/div/a/img').get_attribute('src')
+                imgUrl = driver.find_element(By.XPATH,'//*[@id="Sva75c"]/div/div/div[2]/div[2]/div[2]/c-wiz/div[2]/div[1]/div[1]/div[2]/div/a/img').get_attribute('src')
                                                                    
                 # png, jpg 구분하여 저장               
 
