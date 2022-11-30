@@ -69,7 +69,7 @@ def duplication_screen(search_image_name)->bool:
     main.geometry("700x400")
     lbl_1 = Label(main,text='어떤 단어가 맞나요?')
     lbl_1.place(x = 200, y= 250)
-    duplication_word_lbl = Label(main,text=search_image_name+'가 중의적 표현입니다')
+    duplication_word_lbl = Label(main,text=search_image_name+'가 동음이의어 입니다')
     duplication_word_lbl.place(x = 200, y= 50)
     duplication_words_length = len(duplication_words_dict[search_image_name])
     duplication_words = duplication_words_dict[search_image_name]

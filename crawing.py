@@ -53,6 +53,7 @@ def craw(keyword:str,image_count:int) -> tuple[str,float,int]:
     chrome_options.add_argument('--no-sandbox')
     chrome_options.add_argument('--disable-dev-shm-usage')
     # chrome_options.add_argument("--allow-running-insecure-content")
+    chrome_options.add_argument("--disable-gpu")
     driver = webdriver.Chrome('chromedriver', chrome_options=chrome_options)
     driver.get("https://www.google.co.kr/imghp?hl=ko&tab=ri&ogbl")
 
@@ -99,7 +100,7 @@ def craw(keyword:str,image_count:int) -> tuple[str,float,int]:
                 print("Image Click!")
                 time.sleep(2)
                 imgUrl = driver.find_element(By.XPATH,'//*[@id="Sva75c"]/div/div/div/div[3]/div[2]/c-wiz/div[2]/div[1]/div[1]/div[2]/div/a/img').get_attribute('src')
-                                                     
+                                                                   
                 # png, jpg 구분하여 저장               
 
                 if imgUrl.split('.')[-1] == 'png':
