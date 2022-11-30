@@ -15,6 +15,8 @@ import socket
 import googletrans
 
 
+# 10개 2분>
+
 from crawing import craw,grid
 #직접 코딩한 함수  임포트
 
