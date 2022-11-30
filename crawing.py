@@ -10,8 +10,6 @@ import socket
 import googletrans
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-import random
-
 
 from image_preprocessing import cvt_image_save
 # 직접 코딩한 함수 임포트 
@@ -44,26 +42,22 @@ def trans(keyword:str)->str:
         return keyword
 
 
-# 이건 랜덤으로 인덱스 뽑는건데 아직 사용은 안하고 만들어만 본거 추후에 
-def random_idx(search_image_number,images_length) -> list:
-    random_idx_list = []
-    for _ in range(search_image_number):
-        random_number = random.randint(0,images_length)
-        random_idx_list.append(random_number)
-    return random_idx_list
 
 
-###### 실질적으로 크롤링하는 함수 크롤링할 이미지키워드와 개수 입력 inputType는 우선 신경안써도 됨
+
+###### 실질적으로 크롤링하는 함수 크롤링할 이미지키워드와 개수 입력
 def craw(keyword:str,image_count:int) -> tuple[str,float,int]:
-    keyword = trans(keyword)
     # 크롬 웹드라이버 연결
     chrome_options = webdriver.ChromeOptions()
     chrome_options.add_argument('--headless')
     chrome_options.add_argument('--no-sandbox')
     chrome_options.add_argument('--disable-dev-shm-usage')
+    # chrome_options.add_argument("--allow-running-insecure-content")
+    chrome_options.add_argument("--disable-gpu")
     driver = webdriver.Chrome('chromedriver', chrome_options=chrome_options)
     driver.get("https://www.google.co.kr/imghp?hl=ko&tab=ri&ogbl")
 
+    keyword = trans(keyword)
     # 폴더 생성 
     createFolder('./' + keyword + '_img_download')
     
@@ -95,7 +89,7 @@ def craw(keyword:str,image_count:int) -> tuple[str,float,int]:
 
     images = driver.find_elements(By.CSS_SELECTOR, ".rg_i.Q4LuWd")
     count = 1
-    
+
     print("찾은 " + keyword + " 이미지 개수 : ", len(images))
     
     # 입력한 이미지 수만큼 출력되도록 에러는 넘어가는 방식
@@ -105,9 +99,11 @@ def craw(keyword:str,image_count:int) -> tuple[str,float,int]:
                 images[i].click()
                 print("Image Click!")
                 time.sleep(2)
-                imgUrl = driver.find_element(By.XPATH,'//*[@id="Sva75c"]/div/div/div/div[3]/div[2]/c-wiz/div[2]/div[1]/div[1]/div[2]/div/a/img').get_attribute('src')
-                
-                # png, jpg 구분하여 저장
+                # imgUrl = driver.find_element(By.XPATH,'//*[@id="Sva75c"]/div/div/div/div[3]/div[2]/c-wiz/div[2]/div[1]/div[1]/div[2]/div/a/img').get_attribute('src')
+                imgUrl = driver.find_element(By.XPATH,'//*[@id="Sva75c"]/div/div/div[2]/div[2]/div[2]/c-wiz/div[2]/div[1]/div[1]/div[2]/div/a/img').get_attribute('src')
+                                                                   
+                # png, jpg 구분하여 저장               
+
                 if imgUrl.split('.')[-1] == 'png':
                     urllib.request.urlretrieve(imgUrl, "./" + keyword + "_img_download/" + keyword + str(count) + ".png")
                     print("PNG Image saved : {}_{}.png".format(keyword, count))
@@ -115,7 +111,7 @@ def craw(keyword:str,image_count:int) -> tuple[str,float,int]:
                     urllib.request.urlretrieve(imgUrl, "./" + keyword + "_img_download/" + keyword + str(count) + ".jpg")
                     print("JPG Image saved : {}_{}.jpg".format(keyword, count))
                 count = count + 1
-##################### 예외 처리#######################################
+##################### 예외 처리#################################################
             except HTTPError as e:
                 print(e)
                 pass
@@ -146,6 +142,7 @@ def craw(keyword:str,image_count:int) -> tuple[str,float,int]:
     cvt_images =cvt_image_save(keyword+'_img_download')
     image_length = len(cvt_images)
      # 이미지 처리 후 저장 
+
     return keyword,cvt_images,image_length
 
 
@@ -159,7 +156,6 @@ def grid(cvt_images,image_length,main):
             # Fig(도화지)에 subplot을 추가하는데, 도화지에 여러개의 그림을 그릴려고 할때 사용
             # add_subplot(x,y,z) => (1,3,1)은 1*3 행렬모양의 그래프 (3개)  맨마지막 1은 첫번째 그래프를 가리킴
             # 원문 보시길.. 
-
         ax.set_xticks([])
         ax.set_yticks([])
         # x축과 y레이블은 없는게 깔끔해서 없앰 
