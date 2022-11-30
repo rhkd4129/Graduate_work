@@ -67,7 +67,7 @@ def mainWindow():
 # 동음의어가 맞으면 실행됨
 def duplication_screen(search_image_name)->bool:
     main.geometry("700x400")
-    lbl_1 = Label(main,text='어떤 단어가 맞나요')
+    lbl_1 = Label(main,text='어떤 단어가 맞나요?')
     lbl_1.place(x = 200, y= 250)
     duplication_word_lbl = Label(main,text=search_image_name+'가 중의적 표현입니다')
     duplication_word_lbl.place(x = 200, y= 50)
@@ -90,6 +90,7 @@ def duplication_screen(search_image_name)->bool:
         btn_dict[duplication_word_btn].place(x = x+40, y=150)
 
         # TODO: 
+        # FIXME:
         # 사과를 입력했다면 appple apologize 2개의 버튼이 생성은 되지만 
         # 각 버튼을 눌렀을때 해당 키워드가 크롤링되어야 한다.
         # 그러기 위해서 각 버튼에 event를 걸어야 하는데 그게 문제 
@@ -102,6 +103,7 @@ def duplication_screen(search_image_name)->bool:
     main.option_add("*Font","맑은고딕 15")
 ###########################################################################
 ###########################################################################
+
 def GOClick(): 
     #go 버튼을 눌렀을시 
     global search_image_entry

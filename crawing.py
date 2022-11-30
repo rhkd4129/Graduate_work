@@ -49,9 +49,9 @@ def trans(keyword:str)->str:
 def craw(keyword:str,image_count:int) -> tuple[str,float,int]:
     # 크롬 웹드라이버 연결
     chrome_options = webdriver.ChromeOptions()
-    chrome_options.add_argument('--headless')
-    chrome_options.add_argument('--no-sandbox')
-    chrome_options.add_argument('--disable-dev-shm-usage')
+    # chrome_options.add_argument('--headless')
+    # chrome_options.add_argument('--no-sandbox')
+    # chrome_options.add_argument('--disable-dev-shm-usage')
     driver = webdriver.Chrome('chromedriver', chrome_options=chrome_options)
     driver.get("https://www.google.co.kr/imghp?hl=ko&tab=ri&ogbl")
 
