@@ -57,13 +57,13 @@ def random_idx(search_image_number,images_length) -> list:
         random_idx_list.append(random_number)
     return random_idx_list
 
-cvt_images = cvt_image_save('graduate_work\hat_img_download')
+# cvt_images = cvt_image_save('graduate_work\hat_img_download')
 
 main = Tk()
-cvt_images = cvt_image_save('hat_img_download')
-grid(cvt_images,len(cvt_images),main)
+
 def mainWindow():
-    main.geometry("1500x700")
+    # main.attributes("-fullscreen", True)
+    main.attributes('-zoomed', True)
     # 창 크기 설정
     main.option_add("*Font","맑은고딕 20")
     # 폰트와 픽셀 크기 
