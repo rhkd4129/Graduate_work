@@ -110,19 +110,14 @@ def duplication_screen(search_image_name,number_entry_num)->bool:
 
 # 버튼이 클릭되면 해당 키워드 크롤링하고 그려주기 
 def duplication_screen_crawing_execute(search_image_name,number_entry_num):
-    
-
-    print(search_image_name,'를 크롤링 합니다 ')
-    decide = input('yes or no?')
-    if decide =='yes':pass
-    else: return None
+    # print(search_image_name,'를 크롤링 합니다 ')
+    # decide = input('yes or no?')
+    # if decide =='yes':pass
+    # else: return None
     search_image_name,cvt_images, image_length= craw(search_image_name,number_entry_num)
-
     Clear()
     graduate_App.geometry("1300x700")
     image_grid(cvt_images,image_length,graduate_App)
-
-
 
 
 ##########################################################################
