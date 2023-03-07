@@ -13,7 +13,7 @@ from image_preprocessing import cvt_image_save
 # 직접 코딩한 함수 임포트 
 
 
-############ 폴더 만드는 함수########################
+############ 폴더 만드는 함수######################## 
 def createFolder(directory):
     try:
         if not os.path.exists(directory):
