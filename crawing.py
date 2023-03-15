@@ -8,7 +8,7 @@ import urllib.request
 import os
 import socket
 import googletrans
-
+import random
 from image_preprocessing import cvt_image_save
 # 직접 코딩한 함수 임포트 
 
@@ -81,7 +81,17 @@ def craw(keyword:str,image_count:int) -> tuple[str,float,int]:
     count = 1
 
     print("찾은 " + keyword + " 이미지 개수 : ", len(images))
+    ################################################
+    #TODO: 원하는 이미지개수에서 랜덤으로 무작위 이미지 뽑기 
+    random_choice = []
+    for _ in range(image_count):
+        random_choice.append(random.randint(0,len(images)))
     
+    choice_images=[]
+    
+
+
+    ################################################
     # 입력한 이미지 수만큼 출력되도록 에러는 넘어가는 방식
     for i in range(len(images)):
         if(count - 1 != image_count):
