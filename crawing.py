@@ -83,22 +83,31 @@ def craw(keyword:str,image_count:int) -> tuple[str,float,int]:
     print("찾은 " + keyword + " 이미지 개수 : ", len(images))
     ################################################
     #TODO: 원하는 이미지개수에서 랜덤으로 무작위 이미지 뽑기 
-    random_choice = []
-    for _ in range(image_count):
-        random_choice.append(random.randint(0,len(images)))
-    
+    random_choice=[]
+
     choice_images=[]
-    
+    for i in range(image_count*2):
+        a = random.randint(0,len(images)-1)
+        while a in random_choice:
+                a = random.randint(0,len(images)-1)
+        random_choice.append(a)
 
 
+    for index in random_choice:
+        choice_images.append(images[index])
+
+    print(random_choice)
     ################################################
     # 입력한 이미지 수만큼 출력되도록 에러는 넘어가는 방식
-    for i in range(len(images)):
+    # for i in range(len(images)):
+    for i in random_choice:
+        print(i)
         if(count - 1 != image_count):
             try:
+                time.sleep(2)
                 images[i].click()
                 print("Image Click!")
-                time.sleep(2)
+                
                 # imgUrl = driver.find_element(By.XPATH,'//*[@id="Sva75c"]/div/div/div/div[3]/div[2]/c-wiz/div[2]/div[1]/div[1]/div[2]/div/a/img').get_attribute('src')
                 imgUrl = driver.find_element(By.XPATH,'//*[@id="Sva75c"]/div/div/div[2]/div[2]/div[2]/c-wiz/div[2]/div[1]/div[1]/div[2]/div/a/img').get_attribute('src')                                          
                 # png, jpg 구분하여 저장               

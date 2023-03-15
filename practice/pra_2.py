@@ -1,10 +1,6 @@
-import random
 
-
-ran_list = []
-num = 5
-for x in range(num):
-    ran_list.append(random.randint(1,10))
-
-
-print(ran_list)
+n = int(input('숫자입력'))
+num = 0
+for x in range(n):
+    num= num+x
+print(num)
