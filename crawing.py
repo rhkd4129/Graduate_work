@@ -87,7 +87,8 @@ def craw(keyword:str,image_count:int) -> tuple[str,float,int]:
 
     choice_images=[]
     for i in range(image_count*2):
-        a = random.randint(0,len(images)-1)
+        # a = random.randint(0,len(images)-1)
+        a = random.randint(0,10-1)
         while a in random_choice:
                 a = random.randint(0,len(images)-1)
         random_choice.append(a)
@@ -104,12 +105,14 @@ def craw(keyword:str,image_count:int) -> tuple[str,float,int]:
         print(i)
         if(count - 1 != image_count):
             try:
-                time.sleep(2)
+                time.sleep(10)
                 images[i].click()
                 print("Image Click!")
                 
                 # imgUrl = driver.find_element(By.XPATH,'//*[@id="Sva75c"]/div/div/div/div[3]/div[2]/c-wiz/div[2]/div[1]/div[1]/div[2]/div/a/img').get_attribute('src')
                 imgUrl = driver.find_element(By.XPATH,'//*[@id="Sva75c"]/div/div/div[2]/div[2]/div[2]/c-wiz/div[2]/div[1]/div[1]/div[2]/div/a/img').get_attribute('src')                                          
+                #imgUrl = driver.find_element(By.XPATH,'//*[@id="Sva75c"]/div[2]/div/div[2]/div[2]/div[2]/c-wiz/div/div[1]/div[2]/div[2]/div/a/img').get_attribute('src')                                          
+            
                 # png, jpg 구분하여 저장               
 
                 if imgUrl.split('.')[-1] == 'png':
