@@ -1,4 +1,9 @@
 from selenium import webdriver
+
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
+from webdriver_manager.chrome import ChromeDriverManager # 크롭 드라이버 자동 업데이터 
+
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException,ElementClickInterceptedException,ElementNotInteractableException
@@ -11,6 +16,8 @@ import googletrans
 import random
 from image_preprocessing import cvt_image_save
 # 직접 코딩한 함수 임포트 
+
+
 
 
 ############ 폴더 만드는 함수######################## 
@@ -36,18 +43,40 @@ def trans(keyword:str)->str:
     # 입력받은 키워드가 영어라면 그냥 바로 영어반환
     else:
         return keyword
+    
+
+########## 찾은 이미지에서 랜덤으로 index 설정하는 함수   ############
+def image_index_shuffe(find_image_count,images_length):  
+    random_choice=[]
+    for i in range(find_image_count*2):
+        random_index = random.randint(0,images_length-1)
+        while random_index in random_choice:
+                random_index = random.randint(0,images_length-1)
+        random_choice.append(random_index)
+    random_choice.sort()
+    return random_choice
+
 
 
 ###### 실질적으로 크롤링하는 함수 크롤링할 이미지키워드와 개수 입력
 def craw(keyword:str,image_count:int) -> tuple[str,float,int]:
-    # 크롬 웹드라이버 연결
-    chrome_options = webdriver.ChromeOptions()
-    chrome_options.add_argument('--headless')
+    chrome_options = Options()
+    # chrome_options.add_experimental_option('detach',True) # 모니터 창이 안꺼지게 유지?
+    # chrome_options.add_argument('--headless')
+    # chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36")
+    chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
+
     chrome_options.add_argument('--no-sandbox')
-    chrome_options.add_argument('--disable-dev-shm-usage')
-    # chrome_options.add_argument("--allow-running-insecure-content")
+    chrome_options.add_argument('--disable-dev-shm-usage')        # 디레토리 사용안하게?
+    chrome_options.add_argument("--allow-running-insecure-content") #경고창 안드게?
     chrome_options.add_argument("--disable-gpu")
-    driver = webdriver.Chrome('chromedriver', chrome_options=chrome_options)
+    
+    service = Service(executable_path=ChromeDriverManager().install())
+    driver = webdriver.Chrome(service=service, chrome_options=chrome_options)
+
+    
+    
+    driver.implicitly_wait(5) 
     driver.get("https://www.google.co.kr/imghp?hl=ko&tab=ri&ogbl")
 
     keyword = trans(keyword)
@@ -83,36 +112,33 @@ def craw(keyword:str,image_count:int) -> tuple[str,float,int]:
     print("찾은 " + keyword + " 이미지 개수 : ", len(images))
     ################################################
     #TODO: 원하는 이미지개수에서 랜덤으로 무작위 이미지 뽑기 
-    random_choice=[]
 
-    choice_images=[]
-    for i in range(image_count*2):
-        # a = random.randint(0,len(images)-1)
-        a = random.randint(0,10-1)
-        while a in random_choice:
-                a = random.randint(0,len(images)-1)
-        random_choice.append(a)
-
-
-    for index in random_choice:
-        choice_images.append(images[index])
-
-    print(random_choice)
+    
+    random_index_list=image_index_shuffe(image_count,len(images))
+    print(random_index_list)
+    ################################################
+    shffle_images_list=[]
+    for index in random_index_list:
+        shffle_images_list.append(images[index])
+    
     ################################################
     # 입력한 이미지 수만큼 출력되도록 에러는 넘어가는 방식
-    # for i in range(len(images)):
-    for i in random_choice:
+
+    #for i in random_index_list:
+    #for i in range(len(images)):
+    for i in range(len(shffle_images_list)):
         print(i)
         if(count - 1 != image_count):
             try:
-                time.sleep(10)
-                images[i].click()
+                #images[i].click()
+                shffle_images_list[i].click()
+                #images[i].send_keys(Keys.ENTER)
                 print("Image Click!")
                 
                 # imgUrl = driver.find_element(By.XPATH,'//*[@id="Sva75c"]/div/div/div/div[3]/div[2]/c-wiz/div[2]/div[1]/div[1]/div[2]/div/a/img').get_attribute('src')
-                imgUrl = driver.find_element(By.XPATH,'//*[@id="Sva75c"]/div/div/div[2]/div[2]/div[2]/c-wiz/div[2]/div[1]/div[1]/div[2]/div/a/img').get_attribute('src')                                          
-                #imgUrl = driver.find_element(By.XPATH,'//*[@id="Sva75c"]/div[2]/div/div[2]/div[2]/div[2]/c-wiz/div/div[1]/div[2]/div[2]/div/a/img').get_attribute('src')                                          
-            
+                #imgUrl = driver.find_element(By.XPATH,'//*[@id="Sva75c"]/div/div/div[2]/div[2]/div[2]/c-wiz/div[2]/div[1]/div[1]/div[2]/div/a/img').get_attribute('src')                                          
+                imgUrl = driver.find_element(By.XPATH,'//*[@id="Sva75c"]/div[2]/div/div[2]/div[2]/div[2]/c-wiz/div/div[1]/div[2]/div[2]/div/a/img').get_attribute('src')                                          
+                
                 # png, jpg 구분하여 저장               
 
                 if imgUrl.split('.')[-1] == 'png':
