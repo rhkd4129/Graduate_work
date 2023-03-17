@@ -4,6 +4,8 @@ pip install googletrans==4.0.0-rc1 #->> 해당 버전이 아니면 오류 발생
 pip install selenium==4.6.0
 pip install webdriver==3.8.5
 
+pip install Django== 4.1.7
+
 
 # pip install -r requirements.txt
 

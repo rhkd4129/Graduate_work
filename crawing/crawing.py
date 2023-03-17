@@ -59,7 +59,7 @@ def image_index_shuffe(find_image_count,images_length):
 
 
 ###### 실질적으로 크롤링하는 함수 크롤링할 이미지키워드와 개수 입력
-def craw(keyword:str,image_count:int) -> tuple[str,float,int]:
+def craw(keyword:str,find_image_count:int) -> tuple[str,float,int]:
     chrome_options = Options()
     # chrome_options.add_experimental_option('detach',True) # 모니터 창이 안꺼지게 유지?
     # chrome_options.add_argument('--headless')
@@ -114,7 +114,7 @@ def craw(keyword:str,image_count:int) -> tuple[str,float,int]:
     #TODO: 원하는 이미지개수에서 랜덤으로 무작위 이미지 뽑기 
 
     
-    random_index_list=image_index_shuffe(image_count,len(images))
+    random_index_list=image_index_shuffe(find_image_count,len(images))
     print(random_index_list)
     ################################################
     shffle_images_list=[]
@@ -123,12 +123,10 @@ def craw(keyword:str,image_count:int) -> tuple[str,float,int]:
     
     ################################################
     # 입력한 이미지 수만큼 출력되도록 에러는 넘어가는 방식
-
-    #for i in random_index_list:
-    #for i in range(len(images)):
+    
     for i in range(len(shffle_images_list)):
         print(i)
-        if(count - 1 != image_count):
+        if(count - 1 != find_image_count):
             try:
                 #images[i].click()
                 shffle_images_list[i].click()
