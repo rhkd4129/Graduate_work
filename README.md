@@ -1,7 +1,13 @@
 # Graduate_work_1-GUI
 
+
+
+## crawing 폴더에 크롤링과 이미지 처리, 저장 파일등이 있고
+## graduate_work_website에는 django  website 존재
 ### 먼저 requirements.txt 적힌 모듈 다운 
-### GUI.py가 최종 실행 파일 
+
+
+### crwaing 폴더에 GUI.py가 최종 실행 파일(웹사이트 제외하고 실행할 경우 )
 ### practice 파일은 그냥 연습용 폴더
 
 1. NOTE: 코드 작동 방식에 대한 설명 (자명하지 않은 경우).

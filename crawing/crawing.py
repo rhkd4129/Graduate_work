@@ -62,8 +62,8 @@ def image_index_shuffe(find_image_count,images_length):
 def craw(keyword:str,find_image_count:int) -> tuple[str,float,int]:
     chrome_options = Options()
     # chrome_options.add_experimental_option('detach',True) # 모니터 창이 안꺼지게 유지?
-    # chrome_options.add_argument('--headless')
-    # chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36")
+    chrome_options.add_argument('--headless')
+    chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36")
     chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
 
     chrome_options.add_argument('--no-sandbox')

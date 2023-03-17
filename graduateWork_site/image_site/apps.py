@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class ImageSearchAndShowConfig(AppConfig):
+class ImageSiteConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'image_search_and_show'
+    name = 'image_site'
