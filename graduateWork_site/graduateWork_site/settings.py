@@ -55,7 +55,7 @@ ROOT_URLCONF = 'graduateWork_site.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,'image_site','templates')],
+        'DIRS': [os.path.join(BASE_DIR,'graduateWork_site','templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

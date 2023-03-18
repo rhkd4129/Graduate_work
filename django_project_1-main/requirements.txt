@@ -1,0 +1,8 @@
+django
+pillow
+bs4
+requests
+lxml
+django-extensions 
+#  pip install -r requirements.txt
+# git push -u oring master

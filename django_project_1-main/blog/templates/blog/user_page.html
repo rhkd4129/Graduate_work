@@ -1,0 +1,41 @@
+{% extends 'blog/layout.html' %}
+
+
+
+
+
+{% block content %}
+
+<div class="container">
+    <div class="row mt-5 border border-1">
+        <div class="col-2"style="background-color: aqua;">
+            photo
+        </div>  
+
+        <div class="col-8">
+            <p>{{page_user.username}}</p>
+            <p>{{page_user.email}}</p>
+            <p>{{page_user.phone_number}}</p>
+        </div>  
+
+        <div class="col-2" >
+            <a class="btn btn-secondary btn-sm"  href="{% url 'accounts:profile_edit' %}">Edit Profile</a>
+            <a class="btn btn-info btn-sm"  href="{% url 'accounts:password_change' %}">password_change</a>
+        </div>  
+    </div>
+
+        <div class="row-sm-4">
+            {% if post_list %}
+                {% for post in post_list %}
+                    {% if post.photo  %}
+                        <img src="{{ post.photo.url }}" alt="" style="width: 300px; height: 300px;" />
+                    {% else %}
+                        <p>NO photo</p>
+                    {% endif%}
+                {% endfor %}
+            {% endif %}
+        </div>
+
+    </div>
+</div>
+{% endblock content %}
