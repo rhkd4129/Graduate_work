@@ -59,7 +59,7 @@ def image_index_shuffe(find_image_count,images_length):
 
 
 ###### 실질적으로 크롤링하는 함수 크롤링할 이미지키워드와 개수 입력
-def craw(keyword:str,find_image_count:int) -> tuple[str,float,int]:
+def craw(keyword:str,find_image_count:int):
     chrome_options = Options()
     # chrome_options.add_experimental_option('detach',True) # 모니터 창이 안꺼지게 유지?
     chrome_options.add_argument('--headless')
@@ -108,29 +108,29 @@ def craw(keyword:str,find_image_count:int) -> tuple[str,float,int]:
 
     images = driver.find_elements(By.CSS_SELECTOR, ".rg_i.Q4LuWd")
     count = 1
-
-    print("찾은 " + keyword + " 이미지 개수 : ", len(images))
+    image_length = len(images)
+    print("찾은 " + keyword + " 이미지 개수 : ", image_length)
     ################################################
     #TODO: 원하는 이미지개수에서 랜덤으로 무작위 이미지 뽑기 
 
-    
-    random_index_list=image_index_shuffe(find_image_count,len(images))
-    print(random_index_list)
-    ################################################
-    shffle_images_list=[]
-    for index in random_index_list:
-        shffle_images_list.append(images[index])
-    
+    #if shffle:
+    #    random_index_list=image_index_shuffe(find_image_count,len(images))
+    #    print(random_index_list)
+    #    ################################################
+    #    shffle_images_list=[]
+    #    for index in random_index_list:
+    #        shffle_images_list.append(images[index])
+    #    image_length = len(shffle_images_list)
     ################################################
     # 입력한 이미지 수만큼 출력되도록 에러는 넘어가는 방식
     
-    for i in range(len(shffle_images_list)):
+    for i in range(image_length):
         print(i)
         if(count - 1 != find_image_count):
             try:
-                #images[i].click()
-                shffle_images_list[i].click()
-                #images[i].send_keys(Keys.ENTER)
+                #if shffle:shffle_images_list[i].click()
+                #else:images[i].click()
+                images[i].click()
                 print("Image Click!")
                 
                 # imgUrl = driver.find_element(By.XPATH,'//*[@id="Sva75c"]/div/div/div/div[3]/div[2]/c-wiz/div[2]/div[1]/div[1]/div[2]/div/a/img').get_attribute('src')
