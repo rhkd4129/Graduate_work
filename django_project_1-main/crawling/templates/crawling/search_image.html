@@ -13,10 +13,27 @@
             <input type="submit">
         </form>
 
-        {{search}}
-        {{a}}
-        {#<!-- {{form.cleaned_data['search']}} -->#}
+        <h2>{{keyward}}</h2>
+        <h2>{{find_image_count}}</h2>
+        <table class="table table-bordered table-hover" >
+            <tbody>
+               {% for image in cvt_images %}
+                <tr>
+                    <td>
+                        {% if post.photo %}
+                            {{ image }}
+                        {% else %}
+                            NO PHhoto 
+                        {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+       
         
 {% endblock content %}
+
 
     

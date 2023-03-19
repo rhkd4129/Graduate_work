@@ -3,8 +3,8 @@ from .melonchart import my_dict
 from django.views.generic import ListView
 from django.core.paginator import Paginator
 from .forms import searchForm
-from .image_crawing import image_c
-# Create your views here.
+from .image_crawing import craw
+#from .image_preprocessing import cvt_image_save
 
 def melon_chart(request):
    
@@ -18,9 +18,14 @@ def search_image(request):
     if request.method =='POST':
         form  = searchForm(request.POST)
         if form.is_valid():
-            #search = form.cleaned_data['search']
-            a = image_c(form.cleaned_data['search'])
-            context = {'form':form, 'search':form.cleaned_data['search'],'a':a}
+            keyward = form.cleaned_data['search']
+            find_image_count  = form.cleaned_data['image_number']
+            keyward,cvt_images,image_length = craw(keyward,find_image_count)
+            context = {'form':form,
+                        'keyward':keyward,
+                        'find_image_count':find_image_count,
+                        'cvt_images':cvt_images
+                        }
 
             
             return render(request,'crawling/search_image.html',context)
