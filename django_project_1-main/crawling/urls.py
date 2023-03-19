@@ -4,6 +4,7 @@ app_name = 'crawling'
 
 urlpatterns=[
 
-     path('',views.melon_chart,name = 'melon_chart'),
+     path('melon_chart/',views.melon_chart,name = 'melon_chart'),
+     path('search_image/',views.search_image, name = 'search_image'),
     # path(),
 ]
