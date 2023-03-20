@@ -13,17 +13,21 @@
             <input type="submit">
         </form>
 
-        <h2>{{keyward}}</h2>
-        <h2>{{find_image_count}}</h2>
+        <h2>{#{keyward}#}</h2>
+        <h2>{#{find_image_count}#}</h2>
         <table class="table table-bordered table-hover" >
             <tbody>
-               {% for image in cvt_images %}
                 <tr>
                     <td>
-                        {{ image }}
-                        </td>
-                    </tr>
-                {% endfor %}
+                      {{var}}
+                         
+                    </td>
+
+                    <td>
+                       
+                    </td>
+                </tr>
+            
             </tbody>
         </table>
         

@@ -174,7 +174,7 @@ def craw(keyword:str,find_image_count:int):
         else: break
     driver.close()
 
-    cvt_images =cvt_image_save(keyword+'_img_download')
+    cvt_images =cvt_image_save(keyword+'_img_download',pillow_trans=True)
     image_length = len(cvt_images)
      # 이미지 처리 후 저장 
 
