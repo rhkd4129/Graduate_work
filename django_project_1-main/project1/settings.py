@@ -43,11 +43,9 @@ INSTALLED_APPS = [
 
     
     #localapps
-
     'accounts',
     'blog',
     'crawling',
-    'eng',
 ]
 
 MIDDLEWARE = [
