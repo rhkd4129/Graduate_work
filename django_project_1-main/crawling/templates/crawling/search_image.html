@@ -2,6 +2,12 @@
 
 
   
+context = { 'advice':advice,
+'form':form,
+'keyward':keyward,
+'find_image_count':find_image_number,
+'cvt_images':cvt_images
+}
 
 
 
@@ -19,15 +25,19 @@
             <tbody>
                 <tr>
                     <td>
-                      {{var}}
-                         
+                      {{keyward}}
                     </td>
 
                     <td>
-                       
+                        {{find_image_count}}
                     </td>
                 </tr>
-            
+                {#{% for image in cvt_images %}#}
+                <tr>
+                    {#<td>   <img src="{{ image }}" alt="" style="width: 70px;"/></td>#}
+                    {#{image }#}
+                </tr>
+               {#{% endfor %}#}
             </tbody>
         </table>
         

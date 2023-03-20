@@ -24,6 +24,13 @@ def melon_chart(request):
         
 #         return super().form_valid(form)
 
+def upload(request):
+    if request.method == "POST":
+        for image in images:
+            MultipleImage.objects.create(images=image)
+    images = MultipleImage.objects.all()
+    return render(request, 'index.html', {'images': images})
+
 
 def search_image(request):
     #advice = get_object_or_404(Advice)
@@ -31,24 +38,36 @@ def search_image(request):
         form  = searchForm(request.POST,request.FILES)
         if form.is_valid():
             keyward = form.cleaned_data['keyword']
-            # find_image_number  = form.cleaned_data['find_image_number']
-            # keyward,cvt_images,image_length = craw(keyward,find_image_number)
-            # context = { 'advice':advice,
-            #             'form':form,
-            #             'keyward':keyward,
-            #             'find_image_count':find_image_count,
-            #             'cvt_images':cvt_images
-            #             }
+            find_image_number  = form.cleaned_data['find_image_number']
+            keyward,cvt_images,image_length = craw(keyward,find_image_number)
+            advice = form.save(commit=False)
+            for image in cvt_images:
+                Advice.objects.create(searh_result_image=image)
+            images = advice.obejcts.all()
+               
+
+           
+            #advice.objects.create() = cvt_images
+            #form.cleaned_data['searh_result_image'] = cvt_images
+            advice.save()
+            context = { 
+                        'advice':advice,
+                        'form':form,
+                        'keyward':keyward,
+                        'find_image_count':find_image_number,
+                        'cvt_images':images
+                        }
             
-            # advice.save(cvt_images)
-            advice = form.save()
-            #advice.save()
+            
+            return render(request,'crawling/search_image.html',context)
+            #return redirect(advice)
+           
             #return render(request,'crawling/search_image.html',context)
             #return render(request,'crawling/search_image.html',{'keyward':keyward})
-            #return redirect(advice)
     else:
         form = searchForm()
-    return render(request,'crawling/search_image.html',{'form':form,'var':keyward})
+    #
+    return render(request,'crawling/search_image.html',{'form':form})
 
 
 
