@@ -1,7 +1,7 @@
 from PIL import Image
 
-instance_1 =Image.open('C:\Python_1821028\django_project_1-main\duck_img_download\duck1.jpg')
-instance_2 =Image.open('C:\Python_1821028\django_project_1-main\duck_img_download\duck2.jpg')
+instance_1 =Image.open('C:\graduate_work\django_project_1-main\duck_img_download\duck1.jpg')
+instance_2 =Image.open('C:\graduate_work\django_project_1-main\duck_img_download\duck1.jpg')
 
 
 # from django.shortcuts import render
