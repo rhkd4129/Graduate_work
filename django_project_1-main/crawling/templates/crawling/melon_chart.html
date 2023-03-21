@@ -5,6 +5,7 @@
 
 
 {% block content %}
+
     {% for key, value in melon_chart.items %}
        <p>{{ forloop.counter}}: {{key}} - {{value}}</p>
     {% endfor %}

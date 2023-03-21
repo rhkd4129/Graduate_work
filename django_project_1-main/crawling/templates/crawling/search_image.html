@@ -2,12 +2,8 @@
 
 
   
-context = { 'advice':advice,
-'form':form,
-'keyward':keyward,
-'find_image_count':find_image_number,
-'cvt_images':cvt_images
-}
+
+
 
 
 
@@ -18,26 +14,22 @@ context = { 'advice':advice,
 
             <input type="submit">
         </form>
-
-        <h2>{#{keyward}#}</h2>
-        <h2>{#{find_image_count}#}</h2>
         <table class="table table-bordered table-hover" >
             <tbody>
                 <tr>
                     <td>
-                      {{keyward}}
+                      {{advice.keyword}}
                     </td>
 
                     <td>
-                        {{find_image_count}}
+                        {{advice.find_image_number}}
+                    </td>
+
+                    <td>
+                        {{advice.gender}}
                     </td>
                 </tr>
-                {#{% for image in cvt_images %}#}
-                <tr>
-                    {#<td>   <img src="{{ image }}" alt="" style="width: 70px;"/></td>#}
-                    {#{image }#}
-                </tr>
-               {#{% endfor %}#}
+              
             </tbody>
         </table>
         

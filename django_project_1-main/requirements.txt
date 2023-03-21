@@ -4,6 +4,7 @@ bs4
 requests
 lxml
 django-extensions 
+django-imagekit
 #  pip install -r requirements.txt
 # git push -u oring master
 #git config --global core.autocrlf ture

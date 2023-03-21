@@ -6,13 +6,13 @@ from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFill
  
 
-class ImageModel(models.Model):
-    image = ProcessedImageField(
-        upload_to='crawing/%Y/%m/%d',
-        processors=[ResizeToFill(300, 300)],
-        format='JPEG',
-        options={'quality': 90}
-    )
+# class ImageModel(models.Model):
+#     image = ProcessedImageField(
+#         upload_to='crawing/%Y/%m/%d',
+#         processors=[ResizeToFill(300, 300)],
+#         format='JPEG',
+#         options={'quality': 90}
+#     )
 
 class Advice(models.Model):
     class GenderChices(models.TextChoices):
@@ -22,9 +22,7 @@ class Advice(models.Model):
     
     keyword = models.CharField(max_length=20)
     find_image_number = models.IntegerField()
-    searh_result_image = models.FileField()
-
-    #searh_result_image = models.ImageField(blank=True,upload_to='crawing/%Y/%m/%d')\
+    searh_result_image = models.ImageField(blank=True,upload_to='crawing/%Y/%m/%d')\
     #searh_result_image = models.ManyToManyField('ImageModel', blank=True)
     gender = models.CharField(max_length=1,blank=True,choices=GenderChices.choices)#,default=GenderChices.MALE  
     created_at = models.DateTimeField(auto_now_add=True)
