@@ -10,7 +10,7 @@ from .forms import searchForm
 from django.shortcuts import get_object_or_404
 from copy import deepcopy
 #from .image_preprocessing import cvt_image_save
-
+from .image import instance_1
 def melon_chart(request):
    
     return render(request,'crawling/melon_chart.html',{'melon_chart':my_dict})
@@ -41,10 +41,10 @@ def search_image(request):
             find_image_number  = form.cleaned_data['find_image_number']
             #keyward,cvt_images,image_length = craw(keyward,find_image_number)
             advice = form.save(commit=False)
-            print(form.cleaned_data)
-            #form_clean_copy = deepcopy(form.cleaned_data)
-            #form_clean_copy = form.cleaned_data.copy()
-            form.cleaned_data['keyword']='keyword'
+            cleaned_data = form.clean(instance_1)
+            #form.clean(instance_1)
+            form.cleaned_data['keyword']=keyward
+            form.cleaned_data['keyword']=find_image_number
             #form_clean_copy['keyword'] = 'keyword'
             print(form.cleaned_data)
             form.save()

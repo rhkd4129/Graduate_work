@@ -12,3 +12,9 @@ class searchForm(forms.ModelForm):
         widgets={
             'searh_result_image':forms.ClearableFileInput(attrs={'multiple':True})
         }
+
+
+    def clean(self,images):
+            cleaned_data = super().clean()
+            cleaned_data['searh_result_image'] = images
+            return cleaned_data
