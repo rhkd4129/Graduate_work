@@ -14,7 +14,7 @@ class searchForm(forms.ModelForm):
         }
 
 
-    def clean(self,images):
-            cleaned_data = super().clean()
-            cleaned_data['searh_result_image'] = images
-            return cleaned_data
+    # def clean(self,value):
+    #         cleaned_data = super().clean()
+    #         cleaned_data['searh_result_image'] = value
+    #         return cleaned_data

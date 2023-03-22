@@ -16,14 +16,26 @@ def melon_chart(request):
     return render(request,'crawling/melon_chart.html',{'melon_chart':my_dict})
 
 
-# class AdviceCrate(CreateView):
-#     model =Advice
-#     form_class = searchForm
-#     template_name='crawling/search_image.html'
+# from django import forms
+# from django.core.exceptions import ValidationError
 
-#     def form_valid(self, form):
-        
-#         return super().form_valid(form)
+# class ContactForm(forms.Form):
+#     name = forms.CharField(max_length=100)
+#     email = forms.EmailField()
+#     message = forms.CharField(widget=forms.Textarea)
+
+#     def clean(self):
+#         cleaned_data = super().clean()
+#         email = cleaned_data.get('email')
+#         message = cleaned_data.get('message')
+
+#         if email and not email.endswith('@example.com'):
+#             raise ValidationError("Only example.com emails are allowed.")
+
+#         if message:
+#             num_words = len(message.split())
+#             if num_words < 4:
+#                 raise ValidationError("Enter a message with at least 4 words.")
 
 # def upload(request):
 #     if request.method == "POST":
@@ -41,13 +53,13 @@ def search_image(request):
             find_image_number  = form.cleaned_data['find_image_number']
             #keyward,cvt_images,image_length = craw(keyward,find_image_number)
             advice = form.save(commit=False)
-            cleaned_data = form.clean(instance_1)
+            #print('claen_data:',form.clean())
             #form.clean(instance_1)
-            form.cleaned_data['keyword']=keyward
-            form.cleaned_data['keyword']=find_image_number
-            #form_clean_copy['keyword'] = 'keyword'
-            print(form.cleaned_data)
-            form.save()
+            #form.cleaned_data['keyword']='a'    
+            #print(form.cleaned_data)
+            advice.gender = 'M'
+            advice.searh_result_image = instance_1
+            advice = form.save()
             # for image in cvt_images:
             #     Advice.objects.create(searh_result_image=image)
             # images = advice.obejcts.all()
