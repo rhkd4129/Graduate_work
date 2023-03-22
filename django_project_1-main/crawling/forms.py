@@ -14,7 +14,17 @@ class searchForm(forms.ModelForm):
         }
 
 
-    def clean(self,value):
-            cleaned_data = super().clean()
-            cleaned_data['gender'] = value
-            return cleaned_data
+    # def clean(self,value):
+    #         cleaned_data = super().clean()
+    #         cleaned_data['gender'] = value
+    #         return cleaned_data
+
+    # def clean_customer(self):
+    #     # customer = self.cleaned_data.get('customer')
+    #     self.cleaned_data['customer'] = 'fixed'
+    #     return self.cleaned_data
+        
+
+    #def clean_keyword
+#   #클래스 파스칼형태  claendData
+    #함수느 _형태

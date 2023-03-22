@@ -43,7 +43,11 @@ def melon_chart(request):
 #             MultipleImage.objects.create(images=image)
 #     images = MultipleImage.objects.all()
 #     return render(request, 'index.html', {'images': images})
-
+    # def save_model(self, request, obj, form, change):
+    #     searh_result_image = request.FILES.getlist('searh_result_image')
+    #     for f in searh_result_image:
+    #         instance = Advice(searh_result_image=f)
+    #         instance.save()
 
 def search_image(request):
     if request.method =='POST':
@@ -51,21 +55,24 @@ def search_image(request):
         if form.is_valid():
             keyward = form.cleaned_data['keyword']
             find_image_number  = form.cleaned_data['find_image_number']
-            
+            #searh_result_image =  form.cleaned_data['searh_result_image']
+            searh_result_image = request.FILES.getlist('searh_result_image')
             #keyward,cvt_images,image_length = craw(keyward,find_image_number)
             advice = form.save(commit=False)
-            #print('claen_data:',form.clean())
-            #form.clean(instance_1)
-            #form.cleaned_data['keyword']='a'    
-            #print(form.cleaned_data)
+  
+            
             #advice.gender = 'M'
-            advice.clean('M')
-            #advice.searh_result_image = instance_1
-            advice.save()
+            # advice.obejcts.all()
+            
 
-            # for image in cvt_images:
-            #     Advice.objects.create(searh_result_image=image)
-            # images = advice.obejcts.all()
+            
+            for image in searh_result_image:
+                #Advice.objects.create(searh_result_image=image)
+                instance = advice(keyword=keyward,find_image_number= find_image_number,searh_result_image=searh_result_image)
+                instance.save()
+            #images = advice.obejcts.all()
+            advice.save()
+            print(form.cleaned_data)
             #advice.objects.create() = cvt_images
             #form.cleaned_data['searh_result_image'] = cvt_images
          
