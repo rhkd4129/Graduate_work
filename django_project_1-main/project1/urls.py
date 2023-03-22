@@ -11,6 +11,7 @@ urlpatterns = [
     path('accounts/',include('accounts.urls')),
     path('blog/',include('blog.urls')),
     path('crawling/',include('crawling.urls')),
+    path('qwer/',include('qwer.urls')),
 ]
 
 if settings.DEBUG:#미디어파일에 대한 스태틱 서브기능?

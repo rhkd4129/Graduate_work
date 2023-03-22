@@ -10,7 +10,7 @@ from .forms import searchForm
 from django.shortcuts import get_object_or_404
 from copy import deepcopy
 #from .image_preprocessing import cvt_image_save
-from .image import instance_1
+# from .image import instance_1
 def melon_chart(request):
    
     return render(request,'crawling/melon_chart.html',{'melon_chart':my_dict})
