@@ -51,15 +51,18 @@ def search_image(request):
         if form.is_valid():
             keyward = form.cleaned_data['keyword']
             find_image_number  = form.cleaned_data['find_image_number']
+            
             #keyward,cvt_images,image_length = craw(keyward,find_image_number)
             advice = form.save(commit=False)
             #print('claen_data:',form.clean())
             #form.clean(instance_1)
             #form.cleaned_data['keyword']='a'    
             #print(form.cleaned_data)
-            advice.gender = 'M'
-            advice.searh_result_image = instance_1
-            advice = form.save()
+            #advice.gender = 'M'
+            advice.clean('M')
+            #advice.searh_result_image = instance_1
+            advice.save()
+
             # for image in cvt_images:
             #     Advice.objects.create(searh_result_image=image)
             # images = advice.obejcts.all()
