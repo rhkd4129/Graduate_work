@@ -15,7 +15,7 @@ def numpy_to_pillow(cvt_images):
  
 
 
-def cvt_image_save(dir_path:str,pillow_trans = False)->[list,bool]: 
+def cvt_image_save(dir_path:str,pillow_trans = False):#->[list,bool]: 
   files_names =  [name for name in os.listdir(dir_path)]
   # dir_path의 경로로 들어가 (이미지)파일 저장
   print(files_names)

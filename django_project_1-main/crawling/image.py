@@ -1,9 +1,35 @@
 from PIL import Image
-
+import io
 # instance_1 =Image.open('C:\Users\1717-33\Desktop\1821028_\django_project_1-main\duck_img_download\duck1.jpg')
-instance_1 =Image.open('C:\Python_1821028\django_project_1-main\duck_img_download\duck1.jpg')
+pillow_image =Image.open('C:\study\graduate\django_project_1-main\duck_img_download\duck1.jpg')
+from django.core.files.base import ContentFile
+# my_file = ContentFile(b"C:\study\graduate\django_project_1-main\duck_img_download\duck1.jpg")
+# print(my_file)
+# img = Image.open('file_path', mode='r')
+
+# buffer = io.BytesIO()
+# img.save(buffer, format='PNG')
+# buffer.seek(0)
 
 
+from django.core.files import File
+def image_to_byte_array(image: Image) -> bytes:
+  # BytesIO is a file-like buffer stored in memory
+  imgByteArr = io.BytesIO()
+  # image.save expects a file-like as a argument
+  #image.save(imgByteArr, format=image.format)
+  # Turn the BytesIO object back into a bytes object
+  imgByteArr = imgByteArr.getvalue()
+  return imgByteArr
+
+
+
+
+
+with open(pillow_image,'rb') as f:
+    searh_result_image =File(f)
+    print(searh_result_image)
+        
 # from django.shortcuts import render
 # from django.http import HttpResponse
 # from .models import Image

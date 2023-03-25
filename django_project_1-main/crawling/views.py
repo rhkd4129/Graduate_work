@@ -7,16 +7,20 @@ from .image_crawing import craw
 from django.views.generic import CreateView,FormView
 from .models import Advice
 from .forms import searchForm
+from PIL import Image
 from django.shortcuts import get_object_or_404
 from copy import deepcopy
 #from .image_preprocessing import cvt_image_save
-# from .image import instance_1
+# from .image import pillow_image
+
+# from django.core.files import images
+pillow_image =Image.open('C:\study\graduate\django_project_1-main\duck_img_download\duck1.jpg')
+
+
 def melon_chart(request):
    
     return render(request,'crawling/melon_chart.html',{'melon_chart':my_dict})
 
-
-# from django import forms
 # from django.core.exceptions import ValidationError
 
 # class ContactForm(forms.Form):
@@ -48,74 +52,49 @@ def melon_chart(request):
     #     for f in searh_result_image:
     #         instance = Advice(searh_result_image=f)
     #         instance.save()
-
+#django inmemoryuploadedfile
+# from django.core.files.base import ContentFile, File
+from django.core.files import File
+from django.db.models.fields.files import FileField
+from django.core.files.base import ContentFile
+  #keyward,cvt_images,image_length = craw(keyward,find_image_number)
+  
 def search_image(request):
     if request.method =='POST':
         form  = searchForm(request.POST,request.FILES)
         if form.is_valid():
-            keyward = form.cleaned_data['keyword']
-            find_image_number  = form.cleaned_data['find_image_number']
-            #searh_result_image =  form.cleaned_data['searh_result_image']
-            searh_result_image = request.FILES.getlist('searh_result_image')
-            #keyward,cvt_images,image_length = craw(keyward,find_image_number)
             advice = form.save(commit=False)
-  
+            keyword = form.cleaned_data['keyword']
+            find_image_number = form.cleaned_data['find_image_number']
+            #my_file = File(pillow_image)
+            keyword,cvt_images,image_length = craw(keyword,find_image_number)
             
-            #advice.gender = 'M'
-            # advice.obejcts.all()
-            
-
-            
-            for image in searh_result_image:
-                #Advice.objects.create(searh_result_image=image)
-                instance = advice(keyword=keyward,find_image_number= find_image_number,searh_result_image=searh_result_image)
-                instance.save()
-            #images = advice.obejcts.all()
-            advice.save()
-            print(form.cleaned_data)
-            #advice.objects.create() = cvt_images
-            #form.cleaned_data['searh_result_image'] = cvt_images
-         
-            # context = { 
-            #             'advice':advice,
-            #             'form':form,
-            #             'keyward':keyward,
-            #             'find_image_count':find_image_number
-            #           #  'cvt_images':images
-            #             }
-            
-            
-            return render(request,'crawling/search_image.html',{'advice':advice})
-            #return redirect(advice)
-           
-            #return render(request,'crawling/search_image.html',context)
-            #return render(request,'crawling/search_image.html',{'keyward':keyward})
+            with open('C:\study\graduate\django_project_1-main\duck_img_download\duck1.jpg', 'rb') as f:
+                advice.searh_result_image.save('filename.jpg', File(f), save=False)
+                advice.save()
+            return render(request,'crawling/search_image.html',{'advice':advice})          
     else:
         form = searchForm()
-    #
     return render(request,'crawling/search_image.html',{'form':form})
 
 
-
-
-# def search_image(request):
-
-#     if request.method =='POST':
-#         form  = searchForm(request.POST)
-#         if form.is_valid():
-#             keyward = form.cleaned_data['search']
-#             find_image_count  = form.cleaned_data['image_number']
-#             keyward,cvt_images,image_length = craw(keyward,find_image_count)
-#             context = {'form':form,
-#                         'keyward':keyward,
-#                         'find_image_count':find_image_count,
-#                         'cvt_images':cvt_images
-#                         }
-
-            
-#             return render(request,'crawling/search_image.html',context)
-#     else:
-#         form = searchForm()
-
+            #########################################################   ##################################
+            #with open('C:study\graduate\django_project_1-main\duck_img_download\duck1.jpg','rb') as f:
+            # advice = Advice.objects.create(
+            #         customer = customer,
+            #         keyword= keyword,
+            #         find_image_number=find_image_number,
+            #         searh_result_image =File(pillow_image))
+            ##############################################################################################
+            ##############################################################################################
+            # 
+            # advice.searh_result_image  = File(pillow_image)
+            # advice.save()
+            ###################################################
     
-#     return render(request,'crawling/search_image.html',{'form':form})
+            #images = advice.obejcts.all()         
+            #return render(request,'crawling/search_image.html',{'keyward':keyward})
+
+
+
+

@@ -14,7 +14,8 @@ import os
 import socket
 import googletrans
 import random
-from .image_preprocessing import cvt_image_save
+# from .image_preprocessing import cvt_image_save
+from image_preprocessing import cvt_image_save
 # 직접 코딩한 함수 임포트 
 
 
@@ -185,3 +186,4 @@ def craw(keyword:str,find_image_count:int):
 
     
 
+keyword,cvt_images,image_length = craw('고양이',2)

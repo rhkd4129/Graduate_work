@@ -7,11 +7,11 @@ class searchForm(forms.ModelForm):
     #image_number = forms.IntegerField( min_value=1, max_value=10,label='number')
     class Meta:
         model = Advice
-        fields = ['customer','keyword','find_image_number','searh_result_image']
+        fields = ['customer','keyword','find_image_number']
 
-        widgets={
-            'searh_result_image':forms.ClearableFileInput(attrs={'multiple':True})
-        }
+        # widgets={
+        #     'searh_result_image':forms.ClearableFileInput(attrs={'multiple':True})
+        # }
 
 
     # def clean(self,value):
