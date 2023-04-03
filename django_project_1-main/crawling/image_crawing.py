@@ -15,6 +15,7 @@ import socket
 import googletrans
 import random
 # from .image_preprocessing import cvt_image_save
+
 # 직접 코딩한 함수 임포트 
 
 
@@ -180,16 +181,11 @@ def craw(keyword:str,find_image_count:int):
                 break
         else: break
     driver.close()
-
+    return keyword,path_list,file_name_list
     #cvt_images =cvt_image_save(keyword+'_img_download',pillow_trans=True)
-    # image_length = len(cvt_images)
-     # 이미지 처리 후 저장 
-
-    return keyword
-
-
-
-
-    
-
-# keyword,cvt_images,image_length = craw('고양이',2)
+    #image_length = len(cvt_images)
+     # 이미지 처리 후 저장
+    #return keyword,cvt_images,image_length
+# keyword,path_list,file_name_list  = craw('강아지',2)
+# print(keyword,find_image_count)
+# print(path_list,file_name_list)

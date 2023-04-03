@@ -17,7 +17,9 @@ from copy import deepcopy
 # pillow_image =Image.open('C:\study\graduate\django_project_1-main\duck_img_download\duck1.jpg')
 
 
-def melon_chart(request):return render(request,'crawling/melon_chart.html',{'melon_chart':my_dict})
+def melon_chart(request):
+   
+    return render(request,'crawling/melon_chart.html',{'melon_chart':my_dict})
 
 # from django.core.exceptions import ValidationError
 
