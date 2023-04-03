@@ -67,9 +67,9 @@ def search_image(request):
             keyword = form.cleaned_data['keyword']
             find_image_number = form.cleaned_data['find_image_number']
             #my_file = File(pillow_image)
-            keyword,cvt_images,image_length = craw(keyword,find_image_number)
+            # kweyword,cvt_images,image_length = craw(keyword,find_image_number)
             
-            with open('C:\study\graduate\django_project_1-main\duck_img_download\duck1.jpg', 'rb') as f:
+            with open('C:\Python_1821028\django_project_1-main\duck_img_download\duck1.jpg', 'rb') as f:
                 advice.searh_result_image.save('filename.jpg', File(f), save=False)
                 advice.save()
             return render(request,'crawling/search_image.html',{'advice':advice})          
