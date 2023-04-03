@@ -15,7 +15,7 @@ import socket
 import googletrans
 import random
 # from .image_preprocessing import cvt_image_save
-from .image_preprocessing import cvt_image_save
+
 # 직접 코딩한 함수 임포트 
 
 
@@ -124,7 +124,8 @@ def craw(keyword:str,find_image_count:int):
     #    image_length = len(shffle_images_list)
     ################################################
     # 입력한 이미지 수만큼 출력되도록 에러는 넘어가는 방식
-    
+    path_list=[]
+    file_name_list = []
     for i in range(image_length):
         print(i)
         if(count - 1 != find_image_count):
@@ -141,12 +142,18 @@ def craw(keyword:str,find_image_count:int):
                 # png, jpg 구분하여 저장               
 
                 if imgUrl.split('.')[-1] == 'png':
-                    urllib.request.urlretrieve(imgUrl, "./" + keyword + "_img_download/" + keyword + str(count) + ".png")
+                    path = "./" + keyword + "_img_download/"
+                    file_name =  keyword + str(count) + ".png"
+                    urllib.request.urlretrieve(imgUrl, path+file_name)
                     print("PNG Image saved : {}_{}.png".format(keyword, count))
                 else:
-                    urllib.request.urlretrieve(imgUrl, "./" + keyword + "_img_download/" + keyword + str(count) + ".jpg")
+                    path = "./" + keyword + "_img_download/"
+                    file_name =  keyword + str(count) + ".jpg"
+                    urllib.request.urlretrieve(imgUrl,path+file_name)
                     print("JPG Image saved : {}_{}.jpg".format(keyword, count))
                 count = count + 1
+                file_name_list.append(file_name)
+                path_list.append(path)
 ##################### 예외 처리#################################################
             except HTTPError as e:
                 print(e)
@@ -174,16 +181,11 @@ def craw(keyword:str,find_image_count:int):
                 break
         else: break
     driver.close()
-
-    cvt_images =cvt_image_save(keyword+'_img_download',pillow_trans=True)
-    image_length = len(cvt_images)
-     # 이미지 처리 후 저장 
-
-    return keyword,cvt_images,image_length
-
-
-
-
-    
-
-# keyword,cvt_images,image_length = craw('고양이',2)
+    return keyword,path_list,file_name_list
+    #cvt_images =cvt_image_save(keyword+'_img_download',pillow_trans=True)
+    #image_length = len(cvt_images)
+     # 이미지 처리 후 저장
+    #return keyword,cvt_images,image_length
+# keyword,path_list,file_name_list  = craw('강아지',2)
+# print(keyword,find_image_count)
+# print(path_list,file_name_list)
