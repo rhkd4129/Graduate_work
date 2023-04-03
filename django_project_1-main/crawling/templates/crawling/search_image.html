@@ -14,31 +14,14 @@
 
             <input type="submit">
         </form>
-        <table class="table table-bordered table-hover" >
-            <tbody>
-                <tr>
-                    <td>
-                      {{advice.keyword}}
-                    </td>
-
-                    <td>
-                        {{advice.find_image_number}}
-                    </td>
-
-                    <td>
-                        {{advice.gender}}
-                    </td>
-                </tr>
-                
-            
-            <tr>
-                <td>
-                    <img src="{{advice.searh_result_image.url}}" alt="">
-                </td>
-            </tr>
-           
-            </tbody>
-        </table>
+        {% for advice in advice_list %}
+        <h2>{{ advice.keyword }}</h2>
+        {% if advice.searh_result_image %}
+            <img src="{{ advice.searh_result_image.url }}" alt="search result image">
+        {% else %}
+            <p>No image available.</p>
+        {% endif %}
+    {% endfor %}
         
        
         

@@ -14,7 +14,7 @@ from copy import deepcopy
 # from .image import pillow_image
 
 # from django.core.files import images
-pillow_image =Image.open('C:\study\graduate\django_project_1-main\duck_img_download\duck1.jpg')
+# pillow_image =Image.open('C:\study\graduate\django_project_1-main\duck_img_download\duck1.jpg')
 
 
 def melon_chart(request):return render(request,'crawling/melon_chart.html',{'melon_chart':my_dict})
@@ -55,7 +55,7 @@ def melon_chart(request):return render(request,'crawling/melon_chart.html',{'mel
 from django.core.files import File
 from django.db.models.fields.files import FileField
 from django.core.files.base import ContentFile
-  #keyward,cvt_images,image_length = craw(keyward,find_image_number)
+
   
 def search_image(request):
     if request.method =='POST':
@@ -64,17 +64,40 @@ def search_image(request):
             advice = form.save(commit=False)
             keyword = form.cleaned_data['keyword']
             find_image_number = form.cleaned_data['find_image_number']
-            #my_file = File(pillow_image)
-            keyword,cvt_images,image_length = craw(keyword,find_image_number)
+            keyword,path_list,file_name_list= craw(keyword,find_image_number)
+            adivces=[]
+            # for i in range(find_image_number):
+                # with open(path_list[i]+file_name_list[i], 'rb') as f:
+                    # advice.searh_result_image.save(file_name_list[i], File(f), save=False)                                                                      
+                # adivces[i] = Advice.objects.create(customer='a',keyword=keyword,find_image_number=i,searh_result_image=File(f))                    
+            adivces1= Advice.objects.create(customer='a',keyword=keyword,find_image_number=1,searh_result_image=path_list[0]+file_name_list[0])   
+            adivces2= Advice.objects.create(customer='a',keyword=keyword,find_image_number=2,searh_result_image=path_list[1]+file_name_list[1])                                     
+            advice_list = Advice.objects.all()
+
             
-            with open('C:\study\graduate\django_project_1-main\duck_img_download\duck1.jpg', 'rb') as f:
-                advice.searh_result_image.save('filename.jpg', File(f), save=False)
-                advice.save()
-            return render(request,'crawling/search_image.html',{'advice':advice})          
+            return render(request,'crawling/search_image.html',{'advice_list':advice_list})          
     else:
         form = searchForm()
     return render(request,'crawling/search_image.html',{'form':form})
 
+# comments = Comment.objects.filter(post_id = post_pk)
+
+# @login_required
+# def comment_create(request,post_pk):
+#     post = get_object_or_404(Post,pk = post_pk)
+#     if request.method == 'POST':
+#         form = CommentForm(request.POST)
+#         if form.is_valid():
+#             comment = form.save(commit=False)
+#             comment.post = post
+#             comment.author = request.user
+#             # print(comment)  #message가담겨잇다
+#             # print(post)#post의 title이 담겨잇는데 id도 담겨있다(모든 정보??)
+#             comment.save()
+#             return redirect(post) 
+#     else:
+#         form = CommentForm()
+#     return render(request,'comment/comment_create.html',{"form":form})
 
             #########################################################   ##################################
             #with open('C:study\graduate\django_project_1-main\duck_img_download\duck1.jpg','rb') as f:

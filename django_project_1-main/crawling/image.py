@@ -1,7 +1,7 @@
 from PIL import Image
 import io
 # instance_1 =Image.open('C:\Users\1717-33\Desktop\1821028_\django_project_1-main\duck_img_download\duck1.jpg')
-pillow_image =Image.open('C:\study\graduate\django_project_1-main\duck_img_download\duck1.jpg')
+pillow_image =Image.open('C:\Python_1821028\django_project_1-main\duck_img_download\duck1.jpg')
 from django.core.files.base import ContentFile
 # my_file = ContentFile(b"C:\study\graduate\django_project_1-main\duck_img_download\duck1.jpg")
 # print(my_file)
@@ -26,9 +26,9 @@ def image_to_byte_array(image: Image) -> bytes:
 
 
 
-with open(pillow_image,'rb') as f:
-    searh_result_image =File(f)
-    print(searh_result_image)
+# with open(pillow_image,'rb') as f:
+#     searh_result_image =File(f)
+#     print(searh_result_image)
         
 # from django.shortcuts import render
 # from django.http import HttpResponse
