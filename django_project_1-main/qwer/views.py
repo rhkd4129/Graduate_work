@@ -1,5 +1,5 @@
 
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render,resolve_url
 from .forms import searchForm
 from .models import Advice,AdviceImage
 from .image_db_save import craw
@@ -37,14 +37,18 @@ def result(request,advice_pk):
         #     value = 1
         # elif button_value == '2':
         #     value = 2
-    context = {'advice': advice, 'adviceimage': adviceimage,'button_value':button_value}
+        return redirect('qwer:trans_image_result',advice_pk= advice_pk,button_value = button_value)
+    else:
+       context = {'advice': advice, 'adviceimage': adviceimage}
+    
 
     return render(request, 'qwer/result.html',context)
 
 
-def trans_image_result(request,advice_pk):
+def trans_image_result(request,advice_pk,button_value):
     advice = get_object_or_404(Advice,id = advice_pk)#id로써도되고pk로써도된다? ,,.?
     adviceimage = AdviceImage.objects.filter(advice_id = advice_pk)
+    context = {'button_value':button_value}
 
-    return render(request,'qwer/trans_image_result.html')
+    return render(request,'qwer/trans_image_result.html',context)
 
