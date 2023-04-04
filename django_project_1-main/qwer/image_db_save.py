@@ -17,19 +17,8 @@ import random
 # from .image_preprocessing import cvt_image_save
 
 # 직접 코딩한 함수 임포트 
+import requests
 
-
-
-
-############ 폴더 만드는 함수######################## 
-def createFolder(directory):
-    try:
-        if not os.path.exists(directory):
-            os.makedirs(directory)
-            #해당 폴더 없으면 생성 
-    except OSError:
-        print ('ERROR: Creating directory. ' +  directory)
-            # 예외 처리 
 
 ############## 한글 입력받으면 번역하는 함수############
 def trans(keyword:str)->str:
@@ -44,21 +33,8 @@ def trans(keyword:str)->str:
     # 입력받은 키워드가 영어라면 그냥 바로 영어반환
     else:
         return keyword
-    
 
-########## 찾은 이미지에서 랜덤으로 index 설정하는 함수   ############
-def image_index_shuffe(find_image_count,images_length):  
-    random_choice=[]
-    for i in range(find_image_count*2):
-        random_index = random.randint(0,images_length-1)
-        while random_index in random_choice:
-                random_index = random.randint(0,images_length-1)
-        random_choice.append(random_index)
-    random_choice.sort()
-    return random_choice
-
-
-
+from io import BytesIO
 ###### 실질적으로 크롤링하는 함수 크롤링할 이미지키워드와 개수 입력
 def craw(keyword:str,find_image_count:int):
     chrome_options = Options()
@@ -82,7 +58,6 @@ def craw(keyword:str,find_image_count:int):
 
     keyword = trans(keyword)
     # 폴더 생성 
-    createFolder('./' + keyword + '_img_download')
     
     # 검색창 찾기
     elem = driver.find_element(By.NAME, "q") # 검색창 태그 찾기
@@ -111,49 +86,24 @@ def craw(keyword:str,find_image_count:int):
     count = 1
     image_length = len(images)
     print("찾은 " + keyword + " 이미지 개수 : ", image_length)
-    ################################################
-    #TODO: 원하는 이미지개수에서 랜덤으로 무작위 이미지 뽑기 
 
-    #if shffle:
-    #    random_index_list=image_index_shuffe(find_image_count,len(images))
-    #    print(random_index_list)
-    #    ################################################
-    #    shffle_images_list=[]
-    #    for index in random_index_list:
-    #        shffle_images_list.append(images[index])
-    #    image_length = len(shffle_images_list)
-    ################################################
-    # 입력한 이미지 수만큼 출력되도록 에러는 넘어가는 방식
-    path_list=[]
-    file_name_list = []
+    image_file_list=[]
     for i in range(image_length):
         print(i)
         if(count - 1 != find_image_count):
             try:
-                #if shffle:shffle_images_list[i].click()
-                #else:images[i].click()
                 images[i].click()
-                print("Image Click!")
+                print("Image Click!")                 
+                imgUrl = driver.find_element(By.XPATH,'//*[@id="Sva75c"]/div[2]/div/div[2]/div[2]/div[2]/c-wiz/div/div[1]/div[2]/div[2]/div/a/img').get_attribute('src')                                                 
+     
+                response = requests.get(imgUrl)
+                image_content = response.content
+                image_file = BytesIO(image_content)
                 
-                # imgUrl = driver.find_element(By.XPATH,'//*[@id="Sva75c"]/div/div/div/div[3]/div[2]/c-wiz/div[2]/div[1]/div[1]/div[2]/div/a/img').get_attribute('src')
-                #imgUrl = driver.find_element(By.XPATH,'//*[@id="Sva75c"]/div/div/div[2]/div[2]/div[2]/c-wiz/div[2]/div[1]/div[1]/div[2]/div/a/img').get_attribute('src')                                          
-                imgUrl = driver.find_element(By.XPATH,'//*[@id="Sva75c"]/div[2]/div/div[2]/div[2]/div[2]/c-wiz/div/div[1]/div[2]/div[2]/div/a/img').get_attribute('src')                                          
-                
-                # png, jpg 구분하여 저장               
-
-                if imgUrl.split('.')[-1] == 'png':
-                    path = "./" + keyword + "_img_download/"
-                    file_name =  keyword + str(count) + ".png"
-                    urllib.request.urlretrieve(imgUrl, path+file_name)
-                    print("PNG Image saved : {}_{}.png".format(keyword, count))
-                else:
-                    path = "./" + keyword + "_img_download/"
-                    file_name =  keyword + str(count) + ".jpg"
-                    urllib.request.urlretrieve(imgUrl,path+file_name)
-                    print("JPG Image saved : {}_{}.jpg".format(keyword, count))
                 count = count + 1
-                file_name_list.append(file_name)
-                path_list.append(path)
+          
+                image_file_list.append(image_file)
+                print('이미지 저장')
 ##################### 예외 처리#################################################
             except HTTPError as e:
                 print(e)
@@ -181,11 +131,10 @@ def craw(keyword:str,find_image_count:int):
                 break
         else: break
     driver.close()
-    return keyword,path_list,file_name_list
-    #cvt_images =cvt_image_save(keyword+'_img_download',pillow_trans=True)
-    #image_length = len(cvt_images)
-     # 이미지 처리 후 저장
-    #return keyword,cvt_images,image_length
-keyword,path_list,file_name_list  = craw('강아지',2)
-# print(keyword,find_image_count)
-# print(path_list,file_name_list)
+    return keyword,image_file_list
+
+
+
+keyword , a = craw('강아지', 2)
+print('#################')
+print(a)

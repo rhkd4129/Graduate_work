@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+
+
+
+
+
+{% block content %}
+
+
+
+         
+
+        {{advice.pk}}
+        {{advice.name}}
+        {{advice.keywords}}
+       
+         {% if adviceimage %}
+               {% for image in adviceimage %}
+                {{image.id}}
+                <img src="{{image.image.url}}",style="width:70px;" alt="a"/>  
+             
+             {% endfor %}
+               
+       {% else %}
+        <p>등록된 사진이 없습니다.</p>
+         
+       {% endif %}
+   </tbody>
+{% endblock content %}
