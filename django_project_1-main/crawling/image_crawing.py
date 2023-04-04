@@ -186,6 +186,6 @@ def craw(keyword:str,find_image_count:int):
     #image_length = len(cvt_images)
      # 이미지 처리 후 저장
     #return keyword,cvt_images,image_length
-keyword,path_list,file_name_list  = craw('강아지',2)
+# keyword,path_list,file_name_list  = craw('강아지',2)
 # print(keyword,find_image_count)
 # print(path_list,file_name_list)

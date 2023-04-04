@@ -9,6 +9,8 @@ class AdviceAdmin(admin.ModelAdmin):
     list_display=['name','keywords','age','id']
 
     
+
+    
 @admin.register(AdviceImage)
 class AdviceImageAdmin(admin.ModelAdmin):
     pass

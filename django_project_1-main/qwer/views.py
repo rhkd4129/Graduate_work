@@ -1,21 +1,28 @@
 
 from django.shortcuts import redirect, render
 from .forms import searchForm
-from django.views.generic import CreateView,FormView
 from .models import Advice,AdviceImage
 from .image_db_save import craw
-from PIL import Image
 from django.shortcuts import get_object_or_404
-from copy import deepcopy
 from django.core.files import File
-from django.core.files.uploadedfile import InMemoryUploadedFile
+
 from io import BytesIO
 # Image.open(fp)
 def qwer(request):
     if request.method =='POST':
         form  = searchForm(request.POST,request.FILES)
         if form.is_valid():
-            advice = form.save()
+            advice = form.save(commit=False)
+            keyword = form.cleaned_data['keywords']
+            keyword,image_files = craw(keyword, 2)
+            advice.save()
+            i=4
+            for image_data in image_files:
+                advice_image = AdviceImage.objects.create(advice=advice)
+                advice_image.image.save(f'image{i}.jpg', File(image_data),save=False)
+                advice_image.save()
+                i+=1
+            
             return redirect(advice)
     else:
         form = searchForm()
@@ -23,22 +30,10 @@ def qwer(request):
 
 def result(request,advice_pk):
     advice = get_object_or_404(Advice,id = advice_pk)#id로써도되고pk로써도된다? ,,.?
-    keyword = advice.keywords
-    keyword,image_files = craw(keyword, 2)
-    i=0
-    for image_data in image_files:
-        # 이미지 파일을 InMemoryUploadedFile 객체로 변환
-        # image_io = io.BytesIO(image_data)
-        # image_file = InMemoryUploadedFile(image_io, None, 'image.jpg', 'image/jpeg', image_io.getbuffer().nbytes, None)
-        image = Image.open(image_data)
-        # AdviceImage 모델 객체 생성
-        advice_image = AdviceImage.objects.create(advice=advice)
-        advice_image.image.save(f'image{i}.jpg', File(image),save=False)
-        advice_image.save()
-        i+=1
-
-
-    context = {'advice': advice, 'advice_image': advice_image}
+    adviceimage = AdviceImage.objects.filter(advice_id = advice_pk)
+    print(adviceimage)
+    print(advice)
+    context = {'advice': advice, 'adviceimage': adviceimage}
     return render(request, 'qwer/result.html',context)
 
 

@@ -33,7 +33,7 @@ def trans(keyword:str)->str:
     # 입력받은 키워드가 영어라면 그냥 바로 영어반환
     else:
         return keyword
-
+import base64
 from io import BytesIO
 ###### 실질적으로 크롤링하는 함수 크롤링할 이미지키워드와 개수 입력
 def craw(keyword:str,find_image_count:int):
@@ -95,14 +95,16 @@ def craw(keyword:str,find_image_count:int):
                 images[i].click()
                 print("Image Click!")                 
                 imgUrl = driver.find_element(By.XPATH,'//*[@id="Sva75c"]/div[2]/div/div[2]/div[2]/div[2]/c-wiz/div/div[1]/div[2]/div[2]/div/a/img').get_attribute('src')                                                 
-     
-                response = requests.get(imgUrl)
-                image_content = response.content
-                image_file = BytesIO(image_content)
-                
+
+
+                if imgUrl.startswith('http'):
+                    response = requests.get(imgUrl)
+                    image_data = BytesIO(response.content)
+                else:
+                    encoded_image_data = imgUrl.split(',')[1]
+                    image_data = BytesIO(base64.b64decode(encoded_image_data))
                 count = count + 1
-          
-                image_file_list.append(image_file)
+                image_file_list.append(image_data)
                 print('이미지 저장')
 ##################### 예외 처리#################################################
             except HTTPError as e:
@@ -135,6 +137,7 @@ def craw(keyword:str,find_image_count:int):
 
 
 
-keyword , a = craw('강아지', 2)
-print('#################')
-print(a)
+# keyword , a = craw('강아지', 2)
+# print('#################')
+# print(a)
+# print(type(a[0]))
