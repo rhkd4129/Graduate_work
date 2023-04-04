@@ -18,7 +18,6 @@ from copy import deepcopy
 
 
 def melon_chart(request):
-   
     return render(request,'crawling/melon_chart.html',{'melon_chart':my_dict})
 
 # from django.core.exceptions import ValidationError
