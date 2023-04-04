@@ -12,17 +12,28 @@
             나이:{{ advice.age}}
       </div>
     </div>
+    <form method="post">
+      {% csrf_token %}
+      <button type="submit" name="button_value" value="1">Button 1</button>
+      <button type="submit" name="button_value" value="2">Button 2</button>
+    </form>
 
   
          
     <table class="table table-bordered table-hover mt-5">
       <tbody>
+        {% if button_value %}
+        <tr>
+          <td>Button value is {{ button_value }}</p></td>
+        </tr>
+        {% endif %}
+
         {% if adviceimage %}
           {% for image in adviceimage %}
           <td><img src="{{image.image.url}}",style="width:100px;" alt="a"/>  </td>
-          <a href ="{% url 'qwer:trans_image_result' advice.pk %}"class ="btn btn-primary btn-block mt-3 mb-3">변환</a>
-      
+          {#<a href ="{% url 'qwer:trans_image_result' advice.pk %}"class ="btn btn-primary btn-block mt-3 mb-3">변환</a>#}
         {% endfor %}
+
     </tbody>
   </table>        
    </tbody>

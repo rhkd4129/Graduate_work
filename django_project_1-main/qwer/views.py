@@ -29,13 +29,22 @@ def qwer(request):
 def result(request,advice_pk):
     advice = get_object_or_404(Advice,id = advice_pk)#id로써도되고pk로써도된다? ,,.?
     adviceimage = AdviceImage.objects.filter(advice_id = advice_pk)
-    context = {'advice': advice, 'adviceimage': adviceimage}
+    
+
+    if request.method == 'POST':
+        button_value = request.POST.get('button_value')
+        # if button_value == '1':
+        #     value = 1
+        # elif button_value == '2':
+        #     value = 2
+    context = {'advice': advice, 'adviceimage': adviceimage,'button_value':button_value}
+
     return render(request, 'qwer/result.html',context)
 
 
 def trans_image_result(request,advice_pk):
     advice = get_object_or_404(Advice,id = advice_pk)#id로써도되고pk로써도된다? ,,.?
     adviceimage = AdviceImage.objects.filter(advice_id = advice_pk)
-    context = {'advice': advice, 'adviceimage': adviceimage}
-    return render(request,'qwer/trans_image_result.html',context)
+
+    return render(request,'qwer/trans_image_result.html')
 
