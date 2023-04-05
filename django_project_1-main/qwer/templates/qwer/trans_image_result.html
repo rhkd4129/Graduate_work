@@ -1,5 +1,11 @@
 {% extends 'layout.html' %}
 {% block content %}
-    최종 변환 모델
+
+    {% if adviceimage %}
+    <img src="{{ adviceimage.image.url }}" alt="">
+    {% else %}
+    <p>이미지가 없다</p>
+    {% endif %}
+
     {{button_value}}
 {% endblock content %}

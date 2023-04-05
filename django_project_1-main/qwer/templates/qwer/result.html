@@ -14,8 +14,11 @@
     </div>
     <form method="post">
       {% csrf_token %}
-      <button type="submit" name="button_value" value="1">Button 1</button>
-      <button type="submit" name="button_value" value="2">Button 2</button>
+      {% if adviceimage %}
+        {% for image in adviceimage %}
+          <button type="submit" name="button_value" value={{image.id}}>{{image.id}}</button>
+        {% endfor %}
+      {% endif %}
     </form>
 
   
@@ -31,6 +34,7 @@
         {% if adviceimage %}
           {% for image in adviceimage %}
           <td><img src="{{image.image.url}}",style="width:100px;" alt="a"/>  </td>
+          <td>{{image.id}}</td>
           {#<a href ="{% url 'qwer:trans_image_result' advice.pk %}"class ="btn btn-primary btn-block mt-3 mb-3">변환</a>#}
         {% endfor %}
 

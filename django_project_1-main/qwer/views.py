@@ -46,9 +46,9 @@ def result(request,advice_pk):
 
 
 def trans_image_result(request,advice_pk,button_value):
-    advice = get_object_or_404(Advice,id = advice_pk)#id로써도되고pk로써도된다? ,,.?
-    adviceimage = AdviceImage.objects.filter(advice_id = advice_pk)
-    context = {'button_value':button_value}
-
+    # advice = get_object_or_404(Advice,id = advice_pk)#id로써도되고pk로써도된다? ,,.?
+    adviceimage = AdviceImage.objects.get(advice_id = advice_pk,id=button_value)
+    context = {'adviceimage':adviceimage,'button_value':button_value}
+    print(adviceimage)
     return render(request,'qwer/trans_image_result.html',context)
 
