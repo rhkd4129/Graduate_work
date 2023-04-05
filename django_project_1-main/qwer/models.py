@@ -21,6 +21,7 @@ class Advice(models.Model):
 class AdviceImage(models.Model):
     advice = models.ForeignKey(Advice, on_delete=models.CASCADE, related_name='a')
     image = models.ImageField(upload_to='advice_images/')
+    trans_image = models.ImageField(null = True ,  upload_to='trans_images/')
     
     # def get_absulute_url(self):
     #     return reverse('qwer:trans_image_result',args=)

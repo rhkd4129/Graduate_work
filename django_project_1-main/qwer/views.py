@@ -33,10 +33,19 @@ def result(request,advice_pk):
 
     if request.method == 'POST':
         button_value = request.POST.get('button_value')
-        # if button_value == '1':
-        #     value = 1
-        # elif button_value == '2':
-        #     value = 2
+
+        adviceimage = AdviceImage.objects.get(advice_id = advice_pk,id=button_value)
+        np_image = dbobject_to_np(adviceimage)
+        sketch=ani_to_edge(np_image)
+        pil_img = np_to_pil(sketch)
+
+        bytes_io = BytesIO()
+        pil_img.save(bytes_io, format='PNG')
+
+        trans_image_file = File(bytes_io, name='trans_image.png')
+        adviceimage.trans_image = File(trans_image_file)
+        adviceimage.save()
+
         return redirect('qwer:trans_image_result',advice_pk= advice_pk,button_value = button_value)
     else:
        context = {'advice': advice, 'adviceimage': adviceimage}
@@ -45,10 +54,14 @@ def result(request,advice_pk):
     return render(request, 'qwer/result.html',context)
 
 
+
+from .image_preprocessing import dbobject_to_np,ani_to_edge,np_to_pil
+from io import BytesIO
 def trans_image_result(request,advice_pk,button_value):
     # advice = get_object_or_404(Advice,id = advice_pk)#id로써도되고pk로써도된다? ,,.?
     adviceimage = AdviceImage.objects.get(advice_id = advice_pk,id=button_value)
+
     context = {'adviceimage':adviceimage,'button_value':button_value}
-    print(adviceimage)
+    
     return render(request,'qwer/trans_image_result.html',context)
 
