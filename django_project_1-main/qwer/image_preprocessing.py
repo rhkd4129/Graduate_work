@@ -8,8 +8,14 @@ def dbobject_to_np(db_object):
     img_path = db_object.image.path
     img_pil = Image.open(img_path).convert('RGB')
     img_np = np.array(img_pil)
+    # img_np_1 = cv2.resize(img_np, (512,512))
     img_cv = cv2.cvtColor(img_np, cv2.COLOR_RGB2BGR)
     return img_cv
+
+def image_resize(image,w,h):
+    trans_image = cv2.resize(image,(w,h))
+    return trans_image
+
 
 
 def ani_to_edge(ani_image): 

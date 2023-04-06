@@ -34,7 +34,7 @@ def result(request,advice_pk):
     if request.method == 'POST':
         button_value = request.POST.get('button_value')
 
-        adviceimage = AdviceImage.objects.get(advice_id = advice_pk,id=button_value)
+        adviceimage = AdviceImage.objects.filter(advice_id = advice_pk,id=button_value)[0]
         np_image = dbobject_to_np(adviceimage)
         sketch=ani_to_edge(np_image)
         pil_img = np_to_pil(sketch)
@@ -60,8 +60,19 @@ from io import BytesIO
 def trans_image_result(request,advice_pk,button_value):
     # advice = get_object_or_404(Advice,id = advice_pk)#id로써도되고pk로써도된다? ,,.?
     adviceimage = AdviceImage.objects.get(advice_id = advice_pk,id=button_value)
-
     context = {'adviceimage':adviceimage,'button_value':button_value}
     
     return render(request,'qwer/trans_image_result.html',context)
 
+#  <div class="card mt-5" style="width: 50rem;">
+#       <div class="card-header">
+#           {{ advice.name }}
+#       </div>
+#       <ul class="list-group list-group-flush">
+#         <li class="list-group-item"> {{advice.keywords}}</li>
+#         <li class="list-group-item">{{ advice.pk }}</li>
+#       </ul>
+#       <div class="card-footer">
+#             나이:{{ advice.age}}
+#       </div>
+#     </div>

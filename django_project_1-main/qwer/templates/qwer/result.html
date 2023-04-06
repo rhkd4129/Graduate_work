@@ -1,25 +1,12 @@
 {% extends 'layout.html' %}
 {% block content %}
-    <div class="card mt-5" style="width: 50rem;">
-      <div class="card-header">
-          {{ advice.name }}
-      </div>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item"> {{advice.keywords}}</li>
-        <li class="list-group-item">{{ advice.pk }}</li>
-      </ul>
-      <div class="card-footer">
-            나이:{{ advice.age}}
-      </div>
-    </div>
-    <form method="post">
-      {% csrf_token %}
-      {% if adviceimage %}
-        {% for image in adviceimage %}
-          <button type="submit" name="button_value" value={{image.id}}>{{image.id}}</button>
-        {% endfor %}
-      {% endif %}
-    </form>
+   
+
+  {#<img src="..." class="rounded float-start" alt="...">#}
+  {#<img src="..." class="rounded mx-auto d-block" alt="...">#}
+  {# <img src="..." class="rounded float-end" alt="...">#}
+  
+ 
 
   
          
@@ -33,14 +20,18 @@
 
         {% if adviceimage %}
           {% for image in adviceimage %}
-          <td><img src="{{image.image.url}}",style="width:100px;" alt="a"/>  </td>
-          <td>{{image.id}}</td>
-          {#<a href ="{% url 'qwer:trans_image_result' advice.pk %}"class ="btn btn-primary btn-block mt-3 mb-3">변환</a>#}
-        {% endfor %}
+          <td>
+            <img src="{{image.image.url}}",style="width:100px;" alt="a"/>  
 
+            <form method="post">
+            {% csrf_token %}
+              <button type="submit" name="button_value" value={{image.id}}>{{image.id}}</button>
+            </form> 
+          </td>
+          {% endfor %}
     </tbody>
   </table>        
-   </tbody>
+ 
    {% else %}
    <p>등록된 사진이 없습니다.</p>
   {% endif %}
