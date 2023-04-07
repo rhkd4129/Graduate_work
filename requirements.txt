@@ -16,7 +16,8 @@ django-extensions
 # git push -u oring master
 #git config --global core.autocrlf ture
 
-
+# git config --system --unset core.autocrlf
+# git config --global core.autocrlf false
 # pip install -r requirements.txt
 
 #####################   git    ##################### 
