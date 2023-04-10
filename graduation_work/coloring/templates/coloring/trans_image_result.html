@@ -1,20 +1,32 @@
 {% extends 'layout.html' %}
 {% block content %}
 
+    <style>
+        .text-white{
+            text-decoration: none;
+            
+        }
 
-    {% if adviceimage %}
-    <img class ='m-5 p-5'src="{{ adviceimage.trans_image.url }}" alt="">
+        a:hover{
+            color:black;
+        }
+    </style>
 
-    {% else %}
-    <p>이미지가 없다</p>
-    {% endif %}
+    <div class="py-5">
+        {% if adviceimage %}
+        <img class ='mx-auto'style='width:500px;' src="{{ adviceimage.trans_image.url }}" alt="">
+
+        {% else %}
+        <p>이미지가 없다</p>
+        {% endif %}
+    </div>
+
 
     {{button_value}}
 
-    <footer class="mt-auto text-white-50">
-        <p>Cover template for <a href="https://getbootstrap.com/" class="text-white">Bootstrap</a>, by 
-          <a href="https://twitter.com/mdo" class="text-white">@mdo</a>.</p>
-      </footer>
+    <footer class="my-auto text-white-50">
+    <a href="{% url 'coloring:crawing' %}" class="text-white">다시 이미지 검색하기</a>
+        </footer>
 
     
 {% endblock content %}

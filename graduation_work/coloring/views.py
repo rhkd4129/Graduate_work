@@ -7,18 +7,30 @@ from django.shortcuts import get_object_or_404
 from django.core.files import File
 from .image_preprocessing import dbobject_to_np,ani_to_edge,np_to_pil
 from io import BytesIO
+from django.contrib import messages
+from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required 
 
+
+@login_required
 def crawing(request):
     if request.method =='POST':
         form  = searchForm(request.POST,request.FILES)
         if form.is_valid():
             advice = form.save(commit=False)
+            advice.author = request.user
             keyword = form.cleaned_data['keywords']
             keyword,image_files = craw(keyword, 2)
+            if keyword is None or image_files is None:
+                messages.error(request,'인터넷 오류 다시 시도해 주세요')
+                form = searchForm()
+                return render(request,'coloring/search.html',{'form':form})
+            
             advice.save()
             i=4
+            print(image_files)
             for image_data in image_files:
-                advice_image = AdviceImage.objects.create(advice=advice)
+                advice_image = AdviceImage.objects.create(advice=advice,author=request.user)
                 advice_image.image.save(f'image{i}.jpg', File(image_data),save=False)
                 advice_image.save()
                 i+=1
@@ -27,6 +39,8 @@ def crawing(request):
         form = searchForm()
     return render(request,'coloring/search.html',{'form':form})
 
+
+@login_required
 def crawing_result(request,advice_pk):
     advice = get_object_or_404(Advice,id = advice_pk)#id로써도되고pk로써도된다? ,,.?
     adviceimage = AdviceImage.objects.filter(advice_id = advice_pk)
@@ -35,7 +49,7 @@ def crawing_result(request,advice_pk):
     if request.method == 'POST':
         button_value = request.POST.get('button_value')
 
-        adviceimage = AdviceImage.objects.filter(advice_id = advice_pk,id=button_value)[0]
+        adviceimage = AdviceImage.objects.filter(advice_id = advice_pk,id=button_value,author=request.user)[0]
         np_image = dbobject_to_np(adviceimage)
         sketch=ani_to_edge(np_image)
         pil_img = np_to_pil(sketch)
@@ -55,10 +69,10 @@ def crawing_result(request,advice_pk):
     return render(request, 'coloring/result.html',context)
 
 
-
+@login_required
 def trans_image_result(request,advice_pk,button_value):
     # advice = get_object_or_404(Advice,id = advice_pk)#id로써도되고pk로써도된다? ,,.?
-    adviceimage = AdviceImage.objects.get(advice_id = advice_pk,id=button_value)
+    adviceimage = AdviceImage.objects.get(advice_id = advice_pk,id=button_value,author=request.user)
     context = {'adviceimage':adviceimage,'button_value':button_value}
     
     return render(request,'coloring/trans_image_result.html',context)

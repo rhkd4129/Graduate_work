@@ -1,9 +1,11 @@
 from django.db import models
+import re
+from django.conf import settings
 
 from django.urls import reverse
 
 class Advice(models.Model):
-    # user = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     name = models.CharField(max_length=10)
     keywords = models.CharField(max_length=10)
     age = models.IntegerField()
@@ -19,6 +21,7 @@ class Advice(models.Model):
 
 
 class AdviceImage(models.Model):
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     advice = models.ForeignKey(Advice, on_delete=models.CASCADE, related_name='a')
     image = models.ImageField(upload_to='advice_images/')
     trans_image = models.ImageField(null = True ,  upload_to='trans_images/')

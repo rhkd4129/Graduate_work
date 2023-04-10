@@ -5,13 +5,14 @@ from .forms import SignupForm,ProfileEditForm
 
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required 
-
+from django.contrib.auth import login as auth_login
 
 def signup(request):
     if request.method == 'POST':
         form = SignupForm(request.POST)
         if form.is_valid():
             form.save()
+            # auth_login(request, signed_user)
             return redirect('home')
 
     else:

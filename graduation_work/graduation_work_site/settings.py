@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'bootstrap4',
     #localapps
     'accounts',
     'coloring', 
@@ -140,3 +142,9 @@ AUTH_USER_MODEL = "accounts.User"
 LOGIN_REDIRECT_URL = reverse_lazy('coloring:crawing')#로그인성공했을때 이동
 
 
+from django.contrib.messages import constants as messages_constants
+
+
+MESSAGE_TAGS={
+    messages_constants.ERROR:'danger'
+}

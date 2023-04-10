@@ -18,10 +18,18 @@
        <form class ='my-5'action="" method="post" enctype="multipart/form-data" >
             {% csrf_token %}
             {{form.as_p}}
-
-
             <button class="w-90 btn btn-lg btn-primary mt-3" type="submit">Search</button>
         </form>
+    
+        {% for message in messages %}
+            <div class="palert alert-{{message.tags}}">
+                {{message.message}}
+            </div>
+        {% endfor %}
+            
+    
     </main>
     
 {% endblock content %}
+
+

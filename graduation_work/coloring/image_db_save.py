@@ -94,8 +94,9 @@ def craw(keyword:str,find_image_count:int):
             try:
                 images[i].click()
                 print("Image Click!")                 
-                imgUrl = driver.find_element(By.XPATH,'//*[@id="Sva75c"]/div[2]/div/div[2]/div[2]/div[2]/c-wiz/div/div[1]/div[2]/div[2]/div/a/img').get_attribute('src')                                                 
-
+                # imgUrl = driver.find_element(By.XPATH,'//*[@id="Sva75c"]/div[2]/div/div[2]/div[2]/div[2]/c-wiz/div/div[1]/div[2]/div[2]/div/a/img').get_attribute('src')                                                 
+                imgUrl = driver.find_element(By.XPATH,'  //*[@id="islrg"]/div[1]/div[1]/a[1]/div[1]/img').get_attribute('src')                                                 
+              
 
                 if imgUrl.startswith('http'):
                     response = requests.get(imgUrl)
@@ -115,9 +116,10 @@ def craw(keyword:str,find_image_count:int):
                 pass
             except NoSuchElementException as e:
                 print(e)
-                pass
+                return None,None
             except ConnectionResetError as e:
                 print(e)
+                
                 pass
             except URLError as e:
                 print(e)
