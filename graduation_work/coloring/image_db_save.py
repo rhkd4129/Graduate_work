@@ -92,12 +92,12 @@ def craw(keyword:str,find_image_count:int):
         print(i)
         if(count - 1 != find_image_count):
             try:
-                images[i].click()
+                images[i+1].click()
                 print("Image Click!")                 
                 # imgUrl = driver.find_element(By.XPATH,'//*[@id="Sva75c"]/div[2]/div/div[2]/div[2]/div[2]/c-wiz/div/div[1]/div[2]/div[2]/div/a/img').get_attribute('src')                                                 
-                imgUrl = driver.find_element(By.XPATH,'  //*[@id="islrg"]/div[1]/div[1]/a[1]/div[1]/img').get_attribute('src')                                                 
-              
-
+                imgUrl = driver.find_element(By.CLASS_NAME,'r48jcc.pT0Scc').get_attribute('src')             \
+       
+                                                    
                 if imgUrl.startswith('http'):
                     response = requests.get(imgUrl)
                     image_data = BytesIO(response.content)
@@ -135,6 +135,7 @@ def craw(keyword:str,find_image_count:int):
                 break
         else: break
     driver.close()
+    
     return keyword,image_file_list
 
 

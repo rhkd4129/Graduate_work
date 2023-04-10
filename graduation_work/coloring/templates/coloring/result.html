@@ -13,7 +13,7 @@
         {% if adviceimage %}
           {% for image in adviceimage %}
           <td>
-            <img src="{{image.image.url}}",style="width:100px;" alt="a"/>  
+            <img src="{{image.image.url}}"  alt="a"/>  
 
             <form method="post">
             {% csrf_token %}

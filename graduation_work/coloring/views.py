@@ -12,6 +12,14 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required 
 
 
+# {% for field in form %}
+# <div class="form-group">
+#    <labl for=""></labl>
+#    <input type="" class="form-control" id="" placeholder="" name="">
+# </div>
+# {% endfor %}
+
+
 @login_required
 def crawing(request):
     if request.method =='POST':
@@ -20,15 +28,14 @@ def crawing(request):
             advice = form.save(commit=False)
             advice.author = request.user
             keyword = form.cleaned_data['keywords']
-            keyword,image_files = craw(keyword, 2)
+            keyword,image_files = craw(keyword,3)
+            advice.save()
             if keyword is None or image_files is None:
                 messages.error(request,'인터넷 오류 다시 시도해 주세요')
                 form = searchForm()
                 return render(request,'coloring/search.html',{'form':form})
-            
-            advice.save()
+        
             i=4
-            print(image_files)
             for image_data in image_files:
                 advice_image = AdviceImage.objects.create(advice=advice,author=request.user)
                 advice_image.image.save(f'image{i}.jpg', File(image_data),save=False)
