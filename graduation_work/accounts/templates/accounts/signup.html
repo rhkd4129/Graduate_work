@@ -2,12 +2,13 @@
 
 
 
-
-
 {% block content %}
-   <form action="." method="post">
+{% load bootstrap4 %}
+<div class="container border border-white">
+    <form method="POST" class="px-5 py-5">
         {% csrf_token %}
-        {{form.as_p}}
-    <input type="submit">
-   </form>
+        {% bootstrap_form form %}
+        <button type="submit" class="btn btn-primary">가입</button>
+    </form>
+</div>
 {% endblock content %}

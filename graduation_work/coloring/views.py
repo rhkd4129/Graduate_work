@@ -84,31 +84,11 @@ def trans_image_result(request,advice_pk,button_value):
     
     return render(request,'coloring/trans_image_result.html',context)
 
-def show_trans_image_result(request,advice_pk,button_value):
-    context = {'button_value':button_value}
-    return render(request,'coloring/show_trans_image_result.html',context)
 
 
-#  <table class="table table-bordered table-hover mt-5">
-#       <tbody>
-#         {% if button_value %}
-#         <tr>
-#           <td>Button value is {{ button_value }}</p></td>
-#         </tr>
-#         {% endif %}
+# @login_required
+# def trans_image_result(request,advice_pk,button_value):
+#     adviceimage = AdviceImage.objects.get(advice_id = advice_pk,id=button_value,author=request.user)
+#     context = {'adviceimage':adviceimage,'button_value':button_value}
+#     return render(request,'coloring/show_trans_image_result.html',context)
 
-#         {% if adviceimage %}
-#         {{adviceimage|length}}
-#           {% for image in adviceimage %}
-#           <td>
-            
-#             <img src="{{image.image.url}}"  alt="a"/>  
-
-#             <form method="post">
-#             {% csrf_token %}
-#               <button type="submit" name="button_value" value={{image.id}}>{{image.id}}</button>
-#             </form> 
-#           </td>
-#           {% endfor %}
-#     </tbody>
-#   </table>        
