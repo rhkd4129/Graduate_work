@@ -1,36 +1,26 @@
 {% extends 'coloring/layout.html' %}
 {% block content %}
   
-         
-    <table class="table table-bordered table-hover mt-5">
-      <tbody>
-        {% if button_value %}
-        <tr>
-          <td>Button value is {{ button_value }}</p></td>
-        </tr>
-        {% endif %}
 
-        {% if adviceimage %}
-          {% for image in adviceimage %}
-          <td>
-            <img src="{{image.image.url}}"  alt="a"/>  
-
-            <form method="post">
-            {% csrf_token %}
-              <button type="submit" name="button_value" value={{image.id}}>{{image.id}}</button>
-            </form> 
-          </td>
+        
+<main>
+    {% for image in adviceimage %}
+      {% if forloop.counter0|divisibleby:3 %}
+        <div class="row py-5">
+          {% endif %}
+            <div class="col-sm-4">
+                <img src="{{ image.image.url }}" alt="{{ image.alt }}">
+                <form method="post">
+                  {% csrf_token %}
+                  <button class="btn btn-outline-warning"type="submit" name="button_value" value={{image.id}}>변환하기</button>
+                  </form> 
+            </div>
+          {% if forloop.counter|divisibleby:3 or forloop.last %}
+        </div>
+          {% endif %}
           {% endfor %}
-    </tbody>
-  </table>        
- 
-   {% else %}
-   <p>등록된 사진이 없습니다.</p>
-  {% endif %}
-    
 
-
-</main>
-
-  
+        </div>
+        <a href="{% url 'coloring:crawing' %}" class="btn btn-success">다시 이미지 검색하기</a>
+</main>  
 {% endblock content %}

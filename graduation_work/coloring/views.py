@@ -28,7 +28,7 @@ def crawing(request):
             advice = form.save(commit=False)
             advice.author = request.user
             keyword = form.cleaned_data['keywords']
-            keyword,image_files = craw(keyword,3)
+            keyword,image_files = craw(keyword,6)
             advice.save()
             if keyword is None or image_files is None:
                 messages.error(request,'인터넷 오류 다시 시도해 주세요')
@@ -84,15 +84,31 @@ def trans_image_result(request,advice_pk,button_value):
     
     return render(request,'coloring/trans_image_result.html',context)
 
-#  <div class="card mt-5" style="width: 50rem;">
-#       <div class="card-header">
-#           {{ advice.name }}
-#       </div>
-#       <ul class="list-group list-group-flush">
-#         <li class="list-group-item"> {{advice.keywords}}</li>
-#         <li class="list-group-item">{{ advice.pk }}</li>
-#       </ul>
-#       <div class="card-footer">
-#             나이:{{ advice.age}}
-#       </div>
-#     </div>
+def show_trans_image_result(request,advice_pk,button_value):
+    context = {'button_value':button_value}
+    return render(request,'coloring/show_trans_image_result.html',context)
+
+
+#  <table class="table table-bordered table-hover mt-5">
+#       <tbody>
+#         {% if button_value %}
+#         <tr>
+#           <td>Button value is {{ button_value }}</p></td>
+#         </tr>
+#         {% endif %}
+
+#         {% if adviceimage %}
+#         {{adviceimage|length}}
+#           {% for image in adviceimage %}
+#           <td>
+            
+#             <img src="{{image.image.url}}"  alt="a"/>  
+
+#             <form method="post">
+#             {% csrf_token %}
+#               <button type="submit" name="button_value" value={{image.id}}>{{image.id}}</button>
+#             </form> 
+#           </td>
+#           {% endfor %}
+#     </tbody>
+#   </table>        
