@@ -19,7 +19,7 @@ class Advice(models.Model):
          return reverse('coloring:result',args=[self.pk])
 
 
-
+import os
 class AdviceImage(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     advice = models.ForeignKey(Advice, on_delete=models.CASCADE, related_name='a')
@@ -32,5 +32,6 @@ class AdviceImage(models.Model):
     def __str__(self):
         # return f"{self.advice.user.username} - {self.advice.keywords} - {self.id}"
         return f"{self.advice.keywords} - {self.id}"
-    
+    def get_filename(self):
+        return os.path.basename(self.trans_image.name)
 

@@ -12,6 +12,17 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required 
 
 
+from django.views.generic import View
+
+import os
+from django.conf import settings
+from django.http import HttpResponse
+from django.views.generic.detail import SingleObjectMixin
+from django.http import FileResponse
+from django.core.files.storage import FileSystemStorage
+
+
+
 # {% for field in form %}
 # <div class="form-group">
 #    <labl for=""></labl>
@@ -82,6 +93,20 @@ def trans_image_result(request,advice_pk,button_value):
     adviceimage = AdviceImage.objects.get(advice_id = advice_pk,id=button_value,author=request.user)
     context = {'adviceimage':adviceimage,'button_value':button_value}
     
+    if request.method == 'GET':
+        path =adviceimage.trans_image.url
+        file_path = os.path.join(settings.MEDIA_ROOT, path)
+        print(path)
+        print(file_path)
+
+        if os.path.exists(file_path):
+            binary_file = open(file_path, 'rb')
+            response = HttpResponse(binary_file.read(), content_type="application/octet-stream; charset=utf-8")
+            response['Content-Disposition'] = 'attachment; filename=' + os.path.basename(file_path)
+            return response
+        else:
+            message = '알 수 없는 오류가 발행하였습니다.'
+            return HttpResponse("<script>alert('"+ message +"');history.back()'</script>")
     return render(request,'coloring/trans_image_result.html',context)
 
 

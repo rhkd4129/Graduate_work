@@ -15,18 +15,23 @@
     <div class="py-5">
         {% if adviceimage %}
         <img class ='mx-auto'style='width:500px;' src="{{ adviceimage.trans_image.url }}" alt="">
-
+=90989
         {% else %}
         <p>이미지가 없다</p>
         {% endif %}
     </div>
-
+    
 
     {{button_value}}
 
     <footer class="my-auto text-white-50">
     <a href="{% url 'coloring:crawing' %}" class="text-white">다시 이미지 검색하기</a>
-        </footer>
+    <form action='.'>
+        {% csrf_token %}
+        <button type="submit" class="btn btn-outline-success" name="button_value" >다운로드</button>
 
+    </form>
+</footer>
+        
     
 {% endblock content %}
