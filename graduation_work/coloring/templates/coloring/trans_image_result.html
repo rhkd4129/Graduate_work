@@ -15,23 +15,45 @@
     <div class="py-5">
         {% if adviceimage %}
         <img class ='mx-auto'style='width:500px;' src="{{ adviceimage.trans_image.url }}" alt="">
-=90989
         {% else %}
         <p>이미지가 없다</p>
         {% endif %}
     </div>
-    
-
-    {{button_value}}
 
     <footer class="my-auto text-white-50">
-    <a href="{% url 'coloring:crawing' %}" class="text-white">다시 이미지 검색하기</a>
-    <form action='.'>
-        {% csrf_token %}
-        <button type="submit" class="btn btn-outline-success" name="button_value" >다운로드</button>
+        <a href="{% url 'coloring:crawing' %}" class="text-white">다시 이미지 검색하기</a>
+  
+        <form method="post" action="{% url 'coloring:trans_image_result' advice_pk=advice_pk button_value=button_value %}">
+            {% csrf_token %} 
+            <button id="download-btn" type="submit">이미지 다운로드</button>
+        </form>
 
-    </form>
-</footer>
-        
-    
+    </footer>
+
+    <script>
+        document.querySelector('#download-btn').addEventListener('click', function(event) {
+            event.preventDefault();
+            print('a')
+            var fileName = 'myImage.jpg';
+            var downloadPath = '/downloads/';
+            var downloadPathInput = prompt("Please enter the download path for the image file:", downloadPath);
+            if (downloadPathInput != null) {
+                downloadPath = downloadPathInput;
+            }
+
+            var fileNameInput = prompt("Please enter the file name for the image file:", fileName);
+            if (fileNameInput != null) {
+                fileName = fileNameInput;
+            }
+
+            var downloadUrl = "{{ adviceimage.trans_image.url }}";
+            downloadUrl = downloadUrl.replace(/^http:\/\//i, 'https://');
+            downloadUrl = downloadUrl.replace(/^\/media/i, '');
+
+            var link = document.createElement("a");
+            link.href = downloadPath + fileName;
+            link.download = fileName;
+            link.click();
+        });
+    </script>
 {% endblock content %}
