@@ -92,48 +92,27 @@ def trans_image_result(request,advice_pk,button_value):
     # advice = get_object_or_404(Advice,id = advice_pk)#id로써도되고pk로써도된다? ,,.?
     adviceimage = AdviceImage.objects.get(advice_id = advice_pk,id=button_value,author=request.user)
     file_path = adviceimage.trans_image.path
-    if request.method =='POST':
-        print('클릭')
-        with open(file_path, 'rb') as fh:
-            response = HttpResponse(fh.read(), content_type="image/png")
-            response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
-            return response
+    #if request.method =='POST':
+    #    print('클릭')
+    #    with open(file_path, 'rb') as fh:
+    #        response = HttpResponse(fh.read(), content_type="image/png")
+    #        response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
+    #        return response
     context = {'adviceimage':adviceimage,'button_value':button_value,'advice_pk':advice_pk}
     return render(request,'coloring/trans_image_result.html',context)
 
-# @login_required
-# def image_download(request,adivce_pk,button_value):
-
-
-    
-
-# def trans_image_result(request,advice_pk,button_value):
-#     adviceimage = AdviceImage.objects.get(advice_id=advice_pk, id=button_value, author=request.user)
-
-#     with open(file_path, 'rb') as fh:
-#         response = HttpResponse(fh.read(), content_type="image/png")
-#         response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
-#         return response
+ # <form method="post" action="{% url 'coloring:trans_image_result' advice_pk=advice_pk button_value=button_value %}">
+ #           {% csrf_token %} 
+ #           <button id="download-btn" type="submit">이미지 다운로드</button>
+ #       </form>
 
 
 
-# @login_required
-# def trans_image_result(request,advice_pk,button_value):
-#     adviceimage = AdviceImage.objects.get(advice_id = advice_pk,id=button_value,author=request.user)
-#     context = {'adviceimage':adviceimage,'button_value':button_value}
-#     return render(request,'coloring/show_trans_image_result.html',context)
 
-#   if request.method == 'GET':
-#         path =adviceimage.trans_image.url
-#         file_path = os.path.join(settings.MEDIA_ROOT, path)
-#         print(path)
-#         print(file_path)
-
-#         if os.path.exists(file_path):
-#             binary_file = open(file_path, 'rb')
-#             response = HttpResponse(binary_file.read(), content_type="application/octet-stream; charset=utf-8")
-#             response['Content-Disposition'] = 'attachment; filename=' + os.path.basename(file_path)
-#             return response
-#         else:
-#             message = '알 수 없는 오류가 발행하였습니다.'
-#             return HttpResponse("<script>alert('"+ message +"');history.back()'</script>")
+#@login_required
+##def trans_image_result(request,advice_pk,button_value):
+3    # advice = get_object_or_404(Advice,id = advice_pk)#id로써도되고pk로써도된다? ,,.?
+#    adviceimage = AdviceImage.objects.get(advice_id = advice_pk,id=button_value,author=request.user)
+#    file_path = adviceimage.trans_image.path
+#    context = {'adviceimage':adviceimage,'button_value':button_value,'advice_pk':advice_pk}
+#    return render(request,'coloring/trans_image_result.html',context)
