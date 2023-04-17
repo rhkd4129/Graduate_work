@@ -10,7 +10,7 @@ bs4
 requests
 lxml
 django-extensions 
-
+mysqlclient
 # pip install -r requirents/dev.txt
 
 
