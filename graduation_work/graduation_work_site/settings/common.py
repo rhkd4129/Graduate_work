@@ -69,12 +69,30 @@ WSGI_APPLICATION = 'graduation_work_site.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+# import pymysql
+# pymysql.install_as_MySQLdb()
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME':'kdu',
+        'USER':'admin',
+        'PASSWORD':'rhkdgus123!',
+        
+        'HOST':'kdu.c41emichhaxf.ap-northeast-2.rds.amazonaws.com',
+        'PORT':'3306',
+        'OPTIONS':{
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",        
+            }
+    },
+
 }
+
 
 
 # Password validation
