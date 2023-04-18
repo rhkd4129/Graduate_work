@@ -33,13 +33,31 @@ from .common import *
 #     "loggers": {"django": {"handlers": ["console"], "level": "ERROR",},},
 # }
 
-# STATICFILES_STORAGE = "graduation_work_site.storages.S3StaticStorage"
-# DEFAULT_FILE_STORAGE = "graduation_work_site.storages.S3MediaStorage"
 
-# AWS_ACCESS_KEY_ID = ''
-# AWS_SECRET_ACCESS_KEY=
-# AWS_S3_REGION_NAME
-# AWS_STORAGE_BUCKET_NAME ='kdubucket'
-# AWS_S3_SUSTOM_DOMAIN = f".amazonaws.com"
-# AWS_DEFAULT_ACL = 'public_read'
-# aws_s3
+
+# AKIA3S4HJGLOEFYJD6AW
+# uqjbQijxsLhJITEaZmmLwjtgQZ7yJmodx/tjJK/P
+
+
+
+
+ALLOWED_HOSTS = ['.blasticbeanstalk.com','192.168.56.101','127.0.0.1']
+# 
+
+import os
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME':os.environ['DATABASE_NAME'],
+        'USER':os.environ['DATABASE_USER'],
+        'PASSWORD':os.environ['DATABASE_PASSWORD'],
+        'HOST':'django.c41emichhaxf.ap-northeast-2.rds.amazonaws.com',
+        'PORT':'3306',
+        'OPTIONS':{
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",        
+            }
+    },
+
+}
+
+
