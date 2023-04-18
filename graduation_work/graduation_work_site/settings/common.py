@@ -11,8 +11,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = 'django-insecure-xv=+v)5fy6ljywfr*da(q!33p0i9eu^qsqtnuc2ucg7=2)k+o$'
-SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
+SECRET_KEY = 'django-insecure-xv=+v)5fy6ljywfr*da(q!33p0i9eu^qsqtnuc2ucg7=2)k+o$'
+# SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -83,20 +83,7 @@ DATABASES = {
 # pymysql.install_as_MySQLdb()
 
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME':'django',
-#         'USER':'admin',
-#         'PASSWORD':'12345678',
-#         'HOST':'django.c41emichhaxf.ap-northeast-2.rds.amazonaws.com',
-#         'PORT':'3306',
-#         'OPTIONS':{
-#             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",        
-#             }
-#     },
 
-# }
 
 
 
@@ -138,12 +125,12 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [ os.path.join(BASE_DIR,'graduation_work_site','static')]
 STATIC_ROOT = os.path.join(BASE_DIR,'static')
-print(STATIC_ROOT)
+
 
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
-print(MEDIA_ROOT)
+
 
 
 
@@ -163,15 +150,3 @@ MESSAGE_TAGS={
 }
 
 
-# STATICFILES_STORAGE = "graduation_work_site.storage.S3StaticStorage"
-# DEFAULT_FILE_STORAGE  = "graduation_work_site.storage.S3MediaStorage"
-
-# AWS_ACCESS_KEY_ID = 'AKIA3S4HJGLOEFYJD6AW'
-# AWS_SECRET_ACCESS_KEY='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'
-
-
-# AWS_S3_REGION_NAME='ap-northeast-2'
-# AWS_STORAGE_BUCKET_NAME ='kdubucket'
-# # AWS_S3_CUSTOM_DOMAIN = f"{AWS_STORAGE_BUCKET_NAME}.s3.{AWS_S3_REGION_NAME}.amazonaws.com"
-# AWS_S3_CUSTOM_DOMAIN = '%s.s3.%s.amazonaws.com' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_REGION_NAME)
-# AWS_DEFAULT_ACL = None

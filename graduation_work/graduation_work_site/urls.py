@@ -14,7 +14,5 @@ urlpatterns = [
 
 if settings.DEBUG:#미디어파일에 대한 스태틱 서브기능?
     urlpatterns += static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT)
-    #import debug_toolbar
-    #urlpatterns +=[ path('__debug__/', include('debug_toolbar.urls'))]
-    
+
 

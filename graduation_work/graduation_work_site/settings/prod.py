@@ -1,30 +1,12 @@
 from .common import *
 
 # DEBUG = os.environ.get("DEBUG") in ["1", "t", "true", "T", "True"]
+DEBUG=False
 # ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "").split(",")
-
-# STATICFILES_STORAGE = "backend.storages.StaticAzureStorage"
-# DEFAULT_FILE_STORAGE = "backend.storages.MediaAzureStorage"
-
-# AZURE_ACCOUNT_NAME = os.environ["AZURE_ACCOUNT_NAME"]
-# AZURE_ACCOUNT_KEY = os.environ["AZURE_ACCOUNT_KEY"]
-
 # CORS_ORIGIN_WHITELIST = os.environ.get("CORS_ORIGIN_WHITELIST", "").split(",")
 
-# # 절대 이렇게 소스코드에 키를 넣지 마세요.
-# # 아래 키는 예제로 넣었으며, 동작하지 않는 키입니다.
-# # AZURE_ACCOUNT_NAME = ""
-# # AZURE_ACCOUNT_KEY = ""
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": os.environ.get("DB_ENGINE", "django.db.backends.postgresql"),
-#         "HOST": os.environ["DB_HOST"],
-#         "USER": os.environ["DB_USER"],
-#         "PASSWORD": os.environ["DB_PASSWORD"],
-#         "NAME": os.environ.get("DB_NAME", "postgres"),
-#     },
-# }
+
 
 # LOGGING = {
 #     "version": 1,
@@ -35,14 +17,13 @@ from .common import *
 
 
 
-# AKIA3S4HJGLOEFYJD6AW
-# uqjbQijxsLhJITEaZmmLwjtgQZ7yJmodx/tjJK/P
+
+STATICFILES_STORAGE = "graduation_work_site.storage.S3StaticStorage"
+DEFAULT_FILE_STORAGE  = "graduation_work_site.storage.S3MediaStorage"
 
 
 
-
-ALLOWED_HOSTS = ['.blasticbeanstalk.com','192.168.56.101','127.0.0.1']
-# 
+ALLOWED_HOSTS = ['.elasticbeanstalk.com','192.168.56.101','127.0.0.1']
 
 import os
 DATABASES = {
@@ -60,4 +41,13 @@ DATABASES = {
 
 }
 
+AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
+AWS_SECRET_ACCESS_KEY=os.environ['AWS_SECRET_ACCESS_KEY']
+
+
+AWS_S3_REGION_NAME='ap-northeast-2'
+AWS_STORAGE_BUCKET_NAME ='kdubucket'
+# AWS_S3_CUSTOM_DOMAIN = f"{AWS_STORAGE_BUCKET_NAME}.s3.{AWS_S3_REGION_NAME}.amazonaws.com"
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.%s.amazonaws.com' % (AWS_STORAGE_BUCKET_NAME, AWS_S3_REGION_NAME)
+AWS_DEFAULT_ACL = None
 
