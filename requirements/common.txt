@@ -3,7 +3,7 @@ matplotlib~=3.6.2
 googletrans~=4.0.0-rc1 #->> 해당 버전이 아니면 오류 발생 (꼭 버전을 붙혀서 )
 selenium~=4.6.0
 webdriver_manager~=3.8.5
-Django~=4.1.7
+Django~=4.2
 django-bootstrap4
 pillow
 bs4

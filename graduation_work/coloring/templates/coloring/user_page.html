@@ -8,40 +8,27 @@
         </div>
 
         <div class="container text-center">
+            
             {% for advice in adivce_list %}
             <div class="row">
-              <div class="col">
-                <p>{{advice.name}}</p>
+              <div class="col"><p>{{advice.name}}</p>
               </div>
 
-              <div class="col">
-                  <p>{{advice.keywords}}</p>
+              <div class="col"><p>{{advice.keywords}}</p>
               </div>
             
-              
-              <div class="col">
-                <p>{{advice.age}}</p>
-            </div>
+              <div class="col"><p>{{advice.age}}</p>
+                </div>
 
-
-              <div class="col">
-                <a href="{% url 'coloring:user_page_trans_image' username=user.username %}"  >변환된이미지</a>
-                
+              <div class="col"><a href="{% url 'coloring:user_page_trans_image' username=user.username  %}"  >변환된이미지</a>
               </div>
-
-
-
             </div>
-          </div>
-        <div class="row">
-          
-                 
-                
 
-        
-                  
-            {% endfor %}
-        </div>
+          </div>
+          <hr style="border: solid 2px white;">
+          {% endfor %}
+               
+       
     </div>
 
     

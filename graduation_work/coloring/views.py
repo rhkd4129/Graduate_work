@@ -120,11 +120,13 @@ def user_page(request,username):
 
 def user_page_trans_image(request,username):
     page_user = get_object_or_404(get_user_model(),username = username)
+    # adivce_list = Advice.objects.filter(author = page_user,advice_id=advice_pk)
     adivce_list = Advice.objects.filter(author = page_user)
 
     return render(request,'coloring/user_page_trans_image.html',{
         'page_user':page_user,
         'adivce_list':adivce_list,
+        
     })
 
 
