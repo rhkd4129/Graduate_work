@@ -87,21 +87,21 @@ def crawing_result(request,advice_pk):
     return render(request, 'coloring/result.html',context)
 
 
-@login_required
-def trans_image_result(request,advice_pk,button_value):
-    # advice = get_object_or_404(Advice,id = advice_pk)#id로써도되고pk로써도된다? ,,.?
-    adviceimage = AdviceImage.objects.get(advice_id = advice_pk,id=button_value,author=request.user)
-    # adviceimage = AdviceImage.objects.get(advice_id = advice_pk,id=button_value,author=request.user)
+# @login_required
+# def trans_image_result(request,advice_pk,button_value):
+#     # advice = get_object_or_404(Advice,id = advice_pk)#id로써도되고pk로써도된다? ,,.?
+#     adviceimage = AdviceImage.objects.get(advice_id = advice_pk,id=button_value,author=request.user)
+#     # adviceimage = AdviceImage.objects.get(advice_id = advice_pk,id=button_value,author=request.user)
 
-    file_path = adviceimage.trans_image.path
-    #if request.method =='POST':
-    #    print('클릭')
-    #    with open(file_path, 'rb') as fh:
-    #        response = HttpResponse(fh.read(), content_type="image/png")
-    #        response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
-    #        return response
-    context = {'adviceimage':adviceimage,'button_value':button_value,'advice_pk':advice_pk}
-    return render(request,'coloring/trans_image_result.html',context)
+#     file_path = adviceimage.trans_image.path
+#     #if request.method =='POST':
+#     #    print('클릭')
+#     #    with open(file_path, 'rb') as fh:
+#     #        response = HttpResponse(fh.read(), content_type="image/png")
+#     #        response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
+#     #        return response
+#     context = {'adviceimage':adviceimage,'button_value':button_value,'advice_pk':advice_pk}
+#     return render(request,'coloring/trans_image_result.html',context)
 
 
 def user_page(request,username):
@@ -130,11 +130,11 @@ def user_page_trans_image(request,username):
     })
 
 
-# @login_required
-# def trans_image_result(request,advice_pk,button_value):
-#    adviceimage = AdviceImage.objects.get(advice_id = advice_pk,id=button_value,author=request.user)
-#    context = {'adviceimage':adviceimage,'button_value':button_value,'advice_pk':advice_pk}
-#    return render(request,'coloring/show_trans_image_result.html',context)
+@login_required
+def trans_image_result(request,advice_pk,button_value):
+   adviceimage = AdviceImage.objects.get(advice_id = advice_pk,id=button_value,author=request.user)
+   context = {'adviceimage':adviceimage,'button_value':button_value,'advice_pk':advice_pk}
+   return render(request,'coloring/show_trans_image_result.html',context)
 
 
 
