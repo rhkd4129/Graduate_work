@@ -5,4 +5,4 @@
 /static
 /media
 /.ebextensions
-\graduation_work_site\settings\__pycache__
+/graduation_work_site/settings/__pycache__
