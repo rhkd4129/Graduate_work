@@ -3,7 +3,8 @@ import re
 from django.conf import settings
 
 from django.urls import reverse
- 
+from django.shortcuts import resolve_url
+
 class Advice(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     name = models.CharField(max_length=10)
@@ -34,4 +35,6 @@ class AdviceImage(models.Model):
         return f"{self.advice.keywords} - {self.id}"
     def get_filename(self):
         return os.path.basename(self.trans_image.name)
-
+        #   {% for advice_image in advice.a.all %}
+        #         <img src="  {{ advice_image.image.url }}" alt="">
+        #         {% endfor %}

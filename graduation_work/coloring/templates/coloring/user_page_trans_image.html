@@ -1,0 +1,26 @@
+{% extends 'coloring/layout.html' %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        {% for advice in adivce_list %}
+                {% for advice_image in advice.a.all %}
+                    {#<img src="{{ advice_image.image.url }}" alt="">#}
+                    {% if advice_image.trans_image %}
+                        <img src="{{ advice_image.trans_image.url }}" alt="">
+                    {% else %}
+                        
+                    {% endif %}
+            
+               
+            {% endfor %}
+    
+              
+        {% endfor %}
+    </div>
+</div>
+
+
+
+{% endblock content %}
+
+

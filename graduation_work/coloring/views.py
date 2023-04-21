@@ -103,6 +103,31 @@ def trans_image_result(request,advice_pk,button_value):
     context = {'adviceimage':adviceimage,'button_value':button_value,'advice_pk':advice_pk}
     return render(request,'coloring/trans_image_result.html',context)
 
+
+def user_page(request,username):
+    page_user = get_object_or_404(get_user_model(),username = username)
+    adivce_list = Advice.objects.filter(author = page_user)
+    
+    adivce_list_count = adivce_list.count()
+    
+
+
+    return render(request,'coloring/user_page.html',{
+        'page_user':page_user,
+        'adivce_list':adivce_list,
+        'adivce_list_count':adivce_list_count,
+    })
+
+def user_page_trans_image(request,username):
+    page_user = get_object_or_404(get_user_model(),username = username)
+    adivce_list = Advice.objects.filter(author = page_user)
+
+    return render(request,'coloring/user_page_trans_image.html',{
+        'page_user':page_user,
+        'adivce_list':adivce_list,
+    })
+
+
 # @login_required
 # def trans_image_result(request,advice_pk,button_value):
 #    adviceimage = AdviceImage.objects.get(advice_id = advice_pk,id=button_value,author=request.user)
