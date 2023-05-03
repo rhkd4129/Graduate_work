@@ -1,4 +1,3 @@
-
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required 
@@ -122,19 +121,3 @@ def user_page_trans_image(request,username,keywords,name):
         'page_user':page_user,
         'trans_image_list':trans_image_list,   
     })
-
-
-# @login_required
-# def trans_image_result(request,advice_pk,button_value):
-#    adviceimage = AdviceImage.objects.get(advice_id = advice_pk,id=button_value,author=request.user)
-#    context = {'adviceimage':adviceimage,'button_value':button_value,'advice_pk':advice_pk}
-#    return render(request,'coloring/show_trans_image_result.html',context)
-
-
-
-
- # <form method="post" action="{% url 'coloring:trans_image_result' advice_pk=advice_pk button_value=button_value %}">
- #           {% csrf_token %} 
- #           <button id="download-btn" type="submit">이미지 다운로드</button>
- #       </form>
-

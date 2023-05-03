@@ -16,3 +16,9 @@ class searchForm(forms.ModelForm):
         #     'searh_result_image':forms.ClearableFileInput(attrs={'multiple':True})
         # }
 
+
+class uploadForm(forms.ModelForm):
+    class Meta:
+        model = AdviceImage
+
+        fields = ['image']
