@@ -11,3 +11,11 @@
 5. BUG: 여기에 문제가 있다.
 6. XXX: 가능한 함정에 대한 경고로 ex) NOTE:XXX:.
 
+
+
+# git_study
+
+git branch -a
+git checkout -b profile origin/profile
+
+<!-- Graduate_work_1-GUI-master -->

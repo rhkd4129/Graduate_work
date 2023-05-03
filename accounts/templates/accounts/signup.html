@@ -1,0 +1,14 @@
+{% extends 'accounts/layout.html' %}
+
+
+
+{% block content %}
+{% load bootstrap4 %}
+<div class="container border border-white">
+    <form method="POST" class="px-5 py-5">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <button type="submit" class="btn btn-primary">가입</button>
+    </form>
+</div>
+{% endblock content %}

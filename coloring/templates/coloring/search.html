@@ -1,0 +1,91 @@
+{% extends 'coloring/layout.html' %}
+
+
+{% block content %}     
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+
+    <main class="mt-5">
+
+
+        <p class="lead mt-4"> 그리고 싶은 이미지를 검색해보세요</p>
+       
+       
+       
+       
+
+
+
+       <form class ='my-5'action="" method="post" enctype="multipart/form-data" >
+            {% csrf_token %}
+            {{form.as_p}}
+            <button id = 'search-btn' class="w-90 btn btn-lg btn-primary mt-3" type="submit">이미지 검색</button>
+            <button id = 'search-btn' class="w-90 btn btn-lg btn-primary mt-3" type="submit">이미지 업로드</button>
+        </form>
+    
+        {% for message in messages %}
+            <div class="palert alert-{{message.tags}}">
+                {{message.message}}
+            </div>
+        {% endfor %}
+            
+           
+            
+
+
+
+            <div id="loading-spinner" > {#style="display: none;"#}
+                <i class="fa fa-spinner fa-spin"></i>Loading.....
+
+            </div>
+
+
+
+    </main>
+    
+
+
+<!-- <script>
+    $(function() {
+      // 버튼 클릭 이벤트
+      $('#search-btn').click(function() {
+        // 로딩 스피너 표시
+        $('#loading-spinner').show();
+        
+        // form submit
+        $('#search-form').submit();
+      });
+    });
+  </script> -->
+{% endblock content %}
+
+
+
+
+<!-- <script>
+  $(function() {
+    // 버튼 클릭 이벤트
+    $('#search-btn').click(function() {
+      // 로딩 스피너 표시
+      $('#loading-spinner').show();
+      
+      // Ajax 요청
+      $.ajax({
+        type: 'POST',
+        url: '{% url "coloring:crawing" %}',
+        data: $('form').serialize(),
+        success: function(data) {
+          // 검색 결과를 search.html 페이지에 출력
+          $('#search-results').html(data);
+          
+          // 로딩 스피너 숨김
+          $('#loading-spinner').hide();
+        },
+        error: function() {
+          // 로딩 스피너 숨김
+          $('#loading-spinner').hide();
+        }
+      });
+    });
+  });
+</script> -->
