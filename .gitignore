@@ -2,4 +2,4 @@ db.sqlite3
 /static
 /media
 /.ebextensions
-__pycache__
+__pycache__/
