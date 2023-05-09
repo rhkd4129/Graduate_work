@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Advice,AdviceImage
+from .models import Advice,SearchImage,TransImage
 
 
 
@@ -11,7 +11,13 @@ class AdviceAdmin(admin.ModelAdmin):
     
 
     
-@admin.register(AdviceImage)
+@admin.register(SearchImage)
 class AdviceImageAdmin(admin.ModelAdmin):
+    pass
+
+
+    
+@admin.register(TransImage)
+class TransImageAdmin(admin.ModelAdmin):
     pass
 

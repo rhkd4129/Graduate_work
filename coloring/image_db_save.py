@@ -57,7 +57,7 @@ def craw(keyword:str,find_image_count:int):
     driver.implicitly_wait(5) 
     driver.get("https://www.google.co.kr/imghp?hl=ko&tab=ri&ogbl")
 
-    keyword = trans(keyword)
+    # keyword = trans(keyword)
     # 폴더 생성 
     
     # 검색창 찾기
@@ -87,13 +87,13 @@ def craw(keyword:str,find_image_count:int):
     count = 1
     image_length = len(images)
     print("찾은 " + keyword + " 이미지 개수 : ", image_length)
-
+    find_image_count=30
     image_file_list=[]
+    image_data=[]
     for i in range(image_length):
-        var = random.choice([0,1])
+        
         # print(i)
         if(count - 1 != find_image_count):
-            if var == 1:         
                 try:
                     images[i+1].click()
                     print("Image Click!")                 
@@ -103,12 +103,12 @@ def craw(keyword:str,find_image_count:int):
                                     
                     if imgUrl.startswith('http'):
                         response = requests.get(imgUrl)
-                        image_data = BytesIO(response.content)
+                        image_data.append(BytesIO(response.content))
                     else:
                         encoded_image_data = imgUrl.split(',')[1]
-                        image_data = BytesIO(base64.b64decode(encoded_image_data))
+                        image_data.append(BytesIO(base64.b64decode(encoded_image_data)))
                     count = count + 1
-                    image_file_list.append(image_data)
+                    #image_file_list.append(image_data)
                     print('이미지 저장')
 ##################### 예외 처리#################################################
                 except HTTPError as e:
@@ -122,7 +122,6 @@ def craw(keyword:str,find_image_count:int):
                     return None,None
                 except ConnectionResetError as e:
                     print(e)
-                    
                     pass
                 except URLError as e:
                     print(e)
@@ -138,5 +137,11 @@ def craw(keyword:str,find_image_count:int):
                     break
         else: break
     driver.close()
-    
+
+    random_index = random.sample(range(30), 6)
+    print(random_index)
+    for index in random_index:
+        image_file_list.append(image_data[index])
     return keyword,image_file_list
+
+

@@ -4,61 +4,61 @@
 {% block content %}     
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     
-
     <main class="mt-5">
 
-
         <p class="lead mt-4"> 그리고 싶은 이미지를 검색해보세요</p>
-       
+         <button class ="btn btn-primary" id="search">검색하기</button>
+         <button class ="btn btn-primary" id="upload">직접 업로드하기</button>
        
        
       
-       <form class ='my-5'action="" method="post" enctype="multipart/form-data" >
+       <form id = 'searchForm'style="display: none;" class ='my-5'action="" method="post" enctype="multipart/form-data" >
             {% csrf_token %}
-            {{form.as_p}}        
-
-             <button class = 'btn btn-primary' type="submit" name="button_id" value="검색하기">검색하기</button>
-          
-          
+            {{searchForm.as_p}}       
+             <button name = 'btn' value = '1' id  = 'search-btn'class = 'btn btn-primary' type="submit">검색하기</button>
         </form>
-    
+ 
+
+      
+     <form  class ='my-5'  id = 'uploadForm' style="display: none;" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ searchForm.as_p }}   
+        {{ uploadForm_2.as_p }} 
+        <button class = 'btn btn-primary'  name = 'btn' value = '2'  type="submit">업로드하기 </button>
+      </form> 
+  
+
         {% for message in messages %}
             <div class="palert alert-{{message.tags}}">
                 {{message.message}}
             </div>
         {% endfor %}
             
-           <div id ='upload_form'style ='display:none;' >
-            form
+    
 
-           </div>
-            
-
-
-
-            <div id="loading-spinner" > {#style="display: none;"#}
-                <i class="fa fa-spinner fa-spin"></i>Loading.....
-
-            </div>
-
-
-
+        <div id="loading-spinner" style="display: none;"> 
+          <i class="fa fa-spinner fa-spin"></i>Loading....
+        </div>
     </main>
     
 
+<script>
+    $(function(){
+      $('#search-btn').click(function() {  
+        $('#loading-spinner').show(); });
 
-<!-- <script>
-    $(function() {
-      // 버튼 클릭 이벤트
-      $('#search-btn').click(function() {
-        // 로딩 스피너 표시
-        $('#loading-spinner').show();
-        
-        // form submit
-        $('#search-form').submit();
+      $('#search').click(function(){
+        $('#searchForm').show();
+        $('#uploadForm').hide(); 
+      });
+
+      $('#upload').click(function(){
+        $('#searchForm').hide();
+        $('#uploadForm').show(); 
       });
     });
-  </script> -->
+
+  </script>
 {% endblock content %}
 
 

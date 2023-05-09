@@ -5,8 +5,9 @@ app_name = 'coloring'
 
 urlpatterns=[
 
-     path('',views.crawing,name = 'crawing'),
-     # path('',views.crawing_all,name = 'upload'),
+     # path('',views.crawing,name = 'crawing'),
+     path('',views.all,name = 'crawing'),
+     path('upload/',views.upload_view,name = 'upload'),
 
      
      path('result/<int:advice_pk>/',views.crawing_result,name= 'result'),

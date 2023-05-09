@@ -12,7 +12,7 @@ import glob
 # providers = ['CPUExecutionProvider']
 
 def dbobject_to_np(db_object):
-    img_path = db_object.image.path
+    img_path = db_object.search_image.path
     img_pil = Image.open(img_path).convert('RGB')
     img_np = np.array(img_pil)
     return  cv2.cvtColor(img_np, cv2.COLOR_RGB2BGR)
@@ -78,4 +78,17 @@ def real(np_image):
     scale = ANI_img.shape[:2]
     res = Convert(mat, scale,session)
     print('됐다')
-    return res
+    res=ani_to_edge(res)
+    hard = image_sharpening(res)
+   
+    ###############
+
+    img1 = process_image(res)
+    img2 = np.expand_dims(img1, axis=0)
+    mat = img2 
+    scale = res.shape[:2]
+    res = Convert(mat, scale,session)
+    print('됐다')
+    res=ani_to_edge(res)
+    easy =image_sharpening(res)
+    return hard,easy

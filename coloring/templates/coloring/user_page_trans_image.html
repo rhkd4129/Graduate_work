@@ -18,7 +18,11 @@
                 {% else %}
                         <p> 이미지가 아직 없습니다 </p>
                 {% endif %}
-                        
+                {% for image in trans_images %} 
+                        <img src="{{ image.trans_image.url }}" class="img-fluid mt-5" alt="">
+                        <a href="{{ image.trans_image.url }}" class="btn btn-success"download>이미지 다운로드</a>                                                       
+                {% endfor %}
+                
         </main>
 {% endblock content %}
         

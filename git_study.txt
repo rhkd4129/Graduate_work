@@ -8,7 +8,9 @@ git push <remote> <branch>
 git fetch origin으로 브랜치 최신 정보 가져오기
 git checkout a 브랜치 가져오기
 git push --set-upstream origin image_upload
+python manage.py migrate --run-syncdb
 
 
-git branch -r 원격 브랜치 조회
-git checkout -t [원격 브랜치명]
+
+git push origin --delete feature-branch
+원격으로 브랜치 반영하기

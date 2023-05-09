@@ -1,6 +1,5 @@
 from django import forms
-from .models import Advice,AdviceImage
-
+from .models import Advice,SearchImage
 
 
 
@@ -17,8 +16,11 @@ class searchForm(forms.ModelForm):
         # }
 
 
-class uploadForm(forms.ModelForm):
-    class Meta:
-        model = AdviceImage
 
-        fields = ['image']
+
+class uploadForm_2(forms.ModelForm):
+    class Meta:
+        model = SearchImage
+        fields = ['search_image']
+
+    
