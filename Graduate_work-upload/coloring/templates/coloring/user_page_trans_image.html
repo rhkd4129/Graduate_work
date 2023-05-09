@@ -1,0 +1,28 @@
+{% extends 'coloring/layout.html' %}
+{% block content %}
+        <main class='hover'>
+                {% if trans_image_list %}
+                        {% for image in trans_image_list %}
+                                {% for img in image.a.all  %}
+                                        {% if  img.trans_image %}
+                                                
+                                                <div class="col border border-white mx-5 py-3">
+                                                                <img src="{{ img.trans_image.url }}" class="img-fluid mt-5" alt="">
+                                                                <a href="{{ img.trans_image.url }}" class="btn btn-success"download>이미지 다운로드</a>                                                       
+                                                </div>
+                                                
+                                        {% endif %}
+                                {% endfor %}
+                                        
+                        {% endfor %}
+                {% else %}
+                        <p> 이미지가 아직 없습니다 </p>
+                {% endif %}
+                {% for image in trans_images %} 
+                        <img src="{{ image.trans_image.url }}" class="img-fluid mt-5" alt="">
+                        <a href="{{ image.trans_image.url }}" class="btn btn-success"download>이미지 다운로드</a>                                                       
+                {% endfor %}
+                
+        </main>
+{% endblock content %}
+        

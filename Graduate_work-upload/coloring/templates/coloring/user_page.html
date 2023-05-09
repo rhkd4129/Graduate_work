@@ -1,0 +1,33 @@
+{% extends 'coloring/layout.html' %}
+{% block content %}
+    <div class="container my-3">
+        <div class="row mb-5" >
+            <div class="col-sm-3">
+                {{page_user.username}}
+            </div>
+        </div>
+        <hr style="border: solid 2px blue;">
+        {% for advice in adivce_list %}
+        <div class="container text-center">
+            <div class="row">
+              <div class="col"><p>{{advice.name}}</p></div>
+              <div class="col"><p>{{advice.keywords}}</p></div>
+              <div class="col"><p>{{advice.age}}</p></div>
+              <div class="col"><a href="{% url 'coloring:user_page_trans_image' username=user.username keywords=advice.keywords name=advice.name %}"  >변환된이미지</a></div>
+            </div>
+            <hr style="border: solid 2px white;">
+        </div>
+       
+          {% endfor %}
+    </div>
+
+    
+
+    
+
+    
+    {#<a href="{% url 'accounts/profile_edit' %}">Edit</a>#}
+
+{% endblock content %}
+
+
