@@ -6,7 +6,7 @@ from django.shortcuts import redirect, render,resolve_url,get_object_or_404
 
 from io import BytesIO
 
-from .forms import searchForm,uploadForm_2
+from .forms import searchForm,uploadForm_2,UploadForm_1
 from .models import Advice,SearchImage,TransImage
 from .image_db_save import craw
 from .image_preprocessing import dbobject_to_np,ani_to_edge,np_to_pil,real,image_sharpening
@@ -44,7 +44,7 @@ def crawing(request):
     # return render(request,'coloring/search.html',{'form':form})
 
 def upload_view(request):
-        form_1 = searchForm(request.POST)
+        form_1 = UploadForm_1(request.POST)
         form_2 = uploadForm_2(request.POST, request.FILES)
         if form_1.is_valid() and form_2.is_valid():
             advice = form_1.save(commit=False)
@@ -74,10 +74,11 @@ def all(request):
         elif btn_value =='2':
             return redirect(upload_view(request))
     else:
-        form_1 = searchForm()
+        searchform =searchForm()
+        form_1 = UploadForm_1()
         form_2 = uploadForm_2()
 
-    return render(request, 'coloring/search.html', {'searchForm': searchForm, 'uploadForm_2': uploadForm_2})
+    return render(request, 'coloring/search.html', {'searchForm': searchform, 'uploadForm_1': form_1, 'uploadForm_2': form_2})
 
 
 

@@ -33,7 +33,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # 'storages',
-    'bootstrap4',
+    
     #localapps
     'accounts',
     'coloring', 

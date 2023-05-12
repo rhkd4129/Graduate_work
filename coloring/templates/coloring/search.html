@@ -13,7 +13,7 @@
        
       
        <form id = 'searchForm'style="display: none;" class ='my-5'action="" method="post" enctype="multipart/form-data" >
-            {% csrf_token %}
+            {% csrf_token %}        
             {{searchForm.as_p}}       
              <button name = 'btn' value = '1' id  = 'search-btn'class = 'btn btn-primary' type="submit">검색하기</button>
         </form>
@@ -22,7 +22,8 @@
       
      <form  class ='my-5'  id = 'uploadForm' style="display: none;" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ searchForm.as_p }}   
+    
+        {{ uploadForm_1.as_p }}   
         {{ uploadForm_2.as_p }} 
         <button class = 'btn btn-primary'  name = 'btn' value = '2'  type="submit">업로드하기 </button>
       </form> 
@@ -31,7 +32,9 @@
         {% for message in messages %}
             <div class="palert alert-{{message.tags}}">
                 {{message.message}}
+
             </div>
+            
         {% endfor %}
             
     
