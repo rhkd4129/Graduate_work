@@ -5,20 +5,27 @@
         
 <main>
   <div class="container border border-white">
-    <div class="row mt-5">
-      {% for image in adviceimage %}
-        {% if forloop.counter0|divisibleby:3 %}
-          </div><div class="row my-5">
-        {% endif %}
-        <div class="col-md-4">
-          <img src="{{ image.search_image.url }}" class="img-fluid">
-
-          <form method="post">
-              {% csrf_token %}
-                <button type="submit" class="btn btn-outline-success" name="button_value" value={{image.id}}>{{image.id}}</button>
-          </form> 
-        </div>
-      {% endfor %}
+    <div class="row my-5 mx-5">
+      {% if adviceimage|length != 1 %}
+          {% for image in adviceimage %}
+            {% if forloop.counter0|divisibleby:3 %}
+              </div><div class="row my-5">
+            {% endif %}
+            <div class="col-md-4">
+              <img src="{{ image.search_image.url }}" class="img-fluid">
+              <form method="post">
+                  {% csrf_token %}
+                    <button type="submit" class="btn btn-outline-success" name="button_value" value={{image.id}}>{{image.id}}</button>
+              </form> 
+            </div>
+          {% endfor %}
+      {% else %}
+        <img src="{{ adviceimage.0.search_image.url }}" class="img-fluid">
+        <form method="post">
+            {% csrf_token %}
+              <button type="submit" class="btn btn-outline-success" name="button_value" value={{adviceimage.0.id}}>변환하기</button>
+        </form> 
+      {% endif %}
     </div>
   </div>
 

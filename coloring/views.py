@@ -49,6 +49,7 @@ def upload_view(request):
         if form_1.is_valid() and form_2.is_valid():
             advice = form_1.save(commit=False)
             advice.author = request.user
+            advice.keywords = '사용자-지정'
             advice.save()
 
             custom_image = form_2.save(commit=False)

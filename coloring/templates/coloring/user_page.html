@@ -1,29 +1,36 @@
 {% extends 'coloring/layout.html' %}
 {% block content %}
-    <div class="container my-3">
-        <div class="row mb-5" >
-            <div class="col-sm-3">
-                {{page_user.username}}
-            </div>
-        </div>
-        <hr style="border: solid 2px blue;">
-        {% for advice in adivce_list %}
-        <div class="container text-center">
-            <div class="row">
-              <div class="col"><p>{{advice.name}}</p></div>
-              <div class="col"><p>{{advice.keywords}}</p></div>
-              <div class="col"><p>{{advice.age}}</p></div>
-              <div class="col"><a href="{% url 'coloring:user_page_trans_image' username=user.username keywords=advice.keywords name=advice.name %}"  >변환된이미지</a></div>
-            </div>
-            <hr style="border: solid 2px white;">
-        </div>
-       
-          {% endfor %}
+
+    <div class="container my-3" >
+        <h2 class="mb-5">User Information</h2>
+
+        <table class="table table-striped text-white">
+            <thead >
+                <tr>
+                <th>이름</th>
+                <th>나이</th>
+                <th>Keywords</th>
+                <th>변환된 이미지</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for advice in adivce_list %}
+                    <tr>
+                        <td class="text-white" >{{ advice.name }}</td>
+                        <td class="text-white" >{{ advice.age }}</td>
+                        <td class="text-white" >{{ advice.keywords }}</td>
+                        <td class="text-white" ><a href="{% url 'coloring:user_page_trans_image' username=user.username keywords=advice.keywords name=advice.name %}">이미지</a></td>              
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td  class="text-white"  colspan="4">No users found.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 
-    
-
-    
 
     
     {#<a href="{% url 'accounts/profile_edit' %}">Edit</a>#}
