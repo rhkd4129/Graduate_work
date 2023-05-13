@@ -160,7 +160,6 @@ def user_page_trans_image(request,username,keywords,name):
     page_user = get_object_or_404(get_user_model(),username = username)
     # adivce_list = Advice.objects.filter(author = page_user,advice_id=advice_pk)
     trans_image_list = Advice.objects.filter(name=name,author = page_user,keywords=keywords)
-    print(len(trans_image_list))
     trans_images = trans_image_list[0].trans_search.all()
 
     # print( AdviceImage.objects.filter(advice__in=trans_image_list))
