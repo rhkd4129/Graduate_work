@@ -5,7 +5,7 @@
         <h2 class="mb-5">User Information</h2>
 
         <table class="table table-striped text-white">
-            <thead >
+            <thead class='text-dark'>
                 <tr>
                 <th>이름</th>
                 <th>나이</th>
@@ -16,11 +16,11 @@
 
             <tbody>
                 {% for advice in adivce_list %}
-                    <tr>
-                        <td class="text-white" >{{ advice.name }}</td>
-                        <td class="text-white" >{{ advice.age }}</td>
-                        <td class="text-white" >{{ advice.keywords }}</td>
-                        <td class="text-white" ><a href="{% url 'coloring:user_page_trans_image' username=user.username keywords=advice.keywords name=advice.name %}">이미지</a></td>              
+                    <tr class ="text-dark">
+                        <td >{{ advice.name }}</td>
+                        <td >{{ advice.age }}</td>
+                        <td >{{ advice.keywords }}</td>
+                        <td ><a href="{% url 'coloring:user_page_trans_image' username=user.username keywords=advice.keywords name=advice.name %}">이미지</a></td>              
                     </tr>
                     {% empty %}
                     <tr>
