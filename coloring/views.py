@@ -151,7 +151,7 @@ def user_page(request,username):
     return render(request,'coloring/user_page.html',{
         'page_user':page_user,
         'adivce_list':adivce_list,
-        'adivce_list_count':adivce_list_count,
+        # 'adivce_list_count':adivce_list_count,
     })
 
 
@@ -161,10 +161,9 @@ def user_page_trans_image(request,username,keywords,name):
     # adivce_list = Advice.objects.filter(author = page_user,advice_id=advice_pk)
     trans_image_list = Advice.objects.filter(name=name,author = page_user,keywords=keywords)
     trans_images = trans_image_list[0].trans_search.all()
-
     # print( AdviceImage.objects.filter(advice__in=trans_image_list))
     return render(request,'coloring/user_page_trans_image.html',{
-        'page_user':page_user,
-        'trans_image_list':trans_image_list,   
+        # 'page_user':page_user,
+        # 'trans_image_list':trans_image_list,   
         'trans_images':trans_images,
     })
