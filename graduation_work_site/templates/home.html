@@ -3,9 +3,9 @@
 {% load static  %}
 
   <main class="px-3">
-    <img src="{% static 'logo.jpg' %}"  width="350" height="350"alt="">
+    <img src="{% static 'logo.PNG' %}"  width="400" height="400"alt="">
 
-    <p class="lead pt-2">
+    <p class="lead pt-3">
       {% if user.is_authenticated %} 
                <a href="{% url 'coloring:crawing' %}"  style="font-size: 30px;"class="btn btn-lg btn-light fw-bold border-white bg-white">시작하기</a>        
 

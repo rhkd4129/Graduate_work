@@ -6,7 +6,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <main>
-      <img src="{% static 'logo.jpg' %}"  width="300" height="300"alt="">
+      <img src="{% static 'logo.PNG' %}"  width="400" height="400"alt="">
       <p class="lead pt-1">
       <button class ="btn btn-primary my-1" id="search">검색하기</button>
          <button class ="btn btn-primary my-1" id="upload">직접 업로드하기</button>
@@ -19,7 +19,7 @@
  
 
       
-     <form  class ='my-5'  id = 'uploadForm' style="display: none;" method="POST" enctype="multipart/form-data">
+     <form  class ='my-2'  id = 'uploadForm' style="display: none;" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
     
         {{ uploadForm_1.as_p }}   
@@ -36,6 +36,7 @@
     
 
         <div id="loading-spinner" style="display: none;"> 
+         
           <i class="fa fa-spinner fa-spin"></i>Loading....
         </div>
     </main>
