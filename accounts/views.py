@@ -1,11 +1,16 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.forms import UserCreationForm,PasswordChangeForm
-from django.contrib.auth.views import PasswordChangeView
+
+from django.contrib.auth.views import PasswordChangeView,LoginView
 from .forms import SignupForm,ProfileEditForm
 
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required 
 from django.contrib.auth import login as auth_login
+from django.contrib.auth.views import LoginView
+
+
+
 
 def signup(request):
     if request.method == 'POST':

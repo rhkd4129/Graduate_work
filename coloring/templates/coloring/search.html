@@ -2,15 +2,16 @@
 
 
 {% block content %}     
+{% load static  %}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    
-    <main class="mt-5 border border-white">
-         <button class ="btn btn-primary my-3" id="search">검색하기</button>
-         <button class ="btn btn-primary my-3" id="upload">직접 업로드하기</button>
+
+    <main>
+      <img src="{% static 'logo.jpg' %}"  width="300" height="300"alt="">
+      <p class="lead pt-1">
+      <button class ="btn btn-primary my-1" id="search">검색하기</button>
+         <button class ="btn btn-primary my-1" id="upload">직접 업로드하기</button>
        
-       
-      
-       <form id = 'searchForm'style="display: none;" class ='my-5'action="" method="post" enctype="multipart/form-data" >
+       <form id = 'searchForm'style="display: none;" class ='my-2'action="" method="post" enctype="multipart/form-data" >
             {% csrf_token %}        
             {{searchForm.as_p}}       
              <button name = 'btn' value = '1' id  = 'search-btn'class = 'btn btn-primary' type="submit">검색하기</button>
@@ -25,14 +26,11 @@
         {{ uploadForm_2.as_p }} 
         <button class = 'btn btn-primary'  name = 'btn' value = '2'  type="submit">업로드하기 </button>
       </form> 
-  
 
         {% for message in messages %}
             <div class="palert alert-{{message.tags}}">
                 {{message.message}}
-
             </div>
-            
         {% endfor %}
             
     

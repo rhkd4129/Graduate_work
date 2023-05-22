@@ -5,17 +5,17 @@
         
 <main>
   <div class="container border border-white">
-    <div class="row my-5 mx-5">
+    <div class="row my-1 mx-5">
       {% if adviceimage|length != 1 %}
           {% for image in adviceimage %}
             {% if forloop.counter0|divisibleby:3 %}
-              </div><div class="row my-5">
+              </div><div class="row my-4">
             {% endif %}
             <div class="col-md-4">
               <img src="{{ image.search_image.url }}" class="img-fluid">
               <form method="post">
                   {% csrf_token %}
-                    <button type="submit" class="btn btn-outline-success" name="button_value" value={{image.id}}>{{image.id}}</button>
+                    <button type="submit" class="btn btn-outline-success" name="button_value" value={{image.id}}>변환</button>
               </form> 
             </div>
           {% endfor %}
@@ -32,6 +32,6 @@
   <!-- <div id="search-results">
     Ajax 요청에서 받아온 HTML 데이터를 여기에 출력합니다
   </div> -->
-        <a href="{% url 'coloring:crawing' %}" class="btn btn-success mt-3">다시 이미지 검색하기</a>
+        <a href="{% url 'coloring:crawing' %}" class="btn btn-success mt-1">다시 이미지 검색하기</a>
 </main>  
 {% endblock content %}

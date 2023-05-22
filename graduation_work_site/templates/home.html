@@ -1,28 +1,22 @@
 {% extends 'layout.html' %}
 {% block content %}
+{% load static  %}
 
   <main class="px-3">
-    <h1 class="pt-3">Coloring</h1>
+    <img src="{% static 'logo.jpg' %}"  width="350" height="350"alt="">
 
-    <p class="lead">ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ</p>
-    <p class="lead">경동대학교 소프트웨어학과 2023년도 하계 졸업 작품 발표</p>
-    <p class="lead">ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ</p>
-    <p class="lead pt-2"> 2021026 박찬민</p>
-    <p class="lead pt-2"> 2021009 김세희</p>
-    <p class="lead pt-2"> 1821028 이광현</p>
-  
-    <p class="lead pt-4">
+    <p class="lead pt-2">
       {% if user.is_authenticated %} 
-               <a href="{% url 'coloring:crawing' %}" class="btn btn-lg btn-light fw-bold border-white bg-white">시작하기</a>        
-               {#<a class="nav-link" href="{% url 'accounts:profile' %}">profile</a>#}
+               <a href="{% url 'coloring:crawing' %}"  style="font-size: 30px;"class="btn btn-lg btn-light fw-bold border-white bg-white">시작하기</a>        
+
               {% else %}
-              <a href="{% url 'accounts:login' %}" class="btn btn-lg btn-light fw-bold border-white bg-white">시작하기</a>
+              <a href="{% url 'accounts:login' %}" style="font-size: 30px;" class="btn btn-lg btn-light fw-bold border-white bg-white">시작하기</a>
             </p>
               {% endif %}
   </main>
 
   <footer class="my-auto">
-    {% include "footer.html"  %}
+    {#{% include "footer.html"  %}#}
       </footer>
     {% endblock content %}
     

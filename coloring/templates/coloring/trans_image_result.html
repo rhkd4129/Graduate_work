@@ -13,17 +13,23 @@
     </style>
 
     <div class="py-1">
-        {% if adviceimage %}
-            {% for transimage in adviceimage %}
-                <img  class ='mx-auto my-5'style='width:450px;' src="{{ transimage.trans_image.url }}" alt="">
-                <a href="{{ transimage.trans_image.url }}" class="btn btn-outline-success"download>이미지 다운로드</a>
-
-    
-            {% endfor %}
+        <div class="row">
+            {% if adviceimage %}
+                {% for transimage in adviceimage %}
+                <div class="col-md-6 mt-5">
+                    <div class="card">
+                    <img src="{{ transimage.trans_image.url }}" class="card-img-top" alt="">
+                    <div class="card-body">
+                        <a href="{{ transimage.trans_image.url }}" class="btn btn-success" download>이미지 다운로드</a>
+                    </div>
+                    </div>
+                </div>
+                {% endfor %}
        
-        {% else %}
-        <p>이미지가 없다</p>
-        {% endif %}
+            {% else %}
+                <p>이미지가 없다</p>
+            {% endif %}
+        </div>
     </div>
 
     <footer class="my-3 text-white-50">
