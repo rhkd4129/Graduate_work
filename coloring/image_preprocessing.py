@@ -77,7 +77,7 @@ def real(np_image):
     mat = img2 
     scale = ANI_img.shape[:2]
     res = Convert(mat, scale,session)
-    print('됐다')
+    # print('됐다')
     res=ani_to_edge(res)
     hard = image_sharpening(res)
    
@@ -88,7 +88,7 @@ def real(np_image):
     mat = img2 
     scale = res.shape[:2]
     res = Convert(mat, scale,session)
-    print('됐다')
+    # print('됐다')
     res=ani_to_edge(res)
     easy =image_sharpening(res)
     return hard,easy

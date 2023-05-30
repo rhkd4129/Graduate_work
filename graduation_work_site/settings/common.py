@@ -32,7 +32,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # 'storages',
+    'storages',
     'bootstrap5',
     #localapps
     'accounts',
