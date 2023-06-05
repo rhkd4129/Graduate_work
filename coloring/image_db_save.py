@@ -87,7 +87,7 @@ def craw(keyword:str,find_image_count:int):
     count = 1
     image_length = len(images)
     print("찾은 " + keyword + " 이미지 개수 : ", image_length)
-    find_image_count=30
+    find_image_count=25
     image_file_list=[]
     image_data=[]
     for i in range(image_length):
