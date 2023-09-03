@@ -11,5 +11,5 @@ requirement.txt에 잇는 파일 다운받아야 함
 ![Alt text](image.png)
 ![Alt text](image-1.png)
 ![Alt text](10.PNG)
-![Alt text](image-3.PNG)
+![Alt text](image-3.png)
 
