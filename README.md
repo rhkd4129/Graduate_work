@@ -144,8 +144,7 @@ N개의 이미지를 데이터베이스에 저장합니다.
 6. 최종적으로 흑백 이미지를 반전된 블러 처리된 이미지로 나누어, (스케일링을 수행하여) 스케치 이미지의 결과값을 얻습니다.
 
 
-<img src="readme_image/image_pro1.PNG" width="300px">
-<img src="readme_image/image_pro2.PNG" width="290px">
+<img src="readme_image/image_pro1.PNG" width="300px"><img src="readme_image/image_pro2.PNG" width="290px">
 
 ![result2](readme_image/result2.PNG) 
 최종 결과물은 스케치의 정도가 다른 두 개의 사진으로 나오며, 아이가 좀 더 그리기 편하거나 선호하는 스타일을 선택할 수 있습니다.
