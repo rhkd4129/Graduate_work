@@ -112,16 +112,20 @@ N개의 이미지를 데이터베이스에 저장합니다.
 ![image_search2](readme_image/image_upload.PNG)
 첫번째는 직접 업로드 하는 방식이 존재하고 
 
+
+
+
+![image_search2](readme_image/image_search1.PNG)
+![image_search2](readme_image/image_serach2.PNG)
 두번재는 스크래핑(셀레니움)을 사용하여 이미지를 검색후에 원하는 이미지를 선택하는 경우 입니다.
-
-
-<img src="readme_image/image_search1.PNG" width= "300px"> <img src="readme_image/image_serach2.PNG"  width= "300px" height="150px">
 
 먼저 상담받을 아이의 이름과 나이를 입력하고 원하는 이미지 키워드를 검색하면  
 셀레니움을 이용해 동적으로 고양이를 검색해 일정 개수의 이미지만큼 다운로드 하고
 검색을 할 떄마다 다른 결과가 나올 수 있게 그 안에서 랜덤으로 추출하여 저장하는 방식입니다.
 
-<img src="readme_image/image_serach3.PNG" width= "310px"> <img src="readme_image/image_search4.PNG"  width= "320px">
+
+![image_search2](readme_image/image_serach3.PNG)
+![image_search2](readme_image/image_search4.PNG)
 검색이 완료되면 6개의 이미지가 화면에 나와지고 이 중에서 원하는 이미지를 선택하여 변환합니다.
 
 ---
