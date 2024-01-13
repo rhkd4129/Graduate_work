@@ -88,8 +88,8 @@
 
 ---
 ### 시스템 프로세스
-![SystemProcess](readme_image/SystemProcess.PNG)
-![SystemProcess2](readme_image/SystemProcess2.PNG)
+![SystemProcess](readme_image/systemProcess.PNG)
+![SystemProcess2](readme_image/systemProcess2.PNG)
 왼쪽상단에 Offline부터 시작하여  
 Text-to-images->image-to-ColoringPages->Web->다시 Offline으로 가는 순서입니다.  
 앞에서 말했듯이 아이한테서 키워드를 얻어 검색을 하면 이미지 크롤링을 수행하고
@@ -144,7 +144,7 @@ N개의 이미지를 데이터베이스에 저장합니다.
 6. 최종적으로 흑백 이미지를 반전된 블러 처리된 이미지로 나누어, (스케일링을 수행하여) 스케치 이미지의 결과값을 얻습니다.
 
 
-<img src="readme_image/image_pro1.PNG" width="300px"><img src="readme_image/image_pro2.PNG" width="290px">
+<img src="readme_image/image_pro1.PNG" width="320px"><img src="readme_image/image_pro2.PNG" width="320px">
 
 ![result2](readme_image/result2.PNG) 
 최종 결과물은 스케치의 정도가 다른 두 개의 사진으로 나오며, 아이가 좀 더 그리기 편하거나 선호하는 스타일을 선택할 수 있습니다.
