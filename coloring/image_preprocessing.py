@@ -18,8 +18,6 @@ def dbobject_to_np(db_object):
     return  cv2.cvtColor(img_np, cv2.COLOR_RGB2BGR)
 
 
-
-
 def ani_to_edge(ani_image): 
     gray_img =  cv2.cvtColor(ani_image , cv2.COLOR_BGR2GRAY)
     invert = cv2.bitwise_not(gray_img)
@@ -60,11 +58,6 @@ def image_sharpening(np_image):
                     [0, -1, 0]])
     return cv2.filter2D(np_image, -1, kernel)
 
-
-   
-
-
-
 def real(np_image):
     pic_form = ['.jpeg','.jpg','.png','.JPEG','.JPG','.PNG']
     device_name = ort.get_device()
@@ -77,12 +70,9 @@ def real(np_image):
     mat = img2 
     scale = ANI_img.shape[:2]
     res = Convert(mat, scale,session)
-    print('됐다')
     res=ani_to_edge(res)
     hard = image_sharpening(res)
-   
     ###############
-
     img1 = process_image(res)
     img2 = np.expand_dims(img1, axis=0)
     mat = img2 
