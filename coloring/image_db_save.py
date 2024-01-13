@@ -4,6 +4,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager # 크롭 드라이버 자동 업데이터 
 
+
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException,ElementClickInterceptedException,ElementNotInteractableException
@@ -38,6 +39,7 @@ from io import BytesIO
 ###### 실질적으로 크롤링하는 함수 크롤링할 이미지키워드와 개수 입력
 
 def craw(keyword:str,find_image_count:int):
+    
     chrome_options = Options()
     # chrome_options.add_experimental_option('detach',True) # 모니터 창이 안꺼지게 유지?
     chrome_options.add_argument('--headless')
@@ -48,10 +50,11 @@ def craw(keyword:str,find_image_count:int):
     chrome_options.add_argument('--disable-dev-shm-usage')        # 디레토리 사용안하게?
     chrome_options.add_argument("--allow-running-insecure-content") #경고창 안드게?
     chrome_options.add_argument("--disable-gpu")
+    chrome_path = "C:\chromedriver-win64\chromedriver.exe"  # 본인이 다운로드한 ChromeDriver의 경로로 대체
     
-    service = Service(executable_path=ChromeDriverManager().install())
-    driver = webdriver.Chrome(service=service, chrome_options=chrome_options)
-
+    # service = Service(executable_path=ChromeDriverManager().install())
+    # driver = webdriver.Chrome(service=service, chrome_options=chrome_options)
+    driver = webdriver.Chrome(executable_path=chrome_path,chrome_options=chrome_options)
   
     
     driver.implicitly_wait(5) 
@@ -98,7 +101,8 @@ def craw(keyword:str,find_image_count:int):
                     images[i+1].click()
                     print("Image Click!")                 
                     # imgUrl = driver.find_element(By.XPATH,'//*[@id="Sva75c"]/div[2]/div/div[2]/div[2]/div[2]/c-wiz/div/div[1]/div[2]/div[2]/div/a/img').get_attribute('src')                                                 
-                    imgUrl = driver.find_element(By.CLASS_NAME,'r48jcc.pT0Scc').get_attribute('src')             \
+                    #imgUrl = driver.find_element(By.CLASS_NAME,'r48jcc.pT0Scc').get_attribute('src')             
+                    imgUrl = driver.find_element(By.CLASS_NAME,'sFlh5c.pT0Scc.iPVvYb').get_attribute('src')             
         
                                     
                     if imgUrl.startswith('http'):
