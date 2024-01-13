@@ -88,8 +88,8 @@
 
 ---
 ### 시스템 프로세스
-![SystemProcess](readme_image/systemProcess.PNG)
-![SystemProcess2](readme_image/systemProcess2.PNG)
+![a](readme_image/a.PNG)
+![b](readme_image/b.PNG)
 왼쪽상단에 Offline부터 시작하여  
 Text-to-images->image-to-ColoringPages->Web->다시 Offline으로 가는 순서입니다.  
 앞에서 말했듯이 아이한테서 키워드를 얻어 검색을 하면 이미지 크롤링을 수행하고
