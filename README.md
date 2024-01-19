@@ -4,7 +4,9 @@
 
 # 📖 프로젝트 개요
 ##  프로젝트 소개 
-아동 상담을 위한 수단으로 아동의 흥미를 유발하는 사진을 웹 스크래핑으로 검색하거나 직접 선택하여 이미지 생성 모델로 도안을 생성하고, 이미지 전처리 후 인쇄하는 웹 사이트입니다.
+아동 상담을 위한 수단으로 아동의 흥미를 유발하는 사진을 웹 스크래핑으로 검색하거나 직접 선택하여 이미지 생성 모델로 도안을 생성하고, 이미지 전처리 후 인쇄하는 웹 사이트입니다.  
+<a href="https://drive.google.com/file/d/1QlWMsRKRYzhC1jWU0iVigTU1NT9p06eH/view?usp=sharing">📌 프로젝트 전체 PPT 보기</a>📌 
+
 
 ![main](readme_image/main.PNG)
 ![project_summary](readme_image/project_summary.PNG)
